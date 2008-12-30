@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stateMachine:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stateMachine="http://stateMachine">
+  <describes name="helloWorldMachine">
+    <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.0" implicitTransitionTo="//@describes/@states.1"/>
+    <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.0"/>
+    <states xsi:type="stateMachine:State" name="Welcome" do="LCD.drawString(&quot;HelloWorld&quot;,0,0); LCD.refresh();"/>
+  </describes>
+</stateMachine:Diagram>
