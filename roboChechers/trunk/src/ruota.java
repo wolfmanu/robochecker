@@ -30,26 +30,39 @@ public class ruota  {
 				if (x > 7)
 					x=0;
 				
-				Motor.A.rotateTo(posy[y]+dely[x]+500);
-				Motor.A.rotateTo(posy[y]+dely[x]);
-				Motor.B.rotateTo(posx[x]+500);
-				Motor.B.rotateTo(posx[x]);
+				Motor.A.rotateTo(posy[y]+dely[x],true);
+				Motor.B.rotateTo(posx[x],true);
+				waitForMotors(new Motor[]{Motor.A, Motor.B});
 			}
 			if (Button.RIGHT.isPressed()) {
 				y++;
 				if (y > 7)
 					y=0;
 				
-				Motor.A.rotateTo(posy[y]+dely[x]+500);
-				Motor.A.rotateTo(posy[y]+dely[x]);
-				Motor.B.rotateTo(posx[x]+500);
-				Motor.B.rotateTo(posx[x]);
+				Motor.A.rotateTo(posy[y]+dely[x],true);
+				Motor.B.rotateTo(posx[x],true);
+				waitForMotors(new Motor[]{Motor.A, Motor.B});
 			}
 			if (Button.ESCAPE.isPressed()) {
 				break;
 			}
 			Thread.sleep(100);
 			
+		}
+	}
+	
+	/***
+	 * Wait for motor(s) passed to stop
+	 * TODO: CHECK IF WORK
+	 * @author davide
+	 * @throws InterruptedException 
+	 */
+	public static void waitForMotors(Motor[] motorList) throws InterruptedException{
+		System.out.println("Waiting for motors");
+		for (int i=0; i < motorList.length; i++){
+			while (motorList[i].isMoving()){
+				Thread.sleep(50);
+			}
 		}
 	}
 
