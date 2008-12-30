@@ -19,7 +19,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_WvTLsdWnEd24LYaowz8_Wg" fontName="Segoe UI"/>
         <element xmi:type="stateMachine:State" href="default.statemachine#//@describes/@states.1"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WvTLstWnEd24LYaowz8_Wg" x="223" y="10"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WvTLstWnEd24LYaowz8_Wg" x="199" y="2"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_H28FxdWmEd24LYaowz8_Wg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_H28FxtWmEd24LYaowz8_Wg"/>

@@ -1,5 +1,3 @@
-import lejos.navigation.Pilot;
-import lejos.navigation.TachoNavigator;
 import lejos.nxt.*;
 
 
