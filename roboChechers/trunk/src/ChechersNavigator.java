@@ -57,7 +57,8 @@ public class ChechersNavigator {
 		Motor.B.rotateTo(posx[x],true);
 		
 		waitForMotors(new Motor[]{Motor.A, Motor.B});
-		
+		this.x=newX;
+		this.y=newY;
 	}
 
 	public boolean isMoving() {
