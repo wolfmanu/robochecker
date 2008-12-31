@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/lejosext.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/classes.jar"/>
+	<classpathentry kind="var" path="MY_ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/lejosext.jar"/>
+	<classpathentry kind="var" path="MY_ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/classes.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
