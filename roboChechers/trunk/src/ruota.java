@@ -44,7 +44,7 @@ public class ruota  {
 	 * @throws InterruptedException 
 	 */
 	public static void waitForMotors(Motor[] motorList) throws InterruptedException{
-		System.out.println("Waiting for motors");
+		LCD.drawString("Waiting for motors",0,0);
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isMoving()){
 				Thread.sleep(50);

@@ -84,7 +84,7 @@ public class ChechersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
-		System.out.println("Waiting for motors");
+		LCD.drawString("Waiting for motors",0,0);
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isMoving()){
 				try {
