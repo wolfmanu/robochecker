@@ -12,6 +12,14 @@ public class ChechersNavigator {
 	int[] posx={-7400, -5500, -4250, -2800, -1500, 0 , 1400, 2600};
 	int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
 	int[] dely={2000,1000, 500, 100, 0, 0, 0, 200};
+	
+	private static ChechersNavigator navigator = null;
+	
+	public static ChechersNavigator getInstance(){
+		if (navigator == null)
+			navigator = new ChechersNavigator();
+		return navigator;
+	}
 
 	public int getX() {
 		return x;

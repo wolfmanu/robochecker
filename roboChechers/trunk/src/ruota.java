@@ -10,7 +10,7 @@ public class ruota  {
 		
 		int x=0;
 		int y=0;
-		ChechersNavigator navigator= new ChechersNavigator();
+		ChechersNavigator navigator= ChechersNavigator.getInstance();
 		
 		Motor.B.setSpeed(1000);
 		// TODO Auto-generated method stub
