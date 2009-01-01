@@ -31,8 +31,8 @@ public final class ComputerPlayer implements Player {
 		int beta = MAXWIN + 1;
 		numPositionsEvaluated = 0;
 		move(0, searchDepth, board, computerMove, this.piece, alpha, beta);
-		System.out.print("my move:");
-		System.out.println(computerMove.toString());
+		//System.out.print("my move:");
+		//System.out.println(computerMove.toString());
 		return computerMove;
 	}
 

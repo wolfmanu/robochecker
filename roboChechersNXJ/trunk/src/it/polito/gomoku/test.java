@@ -17,13 +17,13 @@ public class test {
 	    byte result = game.play();
 	    switch(result){
 	    	case GomokuConstants.DRAW:
-	    		System.out.println("Draw");
+	    		//System.out.println("Draw");
 	    		break;
 	    	case GomokuConstants.WHITE_WIN:
-	    		System.out.println("White win");
+	    		//System.out.println("White win");
 	    		break;
 	    	case GomokuConstants.BLACK_WIN:
-	    		System.out.println("Black win");
+	    		//System.out.println("Black win");
 	    		break;
 	    }
 	}

@@ -46,6 +46,7 @@ public class Board {
 	} */
 
 	public void printBoard() {
+		/*
 		System.out.println("\\ 01234567");
 		for (int row = 0; row < rows; ++row) {
 			System.out.print(row);
@@ -54,7 +55,7 @@ public class Board {
 				System.out.print(getPiece(row,col));
 			}
 			System.out.println();
-		}
+		}*/
 	}
 
 	public void setPiece(final Square square, final byte piece) {
