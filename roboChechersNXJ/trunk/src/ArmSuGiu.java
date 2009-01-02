@@ -9,19 +9,19 @@ public class ArmSuGiu {
 
 			while (true) {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
-				Motor.C.setSpeed(50);
+				Motor.C.setSpeed(200);
 				if (Button.LEFT.isPressed()) {
 
-					Motor.C.rotate(25);
+					Motor.C.rotate(10);
 
 				}
 				if (Button.RIGHT.isPressed()) {
-					Motor.C.rotate(-25);
+					Motor.C.rotate(-10);
 				}
 				if (Button.ESCAPE.isPressed()) {
 					break;
 				}
-				Thread.sleep(10);
+				//Thread.sleep(10);
 
 			}
 		}
