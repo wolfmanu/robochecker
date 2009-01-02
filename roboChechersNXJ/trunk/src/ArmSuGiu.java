@@ -11,18 +11,18 @@ public class ArmSuGiu {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
 				Motor.C.setSpeed(200);
 				if (Button.LEFT.isPressed()) {
-
-					Motor.C.rotate(10);
-
+					Motor.C.forward();
 				}
 				if (Button.RIGHT.isPressed()) {
-					Motor.C.rotate(-10);
+					Motor.C.backward();
 				}
 				if (Button.ESCAPE.isPressed()) {
 					break;
 				}
+				if (Button.ENTER.isPressed()) {
+					Motor.C.stop();
+				}
 				//Thread.sleep(10);
-
 			}
 		}
 
