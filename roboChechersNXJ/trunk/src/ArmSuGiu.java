@@ -9,7 +9,7 @@ public class ArmSuGiu {
 
 			while (true) {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
-				Motor.C.setSpeed(200);
+				Motor.C.setSpeed(300);
 				if (Button.LEFT.isPressed()) {
 					Motor.C.forward();
 				}
