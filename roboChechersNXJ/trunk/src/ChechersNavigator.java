@@ -7,8 +7,8 @@ import lejos.nxt.Motor;
  */
 public class ChechersNavigator {
 
-	private int x=5;
-	private int y=0;
+	private int x;
+	private int y;
 	int[] posx={-7400, -5500, -4250, -2800, -1500, 0 , 1400, 2600};
 	int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
 	int[] dely={2000,1000, 500, 100, 0, 0, 0, 200};
@@ -20,7 +20,12 @@ public class ChechersNavigator {
 			navigator = new ChechersNavigator();
 		return navigator;
 	}
-
+	private ChechersNavigator () {
+		Motor.A.resetTachoCount();
+		Motor.B.resetTachoCount();
+		this.x = 5;
+		this.y = 0;
+	}
 	public int getX() {
 		return x;
 	}
@@ -34,7 +39,7 @@ public class ChechersNavigator {
 		if (newX<0) newX=0;
 		if (newY<0) newY=0;
 		if (newX>7) newX=7;
-		if (newY>7) newY=0;
+		if (newY>7) newY=7;
 		//printing what i'm doing on lcd
 		LCD.clear();
 		
@@ -47,6 +52,7 @@ public class ChechersNavigator {
 		LCD.refresh();
 		
 		//controlla se deve recuperare il gioco
+		/*
 		if (newX < this.x){
 			Motor.B.rotateTo(posx[x]-1000,true);
 			LCD.drawString("Gioco X", 0, 2);
@@ -60,7 +66,7 @@ public class ChechersNavigator {
 			Motor.A.rotateTo(posy[y]+dely[x],true);
 		}
 		waitForMotors(new Motor[]{Motor.A, Motor.B});
-		
+		*/
 		Motor.A.rotateTo(posy[y]+dely[x],true);
 		Motor.B.rotateTo(posx[x],true);
 		
@@ -84,14 +90,12 @@ public class ChechersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
-		LCD.drawString("Waiting for motors",0,0);
+		//LCD.drawString("Waiting for motors",0,0);
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isMoving()){
 				try {
 					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					return;
-				}
+				} catch (InterruptedException e) { }
 			}
 		}
 	}

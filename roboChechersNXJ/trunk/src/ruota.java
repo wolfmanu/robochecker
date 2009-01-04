@@ -12,8 +12,11 @@ public class ruota  {
 		int y=0;
 		ChechersNavigator navigator= ChechersNavigator.getInstance();
 		
-		Motor.B.setSpeed(1000);
+		navigator.setSpeed(1000,1000);
 		// TODO Auto-generated method stub
+		Button.waitForPress();
+		navigator.goTo(1,1);
+		Button.waitForPress();
 		while (true) {
 			if (Button.LEFT.isPressed()) {
 				x++;
