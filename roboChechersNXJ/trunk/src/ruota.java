@@ -15,8 +15,8 @@ public class ruota  {
 		navigator.setSpeed(1000,1000);
 		// TODO Auto-generated method stub
 		Button.waitForPress();
-		navigator.goTo(1,1);
-		Button.waitForPress();
+		navigator.goTo(0,0);
+		
 		while (true) {
 			if (Button.LEFT.isPressed()) {
 				x++;

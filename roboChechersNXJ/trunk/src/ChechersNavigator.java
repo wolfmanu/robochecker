@@ -6,12 +6,13 @@ import lejos.nxt.Motor;
  * 
  */
 public class ChechersNavigator {
-
 	private int x;
 	private int y;
-	int[] posx={-7400, -5500, -4250, -2800, -1500, 0 , 1400, 2600};
+	private int lashA, lashB;
+	
+	int[] posx={-7500, -5700, -4250, -2800, -1450, 0 , 1400, 3000};
 	int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
-	int[] dely={2000,1000, 500, 100, 0, 0, 0, 200};
+	int[] dely={1900,1200, 550, 150, 50, 0, 150, 500};
 	
 	private static ChechersNavigator navigator = null;
 	
@@ -25,6 +26,8 @@ public class ChechersNavigator {
 		Motor.B.resetTachoCount();
 		this.x = 5;
 		this.y = 0;
+		this.lashA = 90;
+		this.lashB = 230;
 	}
 	public int getX() {
 		return x;
@@ -35,6 +38,8 @@ public class ChechersNavigator {
 	}
 
 	public void goTo(int newX, int newY) {
+		int destAngleA, destAngleB;
+		
 		//controllo estremi
 		if (newX<0) newX=0;
 		if (newY<0) newY=0;
@@ -51,26 +56,31 @@ public class ChechersNavigator {
 		LCD.drawInt(newY, 7, 1);
 		LCD.refresh();
 		
+		destAngleA = posy[newY]+dely[newX];
+		destAngleB = posx[newX];
+				
 		//controlla se deve recuperare il gioco
-		/*
-		if (newX < this.x){
-			Motor.B.rotateTo(posx[x]-1000,true);
-			LCD.drawString("Gioco X", 0, 2);
-		}else{
-			Motor.B.rotateTo(posx[x],true);
+		if (destAngleA < Motor.A.getTachoCount()) {
+			destAngleA -= lashA;
+			LCD.drawString("gioco A", 0, 2);
 		}
-		if (newY < this.y){
-			Motor.A.rotateTo(posy[y]+dely[x]-1000,true);
-			LCD.drawString("Gioco Y", 0, 3);
-		}else{
-			Motor.A.rotateTo(posy[y]+dely[x],true);
-		}
-		waitForMotors(new Motor[]{Motor.A, Motor.B});
-		*/
-		Motor.A.rotateTo(posy[y]+dely[x],true);
-		Motor.B.rotateTo(posx[x],true);
 		
+		if (destAngleB < Motor.A.getTachoCount()) {
+			destAngleB -= lashB;
+			LCD.drawString("gioco B", 0, 3);
+		}
+		LCD.refresh();	
+		
+		Motor.A.rotateTo(destAngleA,true);
+		Motor.B.rotateTo(destAngleB,true);
 		waitForMotors(new Motor[]{Motor.A, Motor.B});
+		
+		LCD.drawString("A:", 0, 4);
+		LCD.drawInt(Motor.A.getTachoCount(), 4, 4);
+		LCD.drawString("B:", 0, 5);
+		LCD.drawInt(Motor.B.getTachoCount(), 4, 5);
+		LCD.refresh();
+		
 		this.x=newX;
 		this.y=newY;
 	}
@@ -99,5 +109,5 @@ public class ChechersNavigator {
 			}
 		}
 	}
-
+	
 }
