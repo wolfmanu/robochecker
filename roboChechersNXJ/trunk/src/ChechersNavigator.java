@@ -1,5 +1,6 @@
 import lejos.nxt.LCD;
 import lejos.nxt.Motor;
+import lejos.nxt.addon.ColorSensor;
 /**
  * Move the robot over the select chechers's cell
  * @author davide
@@ -93,10 +94,18 @@ public class ChechersNavigator {
 		Motor.A.setSpeed(speedA);
 		Motor.B.setSpeed(speedB);
 	}
-	
+
+	/***
+	 * follows the black line until the grey point, then moves to (0,0)
+	 * (please look at the img/grid.jpg file)
+	 * TODO: IMPLEMENT
+	 * @author Matteo
+	 */
+	public void calibrate(ColorSensor CS) {
+		
+	}
 	/***
 	 * Wait for motor(s) in motorList to stop
-	 * TODO: CHECK IF WORK
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
