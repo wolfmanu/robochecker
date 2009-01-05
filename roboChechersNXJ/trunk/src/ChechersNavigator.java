@@ -23,6 +23,7 @@ public class ChechersNavigator {
 					STOP = 9,	// Red
 					ROTATE = 0;	// Black
 	// Board Mapping
+	private int offA = 1700, offB = 9300;
 	private static int[] posx={-7500, -5700, -4250, -2800, -1450, 0 , 1400, 3000};
 	private static int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
 	private static int[] dely={1900,1200, 550, 150, 50, 0, 150, 500};
@@ -99,8 +100,8 @@ public class ChechersNavigator {
 		LCD.drawInt(newY, 7, 1);
 		LCD.refresh();
 		
-		destAngleA = posy[newY]+dely[newX];
-		destAngleB = posx[newX];
+		destAngleA = offA+posy[newY]+dely[newX];
+		destAngleB = offB+posx[newX];
 				
 		//controlla se deve recuperare il gioco
 		if (destAngleA < this.MA.getTachoCount()) {
@@ -162,11 +163,30 @@ public class ChechersNavigator {
 			LCD.drawString("color", 0, 0);
 			LCD.drawInt((int)CS.getColorNumber(),7,0);
 			LCD.refresh();
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {}
+			try { Thread.sleep(100); } catch (InterruptedException e) {}
 		}
+		MB.rotate(lashB);
+		MA.resetTachoCount(); MB.resetTachoCount();
 		this.calibrated = true;
+		/*
+		Button.ENTER.addButtonListener(new ButtonListener() {
+			public void buttonPressed(Button b) { Motor.A.forward(); }
+			public void buttonReleased(Button b) { Motor.A.stop(); } });
+		Button.LEFT.addButtonListener(new ButtonListener() {
+			public void buttonPressed(Button b) { Motor.B.forward(); }
+			public void buttonReleased(Button b) { Motor.B.stop(); } });
+		Button.RIGHT.addButtonListener(new ButtonListener() {
+			public void buttonPressed(Button b) { Motor.B.backward(); }
+			public void buttonReleased(Button b) { Motor.B.stop(); } });
+		while (true) {
+			if (Button.ESCAPE.isPressed())	break;
+			LCD.clear();
+			LCD.drawString("A:", 0, 4); LCD.drawInt(this.MA.getTachoCount(), 4, 4);
+			LCD.drawString("B:", 0, 5);	LCD.drawInt(this.MB.getTachoCount(), 4, 5);
+			LCD.refresh();
+			try { Thread.sleep(100); } catch (InterruptedException e) {}
+		}
+		*/
 	}
 	
 	public void calibrate() {
