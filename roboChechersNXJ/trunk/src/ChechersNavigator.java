@@ -12,35 +12,37 @@ import lejos.nxt.addon.ColorSensor;
 public class ChechersNavigator {
 	private int x;
 	private int y;
-	private int lashA, lashB;
+	private boolean calibrated;
 	private Motor MA, MB;
 	private ColorSensor CS = null;
 	
-	int[] posx={-7500, -5700, -4250, -2800, -1450, 0 , 1400, 3000};
-	int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
-	int[] dely={1900,1200, 550, 150, 50, 0, 150, 500};
+	private static int lashA = 90,
+					lashB = 230;
+	// Calibration Color Constants
+	private static int GO = 17, // White
+					STOP = 9,	// Red
+					ROTATE = 0;	// Black
+	// Board Mapping
+	private static int[] posx={-7500, -5700, -4250, -2800, -1450, 0 , 1400, 3000};
+	private static int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
+	private static int[] dely={1900,1200, 550, 150, 50, 0, 150, 500};
 	
 	private static ChechersNavigator navigator = null;
-	
 	public static ChechersNavigator getInstance(){
 		if (navigator == null)
 			navigator = new ChechersNavigator(Motor.A, Motor.B, new ColorSensor(SensorPort.S1));
 		return navigator;
 	}
-
 	public static ChechersNavigator getInstance(Motor MA, Motor MB){
 		if (navigator == null)
 			navigator = new ChechersNavigator(MA,MB,new ColorSensor(SensorPort.S1));
 		return navigator;
 	}
-
 	public static ChechersNavigator getInstance(Motor MA, Motor MB, SensorPort port){
 		if (navigator == null)
 			navigator = new ChechersNavigator(MA,MB,new ColorSensor(port));
 		return navigator;
 	}
-
-	
 	public static ChechersNavigator getInstance(Motor MA, Motor MB, ColorSensor CS){
 		if (navigator == null)
 			navigator = new ChechersNavigator(MA,MB,CS);
@@ -51,12 +53,7 @@ public class ChechersNavigator {
 		this.MA = MA;
 		this.MB = MB;
 		this.CS = CS;
-		this.MA.resetTachoCount();
-		this.MB.resetTachoCount();
-		this.x = 5;
-		this.y = 0;
-		this.lashA = 90;
-		this.lashB = 230;
+		this.calibrated = false;
 	}
 
 	public int getX() {
@@ -75,9 +72,17 @@ public class ChechersNavigator {
 		return MB;
 	}
 	
-	public void goTo(int newX, int newY) {
+	public boolean isCalibrated () {
+		return calibrated;
+	}
+	
+	public void goTo(int newX, int newY) throws notCalibratedException {
+
+		if (!isCalibrated()) {
+			throw new notCalibratedException();
+		}
 		int destAngleA, destAngleB;
-		
+
 		//controllo estremi
 		if (newX<0) newX=0;
 		if (newY<0) newY=0;
@@ -133,27 +138,25 @@ public class ChechersNavigator {
 	}
 
 	/***
-	 * follows the black line until the grey point, then moves to (0,0)
+	 * follows the black line until the red point, then moves to (0,0)
 	 * (please look at the img/grid.jpg file)
 	 * TODO: IMPLEMENT
 	 * @author Matteo
 	 */
 	public void calibrate(ColorSensor CS) {
-		int color = -1;
-		while (!Button.ESCAPE.isPressed() && color != 9) {
+		int color = GO;
+		while (!Button.ESCAPE.isPressed()) {
 			color = (int)CS.getColorNumber();
-			switch (color) {
-				case 9: 
-					MA.stop();
-					MB.stop();
-					break;
-				case 0:
-					MA.stop();
-					MB.backward();
-					break;
-				default:
-					MA.forward();
-					MB.stop();
+			if (color == STOP) { 
+				MA.stop();
+				MB.stop();
+				break;
+			} else if (color == ROTATE) {
+				MA.stop();
+				MB.backward();
+			} else {
+				MA.forward();
+				MB.stop();
 			}
 			LCD.clear();
 			LCD.drawString("color", 0, 0);
@@ -163,6 +166,7 @@ public class ChechersNavigator {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {}
 		}
+		this.calibrated = true;
 	}
 	
 	public void calibrate() {
