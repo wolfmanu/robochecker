@@ -66,7 +66,7 @@ public class ChechersNavigator {
 			LCD.drawString("gioco A", 0, 2);
 		}
 		
-		if (destAngleB < Motor.A.getTachoCount()) {
+		if (destAngleB < Motor.B.getTachoCount()) {
 			destAngleB -= lashB;
 			LCD.drawString("gioco B", 0, 3);
 		}
