@@ -10,7 +10,7 @@ public class test {
 	public static void main(String[] args) throws Exception {
 		LCD.drawString("Checkers GAME", 0, 0);
 		LCD.refresh();
-		Player pl1 = new ComputerPlayer(CheckersConstants.WHITE,2);
+		Player pl1 = new ComputerPlayer(CheckersConstants.WHITE,1);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.BLACK,1);
 	    Game game = new Game(pl1,pl2);
 	    int result = game.play();

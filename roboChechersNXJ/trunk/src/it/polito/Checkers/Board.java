@@ -83,7 +83,7 @@ public class Board {
 		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
 		Move[] movesArray = new Move[moves.size()];
 		for (int i = 0; i<moves.size(); i++) {
-			try { movesArray[i++] = Move.fromArray(moves.elementAt(i)); }
+			try { movesArray[i] = Move.fromArray(moves.elementAt(i)); }
 			catch (cantMoveException e) {}
 		}
 		return movesArray;
