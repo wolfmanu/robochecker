@@ -36,7 +36,6 @@ public class ruota  {
 				break;
 			}
 			Thread.sleep(100);
-			
 		}
 	}
 	

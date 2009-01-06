@@ -23,10 +23,10 @@ public class ChechersNavigator {
 					STOP = 9,	// Red
 					ROTATE = 0;	// Black
 	// Board Mapping
-	private int offA = 1700, offB = 9300;
-	private static int[] posx={-7500, -5700, -4250, -2800, -1450, 0 , 1400, 3000};
+	private int offA = 1800, offB = 9400;
+	private static int[] posx={-7500, -5800, -4250, -2800, -1350, 150 , 1600, 3300};
 	private static int[] posy={0, 1000, 2000, 3000, 4000, 5000 , 6000, 7000};
-	private static int[] dely={1900,1200, 550, 150, 50, 0, 150, 500};
+	private static int[] dely={1900,1100, 550, 150, -50, -50, 0, 400};
 	
 	private static ChechersNavigator navigator = null;
 	public static ChechersNavigator getInstance(){
