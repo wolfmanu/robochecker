@@ -6,15 +6,16 @@ public class ArmSuGiu {
 		 * @param args
 		 */
 		public static void main(String[] args) throws Exception {
-
+			ArmController arm = ArmController.getInstance(Motor.C, new TouchSensor(SensorPort.S2));
+			
 			while (true) {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
-				Motor.C.setSpeed(300);
+				Motor.C.setSpeed(500);
 				if (Button.LEFT.isPressed()) {
-					Motor.C.forward();
+					arm.up();
 				}
 				if (Button.RIGHT.isPressed()) {
-					Motor.C.backward();
+					arm.down();
 				}
 				if (Button.ESCAPE.isPressed()) {
 					break;
