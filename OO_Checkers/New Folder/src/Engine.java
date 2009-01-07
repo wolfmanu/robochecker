@@ -339,8 +339,8 @@ class Engine {
 	}
 
 	// given a board, generates all the possible moves depending on whose turn
-	static Vector<int[]> generate_moves(int[][] board, int turn) {
-		Vector<int[]> moves_list = new Vector<int[]>();
+	static Vector<int[]> generate_moves(int[][] board, int turn, int depth) {
+		Vector<int[]> moves_list = get_move_vector(depth);
 		int move;
 
 		for (int i = 7; i >= 0; i--)
@@ -358,7 +358,7 @@ class Engine {
 									int_array[2] = i + k;
 									int_array[3] = j + l;
 									int[][] temp_board = Engine
-											.copy_board(board);
+											.copy_board_gen(board);
 									move = ApplyMove(temp_board, i, j, i
 											+ k, j + l);
 									if (move == INCOMPLETEMOVE)/*
@@ -429,7 +429,7 @@ class Engine {
 		for (int i = -2; i <= 2; i += 4)
 			for (int j = -2; j <= 2; j += 4)
 				if (inRange(newx + i, newy + j)) {
-					int[][] tempPosition = Engine.copy_board(board);
+					int[][] tempPosition = Engine.copy_board_force(board);
 					int moveResult = ApplyMove(tempPosition, newx, newy, newx
 							+ i, newy + j);
 					if (moveResult == LEGALMOVE) {
@@ -508,11 +508,11 @@ class Engine {
 	static int MiniMax(int[][] board, int depth, int max_depth, int[] the_move,
 			int turn, int[] counter, int white_best, int black_best) {
 		int the_score = 0;
-		int[][] new_board = new int[8][8];
+		int[][] new_board;
 		int best_score;
-		int[] best_move = new int[4];
+		int[] best_move = null; // new int[4];
 
-		Vector<int[]> moves_list = new Vector<int[]>(); // vector of 4x1 arrays
+		Vector<int[]> moves_list; //= get_move_vector(depth); // vector of 4x1 arrays
 
 		Thread.yield();
 
@@ -522,7 +522,7 @@ class Engine {
 			best_score = Evaluation(board);
 			counter[0]++;
 		} else {
-			moves_list = generate_moves(board, turn);
+			moves_list = generate_moves(board, turn, depth);
 			best_score = which_turn(turn);
 			switch (moves_list.size()) {
 			case 0:
@@ -532,8 +532,9 @@ class Engine {
 				if (depth == 0) {
 					// forced move: immediately return control
 					best_move = (int[]) moves_list.elementAt(0);
-					for (int k = 0; k < 4; k++)
-						the_move[k] = best_move[k];
+					if (the_move != null)
+						for (int k = 0; k < 4; k++)
+							the_move[k] = best_move[k];
 					return 0;
 				} else {
 					// extend search since there is a forcing move
@@ -542,11 +543,11 @@ class Engine {
 			}
 
 			for (int i = 0; i < moves_list.size(); i++) {
-				new_board = copy_board(board); // board need not be touched
+				new_board = copy_board(board,depth); // board need not be touched
 				move_board(new_board, (int[]) moves_list.elementAt(i)); // returns
 																				// new_board
-				int temp[] = new int[4];
-				the_score = MiniMax(new_board, depth + 1, max_depth, temp,
+				//int temp[] = new int[4];
+				the_score = MiniMax(new_board, depth + 1, max_depth, null,
 						opponent(turn), counter, white_best, black_best);
 
 				if (turn == CheckersConstants.BLACK && the_score > best_score) {
@@ -574,19 +575,49 @@ class Engine {
 			} // end for
 
 		}// end else
-		for (int k = 0; k < 4; k++)
-			the_move[k] = best_move[k];
+		if (the_move != null)
+			for (int k = 0; k < 4; k++)
+				the_move[k] = best_move[k];
 		return best_score;
 	} // end minimax
 
-	static int[][] copy_board(int[][] board) {
-		int[][] copy = new int[8][8];
+	static int[][][] copy = new int[4][8][8];
+	static int[][] copy_board(int[][] board, int depth) {
+		//int[][] copy = new int[8][8];
 
 		for (int i = 0; i < 8; i++)
-			System.arraycopy(board[i], 0, copy[i], 0, 8);
-		return copy;
+			System.arraycopy(board[i], 0, copy[depth][i], 0, 8);
+		return copy[depth];
 	}// end copy_board
 
+	static int[][] copy_gen = new int[8][8];
+	static int[][] copy_board_gen(int[][] board) {
+		//int[][] copy = new int[8][8];
+
+		for (int i = 0; i < 8; i++)
+			System.arraycopy(board[i], 0, copy_gen[i], 0, 8);
+		return copy_gen;
+	}// end copy_board
+	
+	static int[][] copy_force = new int[8][8];
+	static int[][] copy_board_force(int[][] board) {
+		//int[][] copy = new int[8][8];
+
+		for (int i = 0; i < 8; i++)
+			System.arraycopy(board[i], 0, copy_force[i], 0, 8);
+		return copy_force;
+	}// end copy_board
+	
+	static Vector<Vector<int[]>> moves_list = null;
+	static Vector<int[]> get_move_vector(int depth) {
+		if (moves_list == null){
+			moves_list=new Vector<Vector<int[]>>();
+			for (int i=0;i<8;i++)
+				moves_list.addElement(new Vector<int[]>());
+		}
+		return moves_list.elementAt(depth);		
+	}
+	
 	static boolean better(int the_score, int best, int turn) {
 		if (turn == CheckersConstants.BLACK)
 			return the_score > best;
