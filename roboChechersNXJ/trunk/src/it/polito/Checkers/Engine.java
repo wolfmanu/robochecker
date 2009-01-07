@@ -3,7 +3,7 @@ import it.polito.util.Vector;
 
 class Engine {
 
-	final static int INFINITY = Integer.MAX_VALUE;
+	final static int INFINITY = 0xffffff;
 	final static int CHECKER = 100; // one checker worth 100
 	final static int POS = 1; // one position along the -j worth 1
 	final static int KING = 200; // a king's worth

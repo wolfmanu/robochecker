@@ -7,11 +7,12 @@ public class test {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
+		try {
 		LCD.drawString("Checkers GAME", 0, 0);
 		LCD.refresh();
 		Player pl1 = new ComputerPlayer(CheckersConstants.WHITE,1);
-	    Player pl2 = new ComputerPlayer(CheckersConstants.BLACK,1);
+	    Player pl2 = new ComputerPlayer(CheckersConstants.BLACK,3);
 	    Game game = new Game(pl1,pl2);
 	    int result = game.play();
 	    switch(result){
@@ -24,5 +25,8 @@ public class test {
 	    }
 	    LCD.refresh();
 	    Button.waitForPress();
+	    } catch (Exception e) {
+	    	System.out.println(e.getMessage());
+	    }
 	}
 }

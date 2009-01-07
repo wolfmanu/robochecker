@@ -57,7 +57,7 @@ public class Board {
 	public void setPiece(final int row, final int col, final int piece) {
 		pieces[row][col] = piece;
 	}
-/*
+
 	public void printBoard() {
 
 		System.out.println("\\ 01234567");
@@ -70,7 +70,7 @@ public class Board {
 			System.out.println("");
 		}
 	}
-*/
+
 	public int[][] getArrayBoard() {
 		return pieces;
 	}

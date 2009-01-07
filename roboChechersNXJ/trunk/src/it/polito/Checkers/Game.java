@@ -1,5 +1,7 @@
 package it.polito.Checkers;
 
+import lejos.nxt.Button;
+
 public class Game {
 	private final int rows = 8, cols = 8;
 	private final Player whitePlayer;
@@ -47,7 +49,8 @@ public class Game {
 				break;
 			}
 		} while (true);
-
+		board.printBoard();
+		Button.waitForPress();
 		return test;
 	}
 

@@ -27,18 +27,19 @@ public class ComputerPlayer implements Player {
 		int[] counter = new int[1];
 		counter[0]=0;
 		Move nextMove;
-
+/*
 		LCD.clear();
 		LCD.drawString("Thinking...", 0, 0);
 		LCD.refresh();
-
+*/
 		this.score = Engine.MiniMax(board.getArrayBoard(), 0, depth, result, this.piece, counter);
-
+/*
 		LCD.clear();
 		LCD.drawString("("+result[0]+", "+result[1]+")->("+result[2]+", "+result[3]+") "+board.getPossibleMoves(this.piece).length, 0, 0);
 		LCD.refresh();
+		//board.printBoard();
 		Button.waitForPress();
-		
+*/		
 		nextMove = Move.fromArray(result);
 		return nextMove;
 	}
