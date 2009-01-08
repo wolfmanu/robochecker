@@ -1,9 +1,6 @@
 package it.polito.roboCheckers;
 
-import it.polito.Checkers.Board;
-import it.polito.Checkers.CheckersConstants;
-import it.polito.Checkers.Move;
-import it.polito.Checkers.cantMoveException;
+import it.polito.Checkers.*;
 import lejos.nxt.Button;
 
 public class Game {
@@ -28,37 +25,28 @@ public class Game {
 	public int play() throws notCalibratedException {
 		Move lastMove = Move.create();
 		this.cancelled = false;
-		int test;
+		int test=CheckersConstants.NO_WIN;
+		Player player = this.whitePlayer;
 		do {
-			try {
-				lastMove = this.whitePlayer.makeMove(this.board);
-				if (this.cancelled) {
-					test = CheckersConstants.CANCELLED;
+			for (boolean legalMove = true; !legalMove;) {
+				try {
+					lastMove = player.makeMove(this.board);
+					if (this.cancelled) {
+						test = CheckersConstants.CANCELLED;
+						break;
+					}
+					board.makeMove(lastMove);
+				} catch (cantMoveException e) {
+					test = opponentWins(player.getPiece());
 					break;
+				} catch (IllegalMoveException e) {
+					legalMove = false;
 				}
-				board.makeMove(lastMove);
-			} catch (cantMoveException e) {
-				test = opponentWins(this.whitePlayer.getPiece());
-				break;
 			}
 			board.printBoard();
 			Button.waitForPress();
-			try {
-				lastMove = this.blackPlayer.makeMove(this.board);
-				if (this.cancelled) {
-					test = CheckersConstants.CANCELLED;
-					break;
-				}
-				board.makeMove(lastMove);
-			} catch (cantMoveException e) {
-				test = opponentWins(this.blackPlayer.getPiece());
-				break;
-			}
-			board.printBoard();
-			Button.waitForPress();
-		} while (true);
-		board.printBoard();
-		Button.waitForPress();
+			player = (player == blackPlayer) ? whitePlayer : blackPlayer;
+		} while (test==CheckersConstants.NO_WIN);
 		return test;
 	}
 

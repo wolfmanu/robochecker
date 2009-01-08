@@ -18,7 +18,7 @@ public class HumanPlayer implements Player {
 	public void startNewGame() {
 	}
 
-	public Move makeMove(Board board) throws cantMoveException, notCalibratedException {
+	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Move[] moves = myPossibleMoves(board);
 		if (moves.length==0)
 			throw new cantMoveException();
@@ -37,7 +37,7 @@ public class HumanPlayer implements Player {
 			}
 		}
 		if (!foundFrom)
-			throw new cantMoveException();
+			throw new IllegalMoveException();
 		
 		Move theMove = null;
 		for (Move m:moves) {
@@ -49,7 +49,7 @@ public class HumanPlayer implements Player {
 			}
 		}
 		if (theMove == null)
-			throw new cantMoveException();
+			throw new IllegalMoveException();
 		
 		return theMove;
 	}
