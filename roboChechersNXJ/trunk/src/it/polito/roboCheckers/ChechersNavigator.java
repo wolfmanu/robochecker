@@ -1,6 +1,5 @@
 package it.polito.roboCheckers;
 import lejos.nxt.Button;
-import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
@@ -30,12 +29,14 @@ public class ChechersNavigator {
 	private int[] posy={     0,  1020,  2040,  3060,  4080, 5100, 6120, 7140, -4500};
 	private int[] dely={  2800,  1400,   750,   150,   -50,  -60,  300,  700, 0};
 	
+	
 	private static ChechersNavigator navigator = null;
 	public static ChechersNavigator getInstance(){
 		if (navigator == null)
 			navigator = new ChechersNavigator(Motor.A, Motor.B, new ColorSensor(SensorPort.S1));
 		return navigator;
 	}
+	//TODO: getInstance with parameters makes non sense! to fix.
 	public static ChechersNavigator getInstance(Motor MA, Motor MB){
 		if (navigator == null)
 			navigator = new ChechersNavigator(MA,MB,new ColorSensor(SensorPort.S1));
@@ -92,6 +93,8 @@ public class ChechersNavigator {
 		int destAngleA, destAngleB;
 
 		//controllo estremi
+		//TODO: La casella fittizia (8,8) non dovrebbe essere accessibile da un goTo esposto al pubblico ma solo da un metodo privato wrappato da goHome
+		//TODO: successivamente reimplementare il controllo degli estremi
 		/*
 		if (newX<0) newX=0;
 		if (newY<0) newY=0;
@@ -148,9 +151,8 @@ public class ChechersNavigator {
 	}
 
 	/***
-	 * follows the black line until the red point, then moves to (0,0)
+	 * follows the black line until the red point
 	 * (please look at the img/grid.jpg file)
-	 * TODO: IMPLEMENT
 	 * @author Matteo
 	 */
 	public void calibrate(ColorSensor CS) {
@@ -177,25 +179,6 @@ public class ChechersNavigator {
 		MB.rotate(lashB);
 		MA.resetTachoCount(); MB.resetTachoCount();
 		this.calibrated = true;
-		/*
-		Button.ENTER.addButtonListener(new ButtonListener() {
-			public void buttonPressed(Button b) { Motor.A.forward(); }
-			public void buttonReleased(Button b) { Motor.A.stop(); } });
-		Button.LEFT.addButtonListener(new ButtonListener() {
-			public void buttonPressed(Button b) { Motor.B.forward(); }
-			public void buttonReleased(Button b) { Motor.B.stop(); } });
-		Button.RIGHT.addButtonListener(new ButtonListener() {
-			public void buttonPressed(Button b) { Motor.B.backward(); }
-			public void buttonReleased(Button b) { Motor.B.stop(); } });
-		while (true) {
-			if (Button.ESCAPE.isPressed())	break;
-			LCD.clear();
-			LCD.drawString("A:", 0, 4); LCD.drawInt(this.MA.getTachoCount(), 4, 4);
-			LCD.drawString("B:", 0, 5);	LCD.drawInt(this.MB.getTachoCount(), 4, 5);
-			LCD.refresh();
-			try { Thread.sleep(100); } catch (InterruptedException e) {}
-		}
-		*/
 	}
 	
 	public void calibrate() {
@@ -210,7 +193,6 @@ public class ChechersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
-		//LCD.drawString("Waiting for motors",0,0);
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isMoving()){
 				try {

@@ -8,7 +8,7 @@ import it.polito.Checkers.cantMoveException;
 
 public interface Player {
 
-	void startNewGame();
+	void startNewGame(); // TODO: Maybe useless... should remove?
 
 	Move makeMove(final Board board) throws cantMoveException, IllegalMoveException, notCalibratedException;
 
