@@ -21,8 +21,8 @@ public class Robot {
 	public static void main(String[] args) throws Exception {
 		LCD.drawString("Checkers GAME", 0, 0);
 		LCD.refresh();
-		Player pl1 = new HumanPlayer(CheckersConstants.WHITE);
-	    Player pl2 = new ComputerPlayer(CheckersConstants.BLACK,3);
+		Player pl1 = new HumanPlayer(CheckersConstants.BLACK);
+	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,3);
 	    navigator.calibrate();
 	    Game game = new Game(pl1,pl2);
 	    int result = game.play();

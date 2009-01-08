@@ -41,6 +41,8 @@ public class Game {
 				test = opponentWins(this.whitePlayer.getPiece());
 				break;
 			}
+			board.printBoard();
+			Button.waitForPress();
 			try {
 				lastMove = this.blackPlayer.makeMove(this.board);
 				if (this.cancelled) {
@@ -52,6 +54,8 @@ public class Game {
 				test = opponentWins(this.blackPlayer.getPiece());
 				break;
 			}
+			board.printBoard();
+			Button.waitForPress();
 		} while (true);
 		board.printBoard();
 		Button.waitForPress();

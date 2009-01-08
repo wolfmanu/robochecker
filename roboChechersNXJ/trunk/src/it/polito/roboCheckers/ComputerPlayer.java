@@ -27,11 +27,10 @@ public class ComputerPlayer implements Player {
 		int[] counter = new int[1];
 		counter[0]=0;
 		Move nextMove;
+		System.out.println("thinking...");
 		this.score = Engine.MiniMax(board.getArrayBoard(), 0, depth, result, this.piece, counter);
-		board.printBoard();
-		Button.waitForPress();
-	
 		nextMove = Move.fromArray(result);
+		System.out.println(nextMove.toString());
 		return nextMove;
 	}
 
