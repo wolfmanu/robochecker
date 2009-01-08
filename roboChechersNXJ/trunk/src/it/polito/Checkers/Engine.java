@@ -1,7 +1,7 @@
 package it.polito.Checkers;
 import it.polito.util.Vector;
 
-class Engine {
+public class Engine {
 
 	final static int INFINITY = 0xffffff;
 	final static int CHECKER = 100; // one checker worth 100
@@ -505,7 +505,7 @@ class Engine {
 				INFINITY, -INFINITY);
 	}
 
-	static int MiniMax(int[][] board, int depth, int max_depth, int[] the_move,
+	public static int MiniMax(int[][] board, int depth, int max_depth, int[] the_move,
 			int turn, int[] counter, int white_best, int black_best) {
 		int the_score = 0;
 		int[][] new_board = new int[8][8];

@@ -65,7 +65,16 @@ public class Board {
 			System.out.print(""+row);
 			System.out.print(" ");
 			for (int col = 0; col < cols; ++col) {
-				System.out.print(""+getPiece(row,col));
+				if (getPiece(row,col) == CheckersConstants.WHITE)
+					System.out.print("R");
+				else if (getPiece(row,col) == CheckersConstants.BLACK)
+					System.out.print("N");
+				else if (getPiece(row,col) == CheckersConstants.WKING)
+					System.out.print("G");
+				else if (getPiece(row,col) == CheckersConstants.BKING)
+					System.out.print("B");
+				else
+					System.out.print(" ");
 			}
 			System.out.println("");
 		}

@@ -1,9 +1,11 @@
+package it.polito.roboCheckers;
 import lejos.nxt.Button;
 import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
+import it.polito.Checkers.Square;
 /**
  * Move the robot over the select chechers's cell
  * @author davide
@@ -23,10 +25,10 @@ public class ChechersNavigator {
 					STOP = 9,	// Red
 					ROTATE = 0;	// Black
 	// Board Mapping
-	private int offA = 1500, offB = 11500;//perfetto
-	private static int[] posx={-11000, -7500, -5800, -2900, -1350,  150, 2000, 3800};
-	private static int[] posy={     0,  1000,  2000,  3000,  4000, 5000, 6000, 7000};
-	private static int[] dely={  2800,  1100,   550,   150,   -50,  -60,  300,  700};
+	private int offA = 1500, offB = 11000;//imperfetto
+	private int[] posx={-10700, -7700, -5700, -3900, -2000, -300, 1400, 3200, -3000};
+	private int[] posy={     0,  1020,  2040,  3060,  4080, 5100, 6120, 7140, -4500};
+	private int[] dely={  2800,  1400,   750,   150,   -50,  -60,  300,  700, 0};
 	
 	private static ChechersNavigator navigator = null;
 	public static ChechersNavigator getInstance(){
@@ -76,7 +78,12 @@ public class ChechersNavigator {
 	public boolean isCalibrated () {
 		return calibrated;
 	}
-	
+	public void goHome () throws notCalibratedException {
+		this.goTo(8,8);
+	}
+	public void goTo(Square dest) throws notCalibratedException {
+		goTo(dest.getRow(),dest.getCol());
+	}
 	public void goTo(int newX, int newY) throws notCalibratedException {
 
 		if (!isCalibrated()) {
@@ -85,10 +92,12 @@ public class ChechersNavigator {
 		int destAngleA, destAngleB;
 
 		//controllo estremi
+		/*
 		if (newX<0) newX=0;
 		if (newY<0) newY=0;
 		if (newX>7) newX=7;
 		if (newY>7) newY=7;
+		*/
 		//printing what i'm doing on lcd
 		LCD.clear();
 		

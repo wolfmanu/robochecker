@@ -1,4 +1,7 @@
 package it.polito.Checkers;
+import it.polito.roboCheckers.ComputerPlayer;
+import it.polito.roboCheckers.Game;
+import it.polito.roboCheckers.Player;
 import lejos.nxt.Button;
 import lejos.nxt.LCD;
 

@@ -1,3 +1,4 @@
+import it.polito.roboCheckers.ChechersNavigator;
 import lejos.nxt.*;
 
 

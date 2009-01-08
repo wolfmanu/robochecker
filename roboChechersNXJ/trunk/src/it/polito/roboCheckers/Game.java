@@ -1,5 +1,9 @@
-package it.polito.Checkers;
+package it.polito.roboCheckers;
 
+import it.polito.Checkers.Board;
+import it.polito.Checkers.CheckersConstants;
+import it.polito.Checkers.Move;
+import it.polito.Checkers.cantMoveException;
 import lejos.nxt.Button;
 
 public class Game {
@@ -21,7 +25,7 @@ public class Game {
 		return this.board;
 	}
 
-	public int play() {
+	public int play() throws notCalibratedException {
 		Move lastMove = Move.create();
 		this.cancelled = false;
 		int test;

@@ -29,6 +29,14 @@ public class Move {
 		this.to = to;
 	}
 	
+	public Square getFrom () {
+		return this.from;
+	}
+	
+	public Square getLastTo () {
+		return this.to[this.to.length-1];
+	}
+	
 	public void addTo (Square to) {
 		int prevLen = this.to.length;
 		Square[] newTo = new Square[prevLen+1];
