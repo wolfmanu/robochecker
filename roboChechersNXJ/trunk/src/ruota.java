@@ -1,4 +1,4 @@
-import it.polito.roboCheckers.ChechersNavigator;
+import it.polito.roboCheckers.*;
 import lejos.nxt.*;
 
 
@@ -11,7 +11,7 @@ public class ruota  {
 		
 		int x=0;
 		int y=0;
-		ChechersNavigator navigator= ChechersNavigator.getInstance();
+		CheckersNavigator navigator= SimpleNavigator.getInstance();
 		
 		navigator.setSpeed(1000,1000);
 		// TODO Auto-generated method stub
