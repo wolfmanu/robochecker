@@ -1,4 +1,4 @@
-package it.polito.roboCheckers;
+package it.polito.Navigation;
 
 import it.polito.Checkers.Square;
 import lejos.nxt.Motor;

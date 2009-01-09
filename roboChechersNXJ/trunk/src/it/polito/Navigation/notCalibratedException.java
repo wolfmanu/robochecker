@@ -1,4 +1,4 @@
-package it.polito.roboCheckers;
+package it.polito.Navigation;
 
 public class notCalibratedException extends Exception {
 	notCalibratedException() { super(); }

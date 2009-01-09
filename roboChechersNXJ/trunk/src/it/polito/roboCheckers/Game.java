@@ -1,6 +1,7 @@
 package it.polito.roboCheckers;
 
 import it.polito.Checkers.*;
+import it.polito.Navigation.notCalibratedException;
 import lejos.nxt.Button;
 
 public class Game {

@@ -1,4 +1,4 @@
-package it.polito.roboCheckers;
+package it.polito.Navigation;
 import lejos.nxt.Button;
 import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;

@@ -5,6 +5,8 @@ import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 import it.polito.Checkers.*;
+import it.polito.Navigation.CheckersNavigator;
+import it.polito.Navigation.SimpleNavigator;
 
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);

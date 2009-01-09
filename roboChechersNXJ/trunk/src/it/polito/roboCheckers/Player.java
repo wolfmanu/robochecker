@@ -4,6 +4,7 @@ import it.polito.Checkers.Board;
 import it.polito.Checkers.IllegalMoveException;
 import it.polito.Checkers.Move;
 import it.polito.Checkers.cantMoveException;
+import it.polito.Navigation.notCalibratedException;
 
 
 public interface Player {

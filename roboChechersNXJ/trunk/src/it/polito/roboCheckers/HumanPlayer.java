@@ -3,6 +3,9 @@ package it.polito.roboCheckers;
 import lejos.nxt.Button;
 import lejos.nxt.addon.ColorSensor;
 import it.polito.Checkers.*;
+import it.polito.Navigation.CheckersNavigator;
+import it.polito.Navigation.SimpleNavigator;
+import it.polito.Navigation.notCalibratedException;
 
 
 public class HumanPlayer implements Player {
