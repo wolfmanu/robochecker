@@ -10,7 +10,7 @@ import it.polito.Checkers.Square;
  * @author davide
  * 
  */
-public class ChechersNavigator {
+public class SimpleNavigator implements CheckersNavigator {
 	private int x;
 	private int y;
 	private boolean calibrated;
@@ -30,30 +30,30 @@ public class ChechersNavigator {
 	private int[] dely={  2800,  1400,   750,   150,   -50,  -60,  300,  700, 0};
 	
 	
-	private static ChechersNavigator navigator = null;
-	public static ChechersNavigator getInstance(){
+	private static SimpleNavigator navigator = null;
+	public static SimpleNavigator getInstance(){
 		if (navigator == null)
-			navigator = new ChechersNavigator(Motor.A, Motor.B, new ColorSensor(SensorPort.S1));
+			navigator = new SimpleNavigator(Motor.A, Motor.B, new ColorSensor(SensorPort.S1));
 		return navigator;
 	}
 	//TODO: getInstance with parameters makes non sense! to fix.
-	public static ChechersNavigator getInstance(Motor MA, Motor MB){
+	public static SimpleNavigator getInstance(Motor MA, Motor MB){
 		if (navigator == null)
-			navigator = new ChechersNavigator(MA,MB,new ColorSensor(SensorPort.S1));
+			navigator = new SimpleNavigator(MA,MB,new ColorSensor(SensorPort.S1));
 		return navigator;
 	}
-	public static ChechersNavigator getInstance(Motor MA, Motor MB, SensorPort port){
+	public static SimpleNavigator getInstance(Motor MA, Motor MB, SensorPort port){
 		if (navigator == null)
-			navigator = new ChechersNavigator(MA,MB,new ColorSensor(port));
+			navigator = new SimpleNavigator(MA,MB,new ColorSensor(port));
 		return navigator;
 	}
-	public static ChechersNavigator getInstance(Motor MA, Motor MB, ColorSensor CS){
+	public static SimpleNavigator getInstance(Motor MA, Motor MB, ColorSensor CS){
 		if (navigator == null)
-			navigator = new ChechersNavigator(MA,MB,CS);
+			navigator = new SimpleNavigator(MA,MB,CS);
 		return navigator;
 	}
 	
-	private ChechersNavigator (Motor MA, Motor MB, ColorSensor CS) {
+	private SimpleNavigator (Motor MA, Motor MB, ColorSensor CS) {
 		this.MA = MA;
 		this.MB = MB;
 		this.CS = CS;

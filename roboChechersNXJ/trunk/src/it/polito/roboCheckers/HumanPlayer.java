@@ -7,11 +7,11 @@ import it.polito.Checkers.*;
 
 public class HumanPlayer implements Player {
 	private final int piece;
-	private final ChechersNavigator navigator;
+	private final CheckersNavigator navigator;
 	private final ColorSensor CS;
 	public HumanPlayer(final int piece) {
 		this.piece = piece;
-		this.navigator = ChechersNavigator.getInstance();
+		this.navigator = SimpleNavigator.getInstance();
 		this.CS = Robot.getColorSensor();
 	}
 

@@ -8,13 +8,13 @@ import it.polito.Checkers.*;
 
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
-	static private ChechersNavigator navigator = ChechersNavigator.getInstance(Motor.A, Motor.B, CS);
+	static private CheckersNavigator navigator = SimpleNavigator.getInstance(Motor.A, Motor.B, CS);
 	
 	public static ColorSensor getColorSensor() {
 		return CS;
 	}
 	
-	public static ChechersNavigator getNavigator() {
+	public static CheckersNavigator getNavigator() {
 		return navigator;
 	}
 	

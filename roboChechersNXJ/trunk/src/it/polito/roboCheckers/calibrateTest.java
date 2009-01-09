@@ -1,9 +1,7 @@
 package it.polito.roboCheckers;
 import lejos.nxt.Button;
-import lejos.nxt.ButtonListener;
 import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
-import lejos.nxt.Sound;
 import lejos.nxt.addon.ColorSensor;
 
 
@@ -11,7 +9,7 @@ public class calibrateTest {
 
 	public static void main(String[] args) throws Exception {
 		boolean exit = false;
-		ChechersNavigator navigator= ChechersNavigator.getInstance();
+		CheckersNavigator navigator= SimpleNavigator.getInstance();
 		ColorSensor CS = new ColorSensor(SensorPort.S1);
 		navigator.setSpeed(300, 2000);
 		navigator.calibrate();
