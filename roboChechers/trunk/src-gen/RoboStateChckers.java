@@ -125,6 +125,8 @@ public class RoboStateChckers {
 
 			new AbstractTransition(think) {
 
+			}, new AbstractTransition(letturaSensore) {
+
 			}
 
 			});
@@ -134,6 +136,8 @@ public class RoboStateChckers {
 			new AbstractTransition(guessMoveFrom) {
 
 			}, new AbstractTransition(guessMoveTo) {
+
+			}, new AbstractTransition(think) {
 
 			}
 
