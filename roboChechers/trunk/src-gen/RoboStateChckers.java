@@ -62,6 +62,13 @@ public class RoboStateChckers {
 		}
 	};
 
+	public IState letturaSensore = new AbstractState() {
+
+		public String getName() {
+			return "LetturaSensore";
+		}
+	};
+
 	public static void main(String[] args) {
 		RoboStateChckers roboStateChckers = new RoboStateChckers();
 		roboStateChckers.arbitrate();
@@ -85,6 +92,52 @@ public class RoboStateChckers {
 
 	private void init() {
 		if (!initialized) {
+
+			moveTo.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(letturaSensore) {
+
+			}, new AbstractTransition(think) {
+
+			}
+
+			});
+
+			think.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(moveTo) {
+
+			}, new AbstractTransition(moveTo) {
+
+			}
+
+			});
+
+			guessMoveFrom.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(moveTo) {
+
+			}
+
+			});
+
+			guessMoveTo.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(think) {
+
+			}
+
+			});
+
+			letturaSensore.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(guessMoveFrom) {
+
+			}, new AbstractTransition(guessMoveTo) {
+
+			}
+
+			});
 
 			initialized = true;
 		}
