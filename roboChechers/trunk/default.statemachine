@@ -4,23 +4,26 @@
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//where to go" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//guessflag" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//robotflag1" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.3"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="//flagrobot1" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//roboflag2" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found white &amp;&amp; searchinf from" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.5"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//where to go" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching from" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.6"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching to" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.10"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.4"/>
+    <events xsi:type="stateMachine:NamedEvent" name="HumanMoved" transitionTo="//@describes/@states.5"/>
+    <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.4"/>
+    <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.11"/>
     <states xsi:type="stateMachine:StartState"/>
     <states xsi:type="stateMachine:State" name="Calibration"/>
     <states xsi:type="stateMachine:State" name="Home"/>
-    <states xsi:type="stateMachine:State" name="MoveTo" implicitTransition="//@describes/@events.1 //@describes/@events.3"/>
-    <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.2 //@describes/@events.4"/>
+    <states xsi:type="stateMachine:State" name="MoveTo" implicitTransition="//@describes/@events.1 //@describes/@events.10 //@describes/@events.11"/>
+    <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.2 //@describes/@events.3"/>
     <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.0"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.6"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.5"/>
     <states xsi:type="stateMachine:State" name="RobotWins"/>
     <states xsi:type="stateMachine:State" name="HumanWins"/>
-    <states xsi:type="stateMachine:State" name="LetturaSensore" implicitTransition="//@describes/@events.5 //@describes/@events.7 //@describes/@events.8"/>
-    <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.9"/>
+    <states xsi:type="stateMachine:State" name="LetturaSensore" implicitTransition="//@describes/@events.4 //@describes/@events.6 //@describes/@events.7"/>
+    <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.8"/>
+    <states xsi:type="stateMachine:State" name="WaitForHuman" transitionsFrom="//@describes/@events.9"/>
   </describes>
 </stateMachine:Diagram>
