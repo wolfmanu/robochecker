@@ -5,5 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/roboChechersNXJ"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/classes.jar"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/lejosext.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/pccomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
