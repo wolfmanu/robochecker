@@ -69,6 +69,13 @@ public class RoboStateChckers {
 		}
 	};
 
+	public IState updateBoard = new AbstractState() {
+
+		public String getName() {
+			return "UpdateBoard";
+		}
+	};
+
 	public static void main(String[] args) {
 		RoboStateChckers roboStateChckers = new RoboStateChckers();
 		roboStateChckers.arbitrate();
@@ -123,9 +130,7 @@ public class RoboStateChckers {
 
 			guessMoveTo.setImplicitTransitions(new ITransition[]{
 
-			new AbstractTransition(think) {
-
-			}, new AbstractTransition(letturaSensore) {
+			new AbstractTransition(moveTo) {
 
 			}
 
@@ -137,7 +142,15 @@ public class RoboStateChckers {
 
 			}, new AbstractTransition(guessMoveTo) {
 
-			}, new AbstractTransition(think) {
+			}, new AbstractTransition(updateBoard) {
+
+			}
+
+			});
+
+			updateBoard.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(think) {
 
 			}
 
