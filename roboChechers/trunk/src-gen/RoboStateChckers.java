@@ -31,17 +31,6 @@
            }  
       }; 
   
-      public  IState moveTo = new  AbstractState(){
-			  
-			
-           
-           
-           
-           public String getName(){
-                 return "MoveTo";
-           }  
-      }; 
-  
       public  IState think = new  AbstractState(){
 			  
 			
@@ -97,36 +86,47 @@
            }  
       }; 
   
-      public  IState letturaSensore = new  AbstractState(){
+      public  IState sensorRead = new  AbstractState(){
 			  
 			
            
            
            
            public String getName(){
-                 return "LetturaSensore";
+                 return "SensorRead";
            }  
       }; 
   
-      public  IState updateBoard = new  AbstractState(){
+      public  IState update Board = new  AbstractState(){
 			  
 			
            
            
            
            public String getName(){
-                 return "UpdateBoard";
+                 return "Update Board";
            }  
       }; 
   
-      public  IState waitForHuman = new  AbstractState(){
+      public  IState showFrom = new  AbstractState(){
 			  
 			
            
            
            
            public String getName(){
-                 return "WaitForHuman";
+                 return "ShowFrom";
+           }  
+      }; 
+  
+      public  IState showTo = new  AbstractState(){
+			  
+			
+           
+           
+           
+           public String getName(){
+                 return "ShowTo";
            }  
       }; 
   
@@ -152,9 +152,9 @@
               BTChangeListener bTChangeListener = new BTChangeListener();
               
   	    
+  	    calibration.setListener(bTChangeListener);
   	    
-  	    
-  		
+  		calibration.arbitrate(0);
   
 
         }
@@ -165,33 +165,17 @@
         
         public boolean isRunning(){
               return initialized
-     
+     && calibration.isRunning()
   ;
         }
         
         private void init(){
                if (!initialized){
                
-      
-       
-  
-      
-       
-  
-      moveTo.setImplicitTransitions(
+      calibration.setImplicitTransitions(
       new ITransition[] {
       
-         new AbstractTransition(letturaSensore)
-         {
-               
-         }
-      ,
-         new AbstractTransition(think)
-         {
-               
-         }
-      ,
-         new AbstractTransition(waitForHuman)
+         new AbstractTransition(home)
          {
                
          }
@@ -200,15 +184,22 @@
       );
        
   
+      
+      
+      home.setTransitions(new ITransition[]{
+        humanMoved
+        });
+        
+  
       think.setImplicitTransitions(
       new ITransition[] {
       
-         new AbstractTransition(moveTo)
+         new AbstractTransition(showFrom)
          {
                
          }
       ,
-         new AbstractTransition(moveTo)
+         new AbstractTransition(humanWins)
          {
                
          }
@@ -220,7 +211,12 @@
       guessMoveFrom.setImplicitTransitions(
       new ITransition[] {
       
-         new AbstractTransition(moveTo)
+         new AbstractTransition(sensorRead)
+         {
+               
+         }
+      ,
+         new AbstractTransition(robotWins)
          {
                
          }
@@ -232,7 +228,7 @@
       guessMoveTo.setImplicitTransitions(
       new ITransition[] {
       
-         new AbstractTransition(moveTo)
+         new AbstractTransition(sensorRead)
          {
                
          }
@@ -247,7 +243,7 @@
       
        
   
-      letturaSensore.setImplicitTransitions(
+      sensorRead.setImplicitTransitions(
       new ITransition[] {
       
          new AbstractTransition(guessMoveFrom)
@@ -260,7 +256,7 @@
                
          }
       ,
-         new AbstractTransition(updateBoard)
+         new AbstractTransition(update Board)
          {
                
          }
@@ -269,7 +265,7 @@
       );
        
   
-      updateBoard.setImplicitTransitions(
+      update Board.setImplicitTransitions(
       new ITransition[] {
       
          new AbstractTransition(think)
@@ -281,12 +277,29 @@
       );
        
   
+      showFrom.setImplicitTransitions(
+      new ITransition[] {
       
+         new AbstractTransition(showTo)
+         {
+          public int getDelay(){return 3000;}     
+         }
       
-      waitForHuman.setTransitions(new ITransition[]{
-        humanMoved
-        });
-        
+      }
+      );
+       
+  
+      showTo.setImplicitTransitions(
+      new ITransition[] {
+      
+         new AbstractTransition(home)
+         {
+          public int getDelay(){return 3000;}     
+         }
+      
+      }
+      );
+       
   
                initialized=true;
                }
