@@ -17,8 +17,14 @@ public class MathNavigator implements CheckersNavigator {
 	
 	private boolean calibrated;
 	private int x,y;
-	private final double l = 16.0, r=11.0, coeffA=1;
-	private double alpha,beta,gamma;
+	private final double
+		l = 16.0,
+		r=11.0,
+		squareWidth = 2.0,
+		squareOffset = 1.0,
+		coeffB=1,
+		coeffA=1;
+	private double alpha,beta,gamma,Cx;
 	
 	public static CheckersNavigator getInstance(){
 		if (navigator == null)
@@ -52,7 +58,7 @@ public class MathNavigator implements CheckersNavigator {
 				Thread.sleep(POLLING_PERIOD);
 			} catch (InterruptedException e) {}
 		}		
-		alpha = MB.getTachoCount()/coeffA;
+		alpha = MB.getTachoCount()/coeffB;
 		while (CS.getColorNumber()!=STOP_MOVE) {
 			backward();
 			try {
@@ -67,22 +73,38 @@ public class MathNavigator implements CheckersNavigator {
 		// Determine constants
 		beta = 2*Math.acos(l/(2*r*Math.sin(alpha/2)));
 		gamma = (Math.PI - alpha - beta)/2;
+		Cx = r*Math.sin((alpha+beta)/2);
 		this.calibrated = true;
 	}
 
 	public void goHome() throws notCalibratedException {
-		// TODO Auto-generated method stub
-
+		if (!isCalibrated())
+			throw new notCalibratedException();
+		rotateTo(0,0);
 	}
 
 	public void goTo(Square dest) throws notCalibratedException {
-		// TODO Auto-generated method stub
-
+		goTo(dest.getRow(),dest.getCol());
 	}
 
 	public void goTo(int newX, int newY) throws notCalibratedException {
-		// TODO Auto-generated method stub
-
+		if (!isCalibrated())
+			throw new notCalibratedException();
+		
+		double theta, Cy, Px, Py;
+		int limitAngleA, limitAngleB;
+		
+		Px = (newX * squareWidth)+squareOffset;
+		Py = (newY * squareWidth)+squareOffset;
+		theta = Math.acos((Cx-Px)/r) - gamma;
+		Cy = Py - r*Math.sin(Math.acos((Cx-Px)/r));
+		
+		limitAngleA = Math.round((float)(Cy*coeffA));
+		limitAngleB = Math.round((float)(theta*coeffB));
+		rotateTo(limitAngleA,limitAngleB);
+		
+		this.x = newX;
+		this.y = newY;
 	}
 
 	public boolean isCalibrated() {
@@ -113,7 +135,11 @@ public class MathNavigator implements CheckersNavigator {
 	public int getY() {
 		return y;
 	}
-
+	
+	private void rotateTo(int destAngleA, int destAngleB) {
+		rotateTo(destAngleA,destAngleB,false);
+	}
+	
 	private void rotateTo(int destAngleA, int destAngleB, boolean nonBlocking) {
 		MA.rotateTo(destAngleA, true);
 		MB.rotateTo(destAngleB, true);
