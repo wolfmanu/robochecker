@@ -40,11 +40,11 @@ public class Game {
 					board.makeMove(lastMove);
 				} catch (cantMoveException e) {
 					test = opponentWins(player.getPiece());
-					System.out.println("FIRST EXC");
+					System.out.println("Can't Move Exc");
 					break;
 				} catch (IllegalMoveException e) {
 					legalMove = false;
-					System.out.println("SECOND EXC");
+					System.out.println("Illegal Move Exc");
 				}
 			}
 			board.printBoard();

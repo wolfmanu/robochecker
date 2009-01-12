@@ -1,5 +1,4 @@
 package it.polito.roboCheckers;
-import lejos.nxt.Button;
 import it.polito.Checkers.*;
 import it.polito.Navigation.ArmController;
 import it.polito.Navigation.CheckersNavigator;
@@ -38,21 +37,23 @@ public class ComputerPlayer implements Player {
 		System.out.println("thinking...");
 		this.score = Engine.MiniMax(board.getArrayBoard(), 0, depth, result, this.piece, counter);
 		nextMove = Move.fromArray(result);
-		System.out.println(nextMove.toString());
+		System.out.println("MyMove:" + nextMove.toString());
 		navigator.goTo(nextMove.getFrom());
 		arm.down();
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(800);
 		} catch (InterruptedException e) {}
 		arm.up();
 		navigator.goTo(nextMove.getLastTo());
 		arm.down();
+		try {
+			Thread.sleep(800);
+		} catch (InterruptedException e) {}
+		navigator.goHome(); //TODO: go home and recheck vertical alignment
 		return nextMove;
 	}
 
 	public void startNewGame() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public int getScore() {

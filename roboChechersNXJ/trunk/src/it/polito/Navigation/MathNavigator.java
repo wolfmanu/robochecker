@@ -5,13 +5,12 @@ import lejos.nxt.Button;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.SensorPort;
-import lejos.nxt.TachoMotorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
 	private static final int POLLING_PERIOD = 50, STOP_ROTATE = 2, STOP_MOVE = 5;
 	private static final int lashA = 90, lashB = 230;
-	private static CheckersNavigator navigator = null;
+	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
 	private static final LashMotor MB = new LashMotor(MotorPort.B,lashB);
 	private static final ColorSensor CS = new ColorSensor(SensorPort.S1);
@@ -27,7 +26,7 @@ public class MathNavigator implements CheckersNavigator {
 		coeffA = 510;
 	private double alpha,beta,gamma,yOffset,Cx;
 	
-	public static CheckersNavigator getInstance(){
+	public static MathNavigator getInstance(){
 		if (navigator == null)
 			navigator = new MathNavigator();
 		return navigator;
@@ -39,6 +38,15 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	public void calibrate() {
+		//If start already on stop color find next one
+		if (CS.getColorNumber()==STOP_ROTATE)
+			while (CS.getColorNumber()==STOP_ROTATE) {
+				left();
+				try {
+					Thread.sleep(POLLING_PERIOD);
+				} catch (InterruptedException e) {}
+			}
+			
 		while (CS.getColorNumber()!=STOP_ROTATE) {
 			left();
 			try {

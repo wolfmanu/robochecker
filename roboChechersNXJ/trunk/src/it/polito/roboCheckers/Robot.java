@@ -22,8 +22,8 @@ public class Robot {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		LCD.drawString("Checkers GAME", 0, 0);
-		LCD.refresh();
+		System.out.println("Checkers GAME");
+		System.out.println("Calibrating Board");
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,3);
 		navigator.setSpeed(300, 1000);
@@ -39,7 +39,6 @@ public class Robot {
 	    		System.out.println("Black wins");
 	    		break;
 	    }
-	    LCD.refresh();
 	    Button.waitForPress();
 	}
 }
