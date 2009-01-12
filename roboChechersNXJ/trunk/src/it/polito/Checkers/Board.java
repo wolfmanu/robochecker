@@ -88,11 +88,29 @@ public class Board {
 		Engine.move_board(getArrayBoard(), lastMove.toArray());		
 	}
 	
-	public Move[] getPossibleMoves (int piece) {
+	public MovesCollections[] getPossibleMoves (int piece) {
 		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
-		Move[] movesArray = new Move[moves.size()];
+		MovesCollections[] movesArray = new MovesCollections[moves.size()];
+		int flag;
 		for (int i = 0; i<moves.size(); i++) {
-			try { movesArray[i] = Move.fromArray(moves.elementAt(i)); }
+			try { 
+				 flag=0;
+				 Move m=Move.fromArray(moves.elementAt(i));
+				 for (int j=i; j>0 && flag==0; j--) 
+				 {
+					if (movesArray[j].equals(m))
+					 {
+					  movesArray[j].SetTo(m); 
+					  flag=1;
+					 }
+				 }
+
+				if (flag==1)
+				 {
+					movesArray[i]=new MovesCollections(m);
+				 } 
+				 
+				}
 			catch (cantMoveException e) {}
 		}
 		return movesArray;

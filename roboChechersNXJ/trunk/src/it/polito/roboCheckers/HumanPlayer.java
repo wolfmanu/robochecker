@@ -6,6 +6,7 @@ import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
 import it.polito.Navigation.notCalibratedException;
+import it.polito.util.Vector;
 
 
 public class HumanPlayer implements Player {
@@ -22,7 +23,7 @@ public class HumanPlayer implements Player {
 	}
 
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
-		Move[] moves = myPossibleMoves(board);
+		MovesCollections[] moves = myPossibleMoves(board);
 		if (moves.length==0)
 			throw new cantMoveException();
 		
@@ -30,27 +31,31 @@ public class HumanPlayer implements Player {
 		Button.waitForPress();
 		
 		Square from = null;
+		MovesCollections f=null;
 		boolean foundFrom = false;
-		for (Move m:moves) {
+		for (MovesCollections m:moves) {
 			from = m.getFrom();
+			f=m;
 			this.navigator.goTo(from);
 			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
 				foundFrom = true;
 				break;
 			}
 		}
+		
 		if (!foundFrom)
 			throw new IllegalMoveException();
 		
 		Move theMove = null;
-		for (Move m:moves) {
-			if (m.getFrom().equals(from)) {
-				navigator.goTo(m.getLastTo());
-				if (CS.getColorNumber() == piece) {
-					theMove = m;
-				}
-			}
+		Vector<Square[]> vTo = f.getTos();
+		for (int i=0; i<vTo.size(); i++)
+			{
+			 Square[] s = vTo.elementAt(i);
+			 navigator.goTo(s[s.length-1]);
+			 if (CS.getColorNumber() == piece) 
+				 theMove = Move.create(from, s);
 		}
+		
 		if (theMove == null)
 			throw new IllegalMoveException();
 		
@@ -61,7 +66,7 @@ public class HumanPlayer implements Player {
 		return this.piece;
 	}
 
-	private Move[] myPossibleMoves(Board board) {
+	private MovesCollections[] myPossibleMoves(Board board) {
 		return board.getPossibleMoves(this.piece); 
 	}
 }

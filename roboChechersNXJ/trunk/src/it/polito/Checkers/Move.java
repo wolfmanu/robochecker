@@ -1,4 +1,6 @@
-package it.polito.Checkers;
+	package it.polito.Checkers;
+
+import it.polito.util.*;
 
 public class Move {
 
@@ -7,13 +9,14 @@ public class Move {
 
 	public Move (Square from, Square to) {
 		this.from = from;
-		this.to = new Square[1];
-		this.to[0] = to;
+		
+		/*this.to = new Square[1];
+		this.to[0] = to;*/
 	}
 
 	public Move (Square from, Square[] to) {
 		this.from = from;
-		this.to = to;
+		this.to=to;
 	}
 	
 	public void setFrom (Square from) {
@@ -32,7 +35,9 @@ public class Move {
 	public Square getFrom () {
 		return this.from;
 	}
-	
+	public Square[] getTo () {
+		return this.to;
+	}
 	public Square getLastTo () {
 		return this.to[this.to.length-1];
 	}

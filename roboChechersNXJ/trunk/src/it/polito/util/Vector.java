@@ -23,5 +23,15 @@ public class Vector<T> {
 	public T elementAt(int i) {
 		return (T) arr[i];
 	}
+	
+	boolean contains(Object o)
+	{
+		for (Object e : arr)
+			{
+			 if (e.equals(o))
+				return true;
+			}
+	   return false;	
+	}
 
 }
