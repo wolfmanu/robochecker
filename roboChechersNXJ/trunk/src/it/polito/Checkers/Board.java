@@ -4,9 +4,10 @@ import it.polito.util.Vector;
 public class Board {
 
 	private final int[][] pieces;
-
+	private int indice;
 	private final short rows;
 	private final short cols;
+	private MovesCollections[] mosse;
 
 	public Board(final int rows, final int cols) {
 		this.rows = (short) rows;
@@ -14,6 +15,11 @@ public class Board {
 		this.pieces = new int[rows][cols];
 		initBoard();
 	}
+	
+	public static final Board create(int rows, int cols) {
+		return new Board(rows, cols);
+	}
+	
 	public void initBoard() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++)
@@ -113,11 +119,13 @@ public class Board {
 				}
 			catch (cantMoveException e) {}
 		}
+		indice =0;
+		mosse=movesArray;
 		return movesArray;
 	}
 	
-	public static final Board create(int rows, int cols) {
-		return new Board(rows, cols);
+	public Square getPossibleMove() {
+		return mosse[indice++].getFrom();
 	}
 
 }

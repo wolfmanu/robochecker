@@ -4,14 +4,12 @@ import it.polito.util.*;
 public class Move {
 
 	private Square from;
-	private Vector<Square[]> tos;
 	private Square[] to;
 
 	public Move (Square from, Square to) {
 		this.from = from;
-		
-		/*this.to = new Square[1];
-		this.to[0] = to;*/
+		this.to = new Square[1];
+		this.to[0] = to;
 	}
 
 	public Move (Square from, Square[] to) {
