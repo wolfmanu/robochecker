@@ -4,7 +4,7 @@ import lejos.nxt.Button;
 import lejos.nxt.addon.ColorSensor;
 import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
-import it.polito.Navigation.SimpleNavigator;
+import it.polito.Navigation.MathNavigator;
 import it.polito.Navigation.notCalibratedException;
 
 
@@ -14,7 +14,7 @@ public class HumanPlayer implements Player {
 	private final ColorSensor CS;
 	public HumanPlayer(final int piece) {
 		this.piece = piece;
-		this.navigator = SimpleNavigator.getInstance();
+		this.navigator = MathNavigator.getInstance();
 		this.CS = Robot.getColorSensor();
 	}
 

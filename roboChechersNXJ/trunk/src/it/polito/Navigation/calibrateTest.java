@@ -39,20 +39,20 @@ public class calibrateTest {
 			if (i%2==0) 
 				for (int j=0; j<8 && !exit; j++) {
 					navigator.goTo(X[j],Y[i]);
-					LCD.drawString("color", 0, 7);
-					LCD.drawInt((int)CS.getColorNumber(),7,7);
-					LCD.refresh();
-					Thread.sleep(1500);
+//					LCD.drawString("color", 0, 7);
+//					LCD.drawInt((int)CS.getColorNumber(),7,7);
+//					LCD.refresh();
+					//Thread.sleep(1500);
 					if (Button.ESCAPE.isPressed())
 						exit = true;	
 				}
 			else
 				for (int j=7; j>=0 && !exit; j--) {
 					navigator.goTo(X[j],Y[i]);
-					LCD.drawString("color", 0, 7);
-					LCD.drawInt((int)CS.getColorNumber(),7,7);
-					LCD.refresh();
-					Thread.sleep(1500);
+//					LCD.drawString("color", 0, 7);
+//					LCD.drawInt((int)CS.getColorNumber(),7,7);
+//					LCD.refresh();
+					//Thread.sleep(1500);
 					if (Button.ESCAPE.isPressed())
 						exit = true;	
 				}

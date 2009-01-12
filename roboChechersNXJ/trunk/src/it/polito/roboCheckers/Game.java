@@ -29,7 +29,8 @@ public class Game {
 		int test=CheckersConstants.NO_WIN;
 		Player player = this.whitePlayer;
 		do {
-			for (boolean legalMove = true; !legalMove;) {
+			for (boolean legalMove = false; !legalMove;) {
+				legalMove = true;
 				try {
 					lastMove = player.makeMove(this.board);
 					if (this.cancelled) { //TODO should use an exception
@@ -39,9 +40,11 @@ public class Game {
 					board.makeMove(lastMove);
 				} catch (cantMoveException e) {
 					test = opponentWins(player.getPiece());
+					System.out.println("FIRST EXC");
 					break;
 				} catch (IllegalMoveException e) {
 					legalMove = false;
+					System.out.println("SECOND EXC");
 				}
 			}
 			board.printBoard();

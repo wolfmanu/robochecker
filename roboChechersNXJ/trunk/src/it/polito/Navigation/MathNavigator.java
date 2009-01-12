@@ -120,9 +120,9 @@ public class MathNavigator implements CheckersNavigator {
 		
 		limitAngleA = Math.round((float)(Cy*coeffA));
 		limitAngleB = Math.round((float)((theta*coeffB)/(2*java.lang.Math.PI)));
-		System.out.println("Cy: " + Cy);
-		System.out.println("theta: " + theta);
-		System.out.println("Px: " + Px + " Py: " + Py);
+//		System.out.println("Cy: " + Cy);
+//		System.out.println("theta: " + theta);
+//		System.out.println("Px: " + Px + " Py: " + Py);
 		rotateTo(limitAngleA,limitAngleB);
 		
 		this.x = newX;
@@ -182,11 +182,15 @@ public class MathNavigator implements CheckersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
+		System.out.println("Length: " + motorList.length + motorList[0].isRotating() +motorList[0].isMoving());
 		for (int i=0; i < motorList.length; i++){
-			while (motorList[i].isMoving()){
+			while (motorList[i].isRotating()){
 				try {
 					Thread.sleep(POLLING_PERIOD);
-				} catch (InterruptedException e) { }
+				} catch (InterruptedException e) { 
+					System.out.println(e.getMessage());
+					System.out.println("E!");
+				}
 			}
 		}
 	}

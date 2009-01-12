@@ -6,11 +6,12 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
+import it.polito.Navigation.MathNavigator;
 import it.polito.Navigation.SimpleNavigator;
 
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
-	static private CheckersNavigator navigator = SimpleNavigator.getInstance(Motor.A, Motor.B, CS);
+	static private CheckersNavigator navigator = MathNavigator.getInstance();
 	
 	public static ColorSensor getColorSensor() {
 		return CS;
@@ -25,7 +26,9 @@ public class Robot {
 		LCD.refresh();
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,3);
-	    navigator.calibrate();
+		navigator.setSpeed(300, 1000);
+		navigator.calibrate();
+		navigator.setSpeed(1000, 1000);
 	    Game game = new Game(pl1,pl2);
 	    int result = game.play();
 	    switch(result){
