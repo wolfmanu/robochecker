@@ -11,10 +11,12 @@ import it.polito.util.Vector;
 
 public class HumanPlayer implements Player {
 	private final int piece;
+	private final int piecek;
 	private final CheckersNavigator navigator;
 	private final ColorSensor CS;
-	public HumanPlayer(final int piece) {
+	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
+		this.piecek = piecek;
 		this.navigator = MathNavigator.getInstance();
 		this.CS = Robot.getColorSensor();
 	}
@@ -52,7 +54,9 @@ public class HumanPlayer implements Player {
 			{
 			 Square[] s = vTo.elementAt(i);
 			 navigator.goTo(s[s.length-1]);
-			 if (CS.getColorNumber() == piece) 
+			 if (CS.getColorNumber() == piece ||
+					 CS.getColorNumber() == piecek) 
+				 //TODO: check based on the piece in the source square
 				 theMove = Move.create(from, s);
 		}
 		

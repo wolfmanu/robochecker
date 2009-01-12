@@ -24,8 +24,8 @@ public class Robot {
 	public static void main(String[] args) throws Exception {
 		System.out.println("Checkers GAME");
 		System.out.println("Calibrating Board");
-		Player pl1 = new HumanPlayer(CheckersConstants.BLACK);
-	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,3);
+		Player pl1 = new HumanPlayer(CheckersConstants.BLACK, CheckersConstants.BKING);
+	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE, CheckersConstants.WKING,3);
 		navigator.setSpeed(300, 1000);
 		navigator.calibrate();
 		navigator.setSpeed(1000, 1000);

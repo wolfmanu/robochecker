@@ -7,22 +7,24 @@ import it.polito.Navigation.notCalibratedException;
 
 
 public class ComputerPlayer implements Player {
-	private int piece;
+	private final int piece;
+	private final int piecek;
 	private int depth;
 	private int score;
 	private CheckersNavigator navigator;
 	private ArmController arm;
 		
-	public ComputerPlayer(int piece, int depth) {
+	public ComputerPlayer(final int piece, final int piecek, int depth) {
 		this.piece = piece;
+		this.piecek = piecek;
 		this.navigator = MathNavigator.getInstance();
 		this.arm = ArmController.getInstance();
 		this.depth = depth;
 		this.score = 0;
 	}
 
-	public ComputerPlayer(int piece) {
-		this(piece, 6);
+	public ComputerPlayer(final int piece, final int piecek) {
+		this(piece, piecek, 6);
 	}
 	
 	public int getPiece() {
