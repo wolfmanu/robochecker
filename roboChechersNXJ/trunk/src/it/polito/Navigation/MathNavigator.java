@@ -54,7 +54,7 @@ public class MathNavigator implements CheckersNavigator {
 			} catch (InterruptedException e) {}
 		}
 		MB.stop();
-		//left(3*lashB); // Remove lash
+		left(3*lashB); // Remove lash
 		if (CS.getColorNumber()==STOP_ROTATE) {
 			while (CS.getColorNumber()==STOP_ROTATE) {
 				right();
@@ -83,8 +83,8 @@ public class MathNavigator implements CheckersNavigator {
 			} catch (InterruptedException e) {}
 		}
 		MA.stop();
-		//forward(lashA);
-		//left(lashB);
+		forward(lashA);
+		left(lashB);
 		MA.resetTachoCount();
 		MB.resetTachoCount();
 		
