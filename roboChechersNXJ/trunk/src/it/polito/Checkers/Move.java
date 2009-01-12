@@ -1,10 +1,10 @@
 	package it.polito.Checkers;
-
 import it.polito.util.*;
 
 public class Move {
 
 	private Square from;
+	private Vector<Square[]> tos;
 	private Square[] to;
 
 	public Move (Square from, Square to) {
@@ -76,6 +76,22 @@ public class Move {
 		}
 		return newMove;
 	}
+	/*
+	public static final Square[] (int[] arrayMove) throws cantMoveException {
+		
+		int startx = arrayMove[0];
+		int starty = arrayMove[1];
+		if (startx == 0 && starty == 0)
+			throw new cantMoveException();
+		int endx = arrayMove[2];
+		int endy = arrayMove[3];
+		Move newMove = new Move(new Square(startx, starty), new Square(endx % 10, endy % 10));
+		for (endx /= 10, endy /= 10 ; endx > 0 || endy > 0; endx /= 10, endy /= 10) {
+			newMove.addTo(new Square(endx,endy));
+		}
+		return newMove;
+	}
+	*/
 	public int[] toArray() {
 		int[] arrayMove = new int[4];
 		arrayMove[0] = this.from.getRow();

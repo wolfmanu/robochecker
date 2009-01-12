@@ -1,5 +1,6 @@
 package it.polito.Navigation;
 import lejos.nxt.Motor;
+import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 
 public class ArmController {
@@ -9,9 +10,9 @@ public class ArmController {
 	private TouchSensor TS = null;
 	private static ArmController controller = null;
 	
-	public static ArmController getInstance(Motor MC, TouchSensor TS){
+	public static ArmController getInstance(){
 		if (controller == null)
-			controller = new ArmController(MC,TS);
+			controller = new ArmController(Motor.C,new TouchSensor(SensorPort.S2));
 		return controller;
 	}
 	

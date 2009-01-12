@@ -7,7 +7,7 @@ public class ArmSuGiu {
 		 * @param args
 		 */
 		public static void main(String[] args) throws Exception {
-			ArmController arm = ArmController.getInstance(Motor.C, new TouchSensor(SensorPort.S2));
+			ArmController arm = ArmController.getInstance();
 			
 			while (true) {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
