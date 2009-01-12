@@ -4,7 +4,17 @@
 	import lejos.nxt.*;
 	import lejos.navigation.*;
      public class RoboStateChckers {
-          
+        
+	     private static CheckersNavigator navigator  =  SimpleNavigator.getInstance();
+	
+	     private static ColorSensor CS  =  new ColorSensor(SensorPort.S1);
+	
+	     private static Board board = new Board();;
+	
+	     private static int pieceRobot = CheckersConstants.WHITE;;
+	
+	     private static int piecehuman = CheckersConstants.BLACK;;
+	  
         private boolean initialized=false;
         
         
@@ -12,6 +22,10 @@
       public  IState calibration = new  AbstractState(){
 			  
 			
+           
+           public void doIt() throws InterruptedException{
+                 navigator.calibrate();
+           }
            
            
            
@@ -23,6 +37,10 @@
       public  IState home = new  AbstractState(){
 			  
 			
+           
+           public void doIt() throws InterruptedException{
+                 navigator.goHome();
+           }
            
            
            
@@ -45,6 +63,10 @@
       public  IState guessMoveFrom = new  AbstractState(){
 			  
 			
+           
+           public void doIt() throws InterruptedException{
+                 Move[] mosse = board.getPossibleMoves(pieceHuman)
+           }
            
            
            
@@ -97,14 +119,14 @@
            }  
       }; 
   
-      public  IState update Board = new  AbstractState(){
+      public  IState updateBoard = new  AbstractState(){
 			  
 			
            
            
            
            public String getName(){
-                 return "Update Board";
+                 return "UpdateBoard";
            }  
       }; 
   
@@ -130,11 +152,22 @@
            }  
       }; 
   
+      public  IState calculateMoves = new  AbstractState(){
+			  
+			
+           
+           
+           
+           public String getName(){
+                 return "CalculateMoves";
+           }  
+      }; 
+  
         
         
-      public ITransition humanMoved = new AbstractTransition(guessMoveFrom){
+      public ITransition humanMoved = new AbstractTransition(calculateMoves){
            public boolean guard(){
-                return //Insert java condition here;
+                return false;//Insert java condition here;
            }
            public String getName(){
                 return "HumanMoved";
@@ -256,7 +289,7 @@
                
          }
       ,
-         new AbstractTransition(update Board)
+         new AbstractTransition(updateBoard)
          {
                
          }
@@ -265,7 +298,7 @@
       );
        
   
-      update Board.setImplicitTransitions(
+      updateBoard.setImplicitTransitions(
       new ITransition[] {
       
          new AbstractTransition(think)
@@ -295,6 +328,18 @@
          new AbstractTransition(home)
          {
           public int getDelay(){return 3000;}     
+         }
+      
+      }
+      );
+       
+  
+      calculateMoves.setImplicitTransitions(
+      new ITransition[] {
+      
+         new AbstractTransition(guessMoveFrom)
+         {
+               
          }
       
       }

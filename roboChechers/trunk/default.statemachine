@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stateMachine:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stateMachine="http://stateMachine">
   <describes name="RoboStateChckers">
+    <variables name="CheckersNavigator navigator " type="static" initialValue=" SimpleNavigator.getInstance()"/>
+    <variables name="ColorSensor CS " type="static" initialValue=" new ColorSensor(SensorPort.S1)"/>
+    <variables name="board" type="Board" modifier="private static" initialValue="new Board();"/>
+    <variables name="int pieceRobot" type="static" initialValue="CheckersConstants.WHITE;"/>
+    <variables name="int piecehuman" type="static" initialValue="CheckersConstants.BLACK;"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found white &amp;&amp; searchinf from" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching from" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.5"/>
-    <events xsi:type="stateMachine:NamedEvent" name="HumanMoved" transitionTo="//@describes/@states.4"/>
+    <events xsi:type="stateMachine:NamedEvent" trigger="false;//Insert java condition here" name="HumanMoved" transitionTo="//@describes/@states.12"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching to" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
@@ -15,17 +20,19 @@
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//no moves left" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.6"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//no moves left" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.7"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.1" implicitTransitionTo="//@describes/@states.2"/>
+    <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.12" implicitTransitionTo="//@describes/@states.4"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.10"/>
-    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13"/>
-    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2"/>
+    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13" do="navigator.calibrate();"/>
+    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="navigator.goHome();"/>
     <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.7 //@describes/@events.12"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11" do="Move[] mosse = board.getPossibleMoves(pieceHuman)"/>
     <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.3"/>
     <states xsi:type="stateMachine:State" name="RobotWins"/>
     <states xsi:type="stateMachine:State" name="HumanWins"/>
     <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.0 //@describes/@events.1 //@describes/@events.5"/>
-    <states xsi:type="stateMachine:State" name="Update Board" implicitTransition="//@describes/@events.6"/>
+    <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.6"/>
     <states xsi:type="stateMachine:State" name="ShowFrom" implicitTransition="//@describes/@events.8"/>
     <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.9"/>
+    <states xsi:type="stateMachine:State" name="CalculateMoves" implicitTransition="//@describes/@events.14"/>
   </describes>
 </stateMachine:Diagram>
