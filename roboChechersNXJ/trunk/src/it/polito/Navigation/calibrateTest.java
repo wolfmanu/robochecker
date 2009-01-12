@@ -8,10 +8,29 @@ import lejos.nxt.addon.ColorSensor;
 public class calibrateTest {
 
 	public static void main(String[] args) throws Exception {
+		/*
+		double l = 16.0;
+		double r = 11.0;
+		double alpha = 0.2628;
+		double betaarg = l/(2*r*java.lang.Math.sin(alpha/2));
+		double beta = 2*java.lang.Math.acos(betaarg);
+		double gamma = (java.lang.Math.PI - alpha - beta)/2;
+		double Cx = r*java.lang.Math.sin((alpha+beta)/2);
+		
+		System.out.println("alpha: " + alpha);
+		System.out.println("betaarg: " + betaarg);
+		System.out.println("beta: " + beta);
+		System.out.println("gamma: " + gamma);
+		System.out.println("Cx: " + Cx);
+		
+		Button.waitForPress();
+		
+		*/
+		
 		boolean exit = false;
-		CheckersNavigator navigator= SimpleNavigator.getInstance();
+		CheckersNavigator navigator= MathNavigator.getInstance();
 		ColorSensor CS = new ColorSensor(SensorPort.S1);
-		navigator.setSpeed(300, 2000);
+		navigator.setSpeed(300, 1000);
 		navigator.calibrate();
 		navigator.setSpeed(1000, 1000);
 		int[] X = {0,1,2,3,4,5,6,7};
@@ -23,7 +42,7 @@ public class calibrateTest {
 					LCD.drawString("color", 0, 7);
 					LCD.drawInt((int)CS.getColorNumber(),7,7);
 					LCD.refresh();
-					Thread.sleep(5000);
+					Thread.sleep(1500);
 					if (Button.ESCAPE.isPressed())
 						exit = true;	
 				}
@@ -33,7 +52,7 @@ public class calibrateTest {
 					LCD.drawString("color", 0, 7);
 					LCD.drawInt((int)CS.getColorNumber(),7,7);
 					LCD.refresh();
-					Thread.sleep(5000);
+					Thread.sleep(1500);
 					if (Button.ESCAPE.isPressed())
 						exit = true;	
 				}

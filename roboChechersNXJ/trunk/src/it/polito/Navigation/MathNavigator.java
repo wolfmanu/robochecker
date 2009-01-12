@@ -1,6 +1,7 @@
 package it.polito.Navigation;
 
 import it.polito.Checkers.Square;
+import lejos.nxt.Button;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.SensorPort;
@@ -8,7 +9,7 @@ import lejos.nxt.TachoMotorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 50, STOP_ROTATE = 0, STOP_MOVE = 1;
+	private static final int POLLING_PERIOD = 50, STOP_ROTATE = 2, STOP_MOVE = 5;
 	private static final int lashA = 90, lashB = 230;
 	private static CheckersNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
@@ -19,12 +20,12 @@ public class MathNavigator implements CheckersNavigator {
 	private int x,y;
 	private final double
 		l = 16.0,
-		r=11.0,
+		r = 11.0,
 		squareWidth = 2.0,
-		squareOffset = 1.0,
-		coeffB=1,
-		coeffA=1;
-	private double alpha,beta,gamma,Cx;
+		squareOffset = 1.5,
+		coeffB = 61142,
+		coeffA = 510;
+	private double alpha,beta,gamma,yOffset,Cx;
 	
 	public static CheckersNavigator getInstance(){
 		if (navigator == null)
@@ -44,39 +45,57 @@ public class MathNavigator implements CheckersNavigator {
 				Thread.sleep(POLLING_PERIOD);
 			} catch (InterruptedException e) {}
 		}
-		left(3*lashB); // Remove lash
-		while (CS.getColorNumber()==STOP_ROTATE) {
-			right();
-			try {
-				Thread.sleep(POLLING_PERIOD);
-			} catch (InterruptedException e) {}
+		MB.stop();
+		//left(3*lashB); // Remove lash
+		if (CS.getColorNumber()==STOP_ROTATE) {
+			while (CS.getColorNumber()==STOP_ROTATE) {
+				right();
+				try {
+					Thread.sleep(POLLING_PERIOD);
+				} catch (InterruptedException e) {}
+			}
+			MB.stop();
 		}
 		MB.resetTachoCount();
 		while (CS.getColorNumber()!=STOP_ROTATE) {
 			right();
 			try {
 				Thread.sleep(POLLING_PERIOD);
+				//System.out.println("Color: "+Integer.toString(CS.getColorNumber()));
 			} catch (InterruptedException e) {}
 		}		
-		alpha = MB.getTachoCount()/coeffB;
+		MB.stop();
+		alpha = Math.abs((MB.getTachoCount()*2*java.lang.Math.PI)/coeffB);
+		
 		while (CS.getColorNumber()!=STOP_MOVE) {
 			backward();
 			try {
 				Thread.sleep(POLLING_PERIOD);
+				//System.out.println("Color: "+Integer.toString(CS.getColorNumber()));
 			} catch (InterruptedException e) {}
 		}
-		forward(lashA);
-		left(lashB);
+		MA.stop();
+		//forward(lashA);
+		//left(lashB);
 		MA.resetTachoCount();
 		MB.resetTachoCount();
 		
 		// Determine constants
-		beta = 2*Math.acos(l/(2*r*Math.sin(alpha/2)));
-		gamma = (Math.PI - alpha - beta)/2;
-		Cx = r*Math.sin((alpha+beta)/2);
+		double betaarg = l/(2*r*java.lang.Math.sin(alpha/2));
+		beta = 2*java.lang.Math.acos(betaarg);
+		gamma = (java.lang.Math.PI - alpha - beta)/2;
+		Cx = r*java.lang.Math.sin((alpha+beta)/2);
+		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r));
+			
+		System.out.println("alpha: " + alpha);
+		System.out.println("betaarg: " + betaarg);
+		System.out.println("beta: " + beta);
+		System.out.println("gamma: " + gamma);
+		System.out.println("Cx: " + Cx);
+		Button.waitForPress();
 		this.calibrated = true;
 	}
-
+	
 	public void goHome() throws notCalibratedException {
 		if (!isCalibrated())
 			throw new notCalibratedException();
@@ -97,10 +116,13 @@ public class MathNavigator implements CheckersNavigator {
 		Px = (newX * squareWidth)+squareOffset;
 		Py = (newY * squareWidth)+squareOffset;
 		theta = Math.acos((Cx-Px)/r) - gamma;
-		Cy = Py - r*Math.sin(Math.acos((Cx-Px)/r));
+		Cy = Py - r*Math.sin(Math.acos((Cx-Px)/r)) + yOffset;
 		
 		limitAngleA = Math.round((float)(Cy*coeffA));
-		limitAngleB = Math.round((float)(theta*coeffB));
+		limitAngleB = Math.round((float)((theta*coeffB)/(2*java.lang.Math.PI)));
+		System.out.println("Cy: " + Cy);
+		System.out.println("theta: " + theta);
+		System.out.println("Px: " + Px + " Py: " + Py);
 		rotateTo(limitAngleA,limitAngleB);
 		
 		this.x = newX;
@@ -147,14 +169,14 @@ public class MathNavigator implements CheckersNavigator {
 			waitForMotors(new Motor[] {MA,MB});
 	}
 
-	private void left() { MB.forward();	}
-	private void right() { MB.backward(); }
-	private void forward() { MA.forward(); }
-	private void backward() { MA.backward(); }
-	private void left(int angle) { MB.rotate(angle);	}
-	private void right(int angle) { MB.rotate(-angle); }
-	private void forward(int angle) { MA.rotate(angle); }
-	private void backward(int angle) { MA.rotate(-angle); }	
+	public void left() { MB.forward();	}
+	public void right() { MB.backward(); }
+	public void forward() { MA.forward(); }
+	public void backward() { MA.backward(); }
+	public void left(int angle) { MB.rotate(angle);	}
+	public void right(int angle) { MB.rotate(-angle); }
+	public void forward(int angle) { MA.rotate(angle); }
+	public void backward(int angle) { MA.rotate(-angle); }	
 	/***
 	 * Wait for motor(s) in motorList to stop
 	 * @throws InterruptedException 

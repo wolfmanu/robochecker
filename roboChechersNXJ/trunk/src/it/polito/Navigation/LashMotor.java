@@ -19,9 +19,9 @@ public class LashMotor extends Motor {
 		rotateTo(limitAngle,false);
 	}
 	public void rotateTo(int limitAngle, boolean nonBlocking) {
-		if (limitAngle < getTachoCount())
+		if (limitAngle < super.getTachoCount())
 			limitAngle -= lash;
-		rotateTo(limitAngle, nonBlocking);
+		super.rotateTo(limitAngle, nonBlocking);
 	}
 
 }
