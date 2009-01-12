@@ -8,12 +8,15 @@
     <variables name="int piecehuman" type="static" initialValue="CheckersConstants.BLACK;"/>
     <variables name="colore" type="int" modifier="private static " initialValue="CS.getColorNumber();"/>
     <variables name="boolean searchFrom " type="static" initialValue=" true;"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; serchfrom==1" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.4"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching from" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.13"/>
+    <variables name="boolean searchTo " type="static" initialValue=" false;"/>
+    <variables name="from" type="Square" modifier="private static" initialValue="null;"/>
+    <variables name="to" type="Square" modifier="private static" initialValue="null;"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.BLACK &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.4"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.13"/>
     <events xsi:type="stateMachine:NamedEvent" trigger="false;//Insert java condition here" name="HumanMoved" transitionTo="//@describes/@states.12"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.8"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="//found black &amp;&amp; searching to" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.BLACK &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.10"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" delay="3000" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.11"/>
@@ -24,20 +27,20 @@
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.1" implicitTransitionTo="//@describes/@states.2"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.12" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.13" implicitTransitionTo="//@describes/@states.5"/>
-    <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.5"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.5"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.10"/>
-    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13" do="navigator.calibrate();"/>
+    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13" do="navigator.calibrate();" exit="ArmController.up();" entry="ArmController.up(); ArmController.down();"/>
     <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="navigator.goHome();"/>
     <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.7 //@describes/@events.12"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11" do="navigator.goTo(from);" entry="Square from = board.getPossibleMove();"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.3"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11" do="navigator.goTo(from);" entry="from = board.getPossibleMoveFrom();"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.3" do="navigator.goTo(to);" entry="to = board.getPossibleMoveTo();"/>
     <states xsi:type="stateMachine:State" name="RobotWins"/>
     <states xsi:type="stateMachine:State" name="HumanWins"/>
-    <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.0 //@describes/@events.1 //@describes/@events.5 //@describes/@events.16" do="CS." exit="ArmController.up();" entry="ArmController.down();"/>
+    <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.0 //@describes/@events.1 //@describes/@events.5 //@describes/@events.16" do="colore=CS.getColorNumber();" exit="ArmController.up();" entry="ArmController.down();"/>
     <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.6"/>
     <states xsi:type="stateMachine:State" name="ShowFrom" implicitTransition="//@describes/@events.8"/>
     <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.9"/>
-    <states xsi:type="stateMachine:State" name="CalculateMoves" implicitTransition="//@describes/@events.14" do="board.getPossibleMoves(piecehuman);" exit="searchFrom=True;"/>
-    <states xsi:type="stateMachine:State" name="CalculateTo" implicitTransition="//@describes/@events.15"/>
+    <states xsi:type="stateMachine:State" name="CalculateMoves" implicitTransition="//@describes/@events.14" do="board.getPossibleMoves(piecehuman);" exit="searchFrom=true;"/>
+    <states xsi:type="stateMachine:State" name="CalculateTo" implicitTransition="//@describes/@events.15" exit="" entry="searchFrom=false; searchTo=true;"/>
   </describes>
 </stateMachine:Diagram>

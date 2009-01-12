@@ -1,10 +1,11 @@
 package it.polito.Checkers;
-import it.polito.util.Vector;
+import it.polito.util.*;
 
 public class Board {
 
 	private final int[][] pieces;
 	private int indice;
+	private int indice2;
 	private final short rows;
 	private final short cols;
 	private MovesCollections[] mosse;
@@ -124,8 +125,15 @@ public class Board {
 		return movesArray;
 	}
 	
-	public Square getPossibleMove() {
+	public Square getPossibleMoveFrom() {
+		indice2=0;
 		return mosse[indice++].getFrom();
+	}
+	
+	public Square getPossibleMoveTo() {
+		indice2=0;
+		Square[] s= mosse[indice++].getTos().elementAt(indice2++);
+		return s[s.length-1];
 	}
 
 }
