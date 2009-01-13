@@ -34,7 +34,7 @@
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.5"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.10"/>
     <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13" do="navigator.calibrate();" exit="arm.up();" entry="arm.down();"/>
-    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="try{navigator.goHome();}catch(Exception e){}"/>
+    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="try{navigator.goHome();}catch(Exception e){}" entry="arm.up();"/>
     <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.7 //@describes/@events.12" do=" Engine.MiniMax(board.getArrayBoard(), 0, depth, result,pieceRobot, new int[1]); try{nextMove = Move.fromArray(result);}catch(cantMoveException e){humanWin=true;}" exit="from=nextMove.getFrom(); to=nextMove.getTo();" entry="">
       <variables name="result" type="int[]" initialValue="new int[4];"/>
       <variables name="nextMove" type="Move" initialValue="null"/>
@@ -45,8 +45,8 @@
     <states xsi:type="stateMachine:State" name="HumanWins" do="System.out.println(&quot;Black wins&quot;);"/>
     <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.0 //@describes/@events.1 //@describes/@events.5 //@describes/@events.16" do="colore=CS.getColorNumber();" exit="arm.up();" entry="arm.down();"/>
     <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.6" do="board.makeMove(new Move(from,to));"/>
-    <states xsi:type="stateMachine:State" name="ShowFrom" implicitTransition="//@describes/@events.8" do="arm.down();" exit="arm.up();" entry="try{navigator.goTo(from);}catch(Exception e){}"/>
-    <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.9" do="arm.down();" exit="arm.up();" entry="try{navigator.goTo(to[to.length-1]);}catch(Exception e){}"/>
+    <states xsi:type="stateMachine:State" name="ShowFrom" implicitTransition="//@describes/@events.8" do="arm.down();" exit="" entry="try{navigator.goTo(from);}catch(Exception e){}"/>
+    <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.9" do="arm.down();" exit="" entry="arm.up(); try{navigator.goTo(to[to.length-1]);}catch(Exception e){}"/>
     <states xsi:type="stateMachine:State" name="CalculateMoves" implicitTransition="//@describes/@events.14 //@describes/@events.11" do="try{board.getPossibleMoves(piecehuman);&#x9;} catch (cantMoveException e) {robotWin=true;}" exit="searchFrom=true;"/>
     <states xsi:type="stateMachine:State" name="CalculateTo" implicitTransition="//@describes/@events.15" exit="" entry="searchFrom=false; searchTo=true;"/>
   </describes>

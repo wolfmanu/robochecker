@@ -1,8 +1,7 @@
-import lejos.nxt.addon.ColorSensor;
-import it.polito.Navigation.*;
-import it.polito.Checkers.*;
+
 import de.nordakademie.lejos.statemachine.*;
 import lejos.nxt.*;
+import lejos.navigation.*;
 public class RoboStateChckers {
 
 	private static CheckersNavigator navigator = SimpleNavigator.getInstance();
@@ -61,6 +60,10 @@ public class RoboStateChckers {
 				navigator.goHome();
 			} catch (Exception e) {
 			}
+		}
+
+		public void entry() {
+			arm.up();
 		}
 
 		public String getName() {
@@ -188,10 +191,6 @@ public class RoboStateChckers {
 			arm.down();
 		}
 
-		public void exit() {
-			arm.up();
-		}
-
 		public void entry() {
 			try {
 				navigator.goTo(from);
@@ -210,11 +209,8 @@ public class RoboStateChckers {
 			arm.down();
 		}
 
-		public void exit() {
-			arm.up();
-		}
-
 		public void entry() {
+			arm.up();
 			try {
 				navigator.goTo(to[to.length - 1]);
 			} catch (Exception e) {
