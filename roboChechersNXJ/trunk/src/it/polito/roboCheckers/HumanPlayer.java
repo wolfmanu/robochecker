@@ -25,19 +25,19 @@ public class HumanPlayer implements Player {
 	}
 
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
-		MovesCollections[] moves = myPossibleMoves(board);
-		if (moves.length==0)
+		Vector<MovesCollections> moves = myPossibleMoves(board);
+		if (moves.size()==0)
 			throw new cantMoveException();
 		
 		System.out.println("Waiting for human to move");
 		Button.waitForPress();
 		
 		Square from = null;
-		MovesCollections f=null;
 		boolean foundFrom = false;
-		for (MovesCollections m:moves) {
+		MovesCollections m=null;
+		for (int i=moves.size(); i>=0;i--) {
+			m = moves.elementAt(i);
 			from = m.getFrom();
-			f=m;
 			this.navigator.goTo(from);
 			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
 				foundFrom = true;
@@ -45,19 +45,18 @@ public class HumanPlayer implements Player {
 			}
 		}
 		
-		if (!foundFrom)
+		if (!foundFrom || m==null)
 			throw new IllegalMoveException();
 		
 		Move theMove = null;
-		Vector<Square[]> vTo = f.getTos();
-		for (int i=0; i<vTo.size(); i++)
-			{
-			 Square[] s = vTo.elementAt(i);
-			 navigator.goTo(s[s.length-1]);
-			 if (CS.getColorNumber() == piece ||
-					 CS.getColorNumber() == piecek) 
-				 //TODO: check based on the piece in the source square
-				 theMove = Move.create(from, s);
+		Vector<Square[]> vTo = m.getTos();
+		for (int i = 0; i < vTo.size(); i++) {
+			Square[] s = vTo.elementAt(i);
+			navigator.goTo(s[s.length - 1]);
+			if (CS.getColorNumber() == piece || CS.getColorNumber() == piecek) {
+				theMove = Move.create(from, s);
+				break;
+			}
 		}
 		
 		if (theMove == null)
@@ -70,7 +69,7 @@ public class HumanPlayer implements Player {
 		return this.piece;
 	}
 
-	private MovesCollections[] myPossibleMoves(Board board) {
+	private Vector<MovesCollections> myPossibleMoves(Board board) {
 		return board.getPossibleMoves(this.piece); 
 	}
 }

@@ -3,7 +3,7 @@ import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 
-public class ArmController {
+public class ArmController extends Thread {
 
 	private final int goDownRounds = -850;
 	private Motor MC = null;
@@ -38,5 +38,6 @@ public class ArmController {
 		up();
 		MC.rotate(goDownRounds);
 	}
+	
 	
 }

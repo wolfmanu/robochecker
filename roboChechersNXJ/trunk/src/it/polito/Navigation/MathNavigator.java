@@ -19,9 +19,9 @@ public class MathNavigator implements CheckersNavigator {
 	private int x,y;
 	private final double
 		l = 16.0,
-		r = 11.0,
+		r = 11.5,
 		squareWidth = 2.0,
-		squareOffset = 1.5,
+		squareOffset = 1,
 		coeffB = 61142,
 		coeffA = 510;
 	private double alpha,beta,gamma,yOffset,Cx;
@@ -38,6 +38,7 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	public void calibrate() {
+		forward(3000);
 		//If start already on stop color find next one
 		if (CS.getColorNumber()==STOP_ROTATE)
 			while (CS.getColorNumber()==STOP_ROTATE) {
@@ -93,14 +94,14 @@ public class MathNavigator implements CheckersNavigator {
 		beta = 2*java.lang.Math.acos(betaarg);
 		gamma = (java.lang.Math.PI - alpha - beta)/2;
 		Cx = r*java.lang.Math.sin((alpha+beta)/2);
-		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r));
+		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r))+0.5;
 			
 		System.out.println("alpha: " + alpha);
 		System.out.println("betaarg: " + betaarg);
 		System.out.println("beta: " + beta);
 		System.out.println("gamma: " + gamma);
 		System.out.println("Cx: " + Cx);
-		Button.waitForPress();
+		try {			Thread.sleep(1000);		} catch (InterruptedException e) {}
 		this.calibrated = true;
 	}
 	
@@ -190,7 +191,7 @@ public class MathNavigator implements CheckersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
-		System.out.println("Length: " + motorList.length + motorList[0].isRotating() +motorList[0].isMoving());
+		//System.out.println("Length: " + motorList.length + motorList[0].isRotating() +motorList[0].isMoving());
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isRotating()){
 				try {

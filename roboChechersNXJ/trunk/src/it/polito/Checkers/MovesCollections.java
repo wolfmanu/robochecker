@@ -5,7 +5,7 @@ import it.polito.util.*;
 public class MovesCollections 
 {
 	private Square from;
-	private Vector<Square[]> tos;
+	private Vector<Square[]> tos = new Vector<Square[]>();
 	
 	
 	public MovesCollections(Move m)
@@ -13,7 +13,13 @@ public class MovesCollections
 		from=m.getFrom();
 		tos.addElement(m.getTo());
 	}
-		
+	
+	public MovesCollections(Square from, Square[] to)
+	{
+		this.from=from;
+		tos.addElement(to);
+	}
+	
 	public Square getFrom() {
 		return from;
 	}

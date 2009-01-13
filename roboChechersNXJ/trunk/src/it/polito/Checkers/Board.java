@@ -1,4 +1,5 @@
 package it.polito.Checkers;
+import lejos.nxt.Button;
 import it.polito.util.*;
 
 public class Board {
@@ -8,13 +9,17 @@ public class Board {
 	private int indice2;
 	private final short rows;
 	private final short cols;
-	private MovesCollections[] mosse;
+	private Vector<MovesCollections> mosse;
 
 	public Board(final int rows, final int cols) {
 		this.rows = (short) rows;
 		this.cols = (short) cols;
 		this.pieces = new int[rows][cols];
 		initBoard();
+	}
+
+	public Board() {
+		this(8,8);
 	}
 	
 	public static final Board create(int rows, int cols) {
@@ -95,45 +100,48 @@ public class Board {
 		Engine.move_board(getArrayBoard(), lastMove.toArray());		
 	}
 	
-	public MovesCollections[] getPossibleMoves (int piece) {
+	public Vector<MovesCollections> getPossibleMoves(int piece) {
 		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
-		MovesCollections[] movesArray = new MovesCollections[moves.size()];
+		Vector<MovesCollections> movesArray = new Vector<MovesCollections>();
 		int flag;
-		for (int i = 0; i<moves.size(); i++) {
-			try { 
-				 flag=0;
-				 Move m=Move.fromArray(moves.elementAt(i));
-				 for (int j=i; j>0 && flag==0; j--) 
-				 {
-					if (movesArray[j].equals(m))
-					 {
-					  movesArray[j].SetTo(m); 
-					  flag=1;
-					 }
-				 }
-
-				if (flag==1)
-				 {
-					movesArray[i]=new MovesCollections(m);
-				 } 
-				 
+		for (int i = 0; i < moves.size(); i++) {
+			try {
+				flag = 0;
+				Move m = Move.fromArray(moves.elementAt(i));
+				for (int j = 0; j < movesArray.size() && flag == 0; j++) {
+					if (movesArray.elementAt(j).equals(m)) {
+						movesArray.elementAt(j).SetTo(m);
+						flag = 1;
+					}
 				}
-			catch (cantMoveException e) {}
+				if (flag == 0) {
+					movesArray.addElement(new MovesCollections(m));
+				}
+
+			} catch (cantMoveException e) {
+			}
+
 		}
-		indice =0;
-		mosse=movesArray;
+		indice = 0;
+		mosse = movesArray;
+		// System.out.println("movesArray.size = " + movesArray.size());
+		// Button.waitForPress();
 		return movesArray;
+		/*
+		 * } catch (Exception ne) { System.out .println(ne.getClass().toString()
+		 * + " " + ne.getMessage()); Button.waitForPress(); return mosse; }
+		 */
+
 	}
 	
 	public Square getPossibleMoveFrom() {
 		indice2=0;
-		return mosse[indice++].getFrom();
+		return mosse.elementAt(indice++).getFrom();
 	}
 	
-	public Square getPossibleMoveTo() {
-		indice2=0;
-		Square[] s= mosse[indice++].getTos().elementAt(indice2++);
-		return s[s.length-1];
+	public Square[] getPossibleMoveTo() {
+		Square[] s= mosse.elementAt(indice).getTos().elementAt(indice2++);
+		return s;
 	}
 
 }
