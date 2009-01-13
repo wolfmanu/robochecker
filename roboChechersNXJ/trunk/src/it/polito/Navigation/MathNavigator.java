@@ -1,5 +1,6 @@
 package it.polito.Navigation;
 
+import it.polito.Checkers.Color;
 import it.polito.Checkers.Square;
 import lejos.nxt.Button;
 import lejos.nxt.Motor;
@@ -8,7 +9,7 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = 5, STOP_ROTATE_R = 2, STOP_MOVE = 5;
+	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = Color.BORDO3, STOP_ROTATE_R = Color.BKING, STOP_MOVE = Color.WKING;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
@@ -39,6 +40,7 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	public void calibrate() {
+		Color c = new Color();
 		arm.down();
 		forward(1000);
 		//If start already on stop color find next one
@@ -52,8 +54,10 @@ public class MathNavigator implements CheckersNavigator {
 		MB.stop();
 		
 		left(2*lashB); // Remove lash
-		if (CS.getColorNumber()==STOP_ROTATE_L) {
-			while (CS.getColorNumber()==STOP_ROTATE_L) {
+		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());		
+		if (c.equals(Color.getInstance(STOP_ROTATE_L))){//(CS.getColorNumber()==STOP_ROTATE_L) {
+
+			while (c.equals(Color.getInstance(STOP_ROTATE_L))) {//(CS.getColorNumber()==STOP_ROTATE_L) {
 				right();
 				try {
 					Thread.sleep(POLLING_PERIOD);
@@ -62,7 +66,8 @@ public class MathNavigator implements CheckersNavigator {
 			MB.stop();
 		}
 		MB.resetTachoCount();
-		while (CS.getColorNumber()!=STOP_ROTATE_R) {
+		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
+		while (c.equals(Color.getInstance(STOP_ROTATE_R))){//(CS.getColorNumber()!=STOP_ROTATE_R) {
 			right();
 			try {
 				Thread.sleep(POLLING_PERIOD);
@@ -72,7 +77,8 @@ public class MathNavigator implements CheckersNavigator {
 		MB.stop();
 		alpha = Math.abs((MB.getTachoCount()*2*java.lang.Math.PI)/coeffB);
 		
-		while (CS.getColorNumber()!=STOP_MOVE) {
+		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
+		while (c.equals(Color.getInstance(STOP_MOVE))){//(CS.getColorNumber()!=STOP_MOVE) {
 			backward();
 			try {
 				Thread.sleep(POLLING_PERIOD);

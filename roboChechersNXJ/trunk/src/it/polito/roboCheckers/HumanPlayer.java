@@ -17,6 +17,7 @@ public class HumanPlayer implements Player {
 	private final int piecek;
 	private final CheckersNavigator navigator;
 	private final ColorSensor CS;
+	
 	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
 		this.piecek = piecek;
@@ -29,6 +30,7 @@ public class HumanPlayer implements Player {
 
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
+		Color c = new Color();
 		System.out.println("Waiting for human to move");
 		try {
 			NXTCommHandle.getInstance().waitForMove();
@@ -45,7 +47,8 @@ public class HumanPlayer implements Player {
 			m = moves.elementAt(i);
 			from = m.getFrom();
 			this.navigator.goTo(from);
-			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
+			c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
+			if (c.equals(Color.getInstance(Color.EMPTY))) {
 				foundFrom = true;
 				break;
 			}
@@ -60,7 +63,8 @@ public class HumanPlayer implements Player {
 			Square[] s = vTo.elementAt(i);
 			navigator.goTo(s[s.length - 1]);
 			System.out.println("color: "+CS.getColorNumber());
-			if (CS.getColorNumber() == piece || CS.getColorNumber() == piecek) {
+			c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
+			if (c.equals(Color.getInstance(piece)) || c.equals(Color.getInstance(piecek))) {
 				theMove = Move.create(from, s);
 				break;
 			}
