@@ -185,7 +185,7 @@ public class Color {
 	}
 	
 	public String toString(){
-		return name;
+		return name + " R: " + this.Red + " G: " + this.Green + " B: " + this.Blue;
 	}
 	
 }
