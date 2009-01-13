@@ -22,7 +22,9 @@ public class RoboStateChckers {
 
 	private static Square from = null;;
 
-	private static Square to = null;;
+	private static Square[] to = null;;
+
+	private ArmController arm = ArmController.getInstance();;
 
 	private boolean initialized = false;
 
@@ -33,12 +35,11 @@ public class RoboStateChckers {
 		}
 
 		public void exit() {
-			ArmController.up();
+			arm.up();
 		}
 
 		public void entry() {
-			ArmController.up();
-			ArmController.down();
+			arm.down();
 		}
 
 		public String getName() {
@@ -82,7 +83,7 @@ public class RoboStateChckers {
 	public IState guessMoveTo = new AbstractState() {
 
 		public void doIt() throws InterruptedException {
-			navigator.goTo(to);
+			navigator.goTo(to[to.length - 1]);
 		}
 
 		public void entry() {
@@ -115,11 +116,11 @@ public class RoboStateChckers {
 		}
 
 		public void exit() {
-			ArmController.up();
+			arm.up();
 		}
 
 		public void entry() {
-			ArmController.down();
+			arm.down();
 		}
 
 		public String getName() {
@@ -128,6 +129,10 @@ public class RoboStateChckers {
 	};
 
 	public IState updateBoard = new AbstractState() {
+
+		public void doIt() throws InterruptedException {
+			board.makeMove(new Move(from, to));
+		}
 
 		public String getName() {
 			return "UpdateBoard";
