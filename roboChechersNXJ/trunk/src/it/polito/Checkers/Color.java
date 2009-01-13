@@ -184,4 +184,8 @@ public class Color {
 				
 	}
 	
+	public String toString(){
+		return name;
+	}
+	
 }
