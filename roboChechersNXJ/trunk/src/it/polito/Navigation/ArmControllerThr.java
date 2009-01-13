@@ -3,13 +3,14 @@ import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
 
-public class ArmControllerThr extends Thread {
+public class ArmControllerThr {
 	private static final int STOP = 0, GOUP = 1, GODOWN = 2;
 	private static int status = STOP;
-	private final int goDownRounds = -850;
-	private Motor MC = null;
-	private TouchSensor TS = null;
+	private final static int goDownRounds = -850;
+	private static Motor MC = null;
+	private static TouchSensor TS = null;
 	private static ArmControllerThr controller = null;
+	private static Thread t;
 	
 	public static ArmControllerThr getInstance(){
 		if (controller == null)
@@ -22,50 +23,56 @@ public class ArmControllerThr extends Thread {
 		this.TS = TS;
 	}
 	
-	public void up() {
-		status = GOUP;
-		this.start();
-	}
-	public void down() {
-		status = GODOWN;
-		this.start();
+	public synchronized static void stop() {
+		t = new Thread() {
+			public void run() {
+				//System.out.println("STOP");
+				MC.stop();
+			}
+		};
+		t.start();
+		status = STOP;
 	}
 	
-	public void run() {
-		System.out.println("Entro in Run");
-		switch (status) {
-		case STOP:
-			System.out.println("Entro in switch 1");
-			MC.stop();
-			break;
-		case GOUP:
-			System.out.println("Entro in switch 2");
-			while (status != STOP) {
-				Thread.yield();
-			}
-			System.out.println("Passo il while 2");
-			if (!TS.isPressed()) {
-				MC.forward();
-				
-				while (!TS.isPressed()) {
-					Thread.yield();
-				}
-				MC.stop();
-				MC.resetTachoCount();
-			}
-			status = STOP;
-			break;
-		case GODOWN:
-			System.out.println("Entro in switch 3");
-			while (status != STOP) {
-				Thread.yield();
-			}
-			System.out.println("Passo il while 3");
-			up();
-			MC.rotate(goDownRounds);
-			status = STOP;
-			break;
-		}
+	public synchronized void up() {
+		t = new Thread() {
+    		public void run() {
+    				//System.out.println("UP");
+    				//while (status != STOP) {
+    				//	Thread.yield();
+    				//}
+    				//System.out.println("Passo il while 2");
+					MC.forward();
+					
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {}
+									
+					MC.stop();
+					MC.resetTachoCount();
+    				status = STOP;
+    		}
+        };
+    	t.start();
+		status = GOUP;
 	}
+	public synchronized void down() {
+		t = new Thread() {
+    		public void run() {
+    			//System.out.println("DOWN");
+				//while (status != STOP) {
+				//	Thread.yield();
+				//}
+				//System.out.println("Passo il while 3");
+				//up();
+				MC.rotate(goDownRounds);
+				status = STOP;
+    		}
+        };
+    	t.start();
+		status = GOUP;
+	}
+	
+	
 	
 }
