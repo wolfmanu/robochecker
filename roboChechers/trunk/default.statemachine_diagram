@@ -201,38 +201,6 @@
         <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.2"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_AQQX0eCUEd2lOpQlLDeh_g"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_rN8wwOCVEd2lOpQlLDeh_g" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.3"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_rN8wweCVEd2lOpQlLDeh_g"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_KM5VMOCWEd2lOpQlLDeh_g" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.4"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_KM5VMeCWEd2lOpQlLDeh_g"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="__CjaseD4Ed21MN1j2wuzhg" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.5"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="__CjasuD4Ed21MN1j2wuzhg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_qmaRMOD5Ed21MN1j2wuzhg" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.6"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_qmaRMeD5Ed21MN1j2wuzhg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="__OWJEOD6Ed21MN1j2wuzhg" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.7"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="__OWJEeD6Ed21MN1j2wuzhg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_VcnQIOD9Ed21MN1j2wuzhg" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.8"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_VcnQIeD9Ed21MN1j2wuzhg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_b78rEOD9Ed21MN1j2wuzhg" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.9"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_b78rEeD9Ed21MN1j2wuzhg"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_jR1k0eFQEd2kc_QK-JjpSA" type="2004">
-        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.10"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_jR1k0uFQEd2kc_QK-JjpSA"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_LlaPUd8tEd2F7IkGMWYcdQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_LlaPUt8tEd2F7IkGMWYcdQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_LlaPU98tEd2F7IkGMWYcdQ"/>

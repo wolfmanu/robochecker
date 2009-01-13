@@ -31,10 +31,10 @@
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.5"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.10"/>
     <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.13" do="navigator.calibrate();" exit="arm.up();" entry="arm.down();"/>
-    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="navigator.goHome();"/>
+    <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.2" do="try{navigator.goHome();}catch(Exception e){}"/>
     <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.7 //@describes/@events.12"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11" do="navigator.goTo(from);" entry="from = board.getPossibleMoveFrom();"/>
-    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.3" do="navigator.goTo(to[to.length-1]);" entry="to = board.getPossibleMoveTo();"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.4 //@describes/@events.11" do="try{navigator.goTo(from);}catch(Exception e){}" entry="from = board.getPossibleMoveFrom();"/>
+    <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.3" do="try{navigator.goTo(to[to.length-1]);}catch(Exception e){}" entry="to = board.getPossibleMoveTo();"/>
     <states xsi:type="stateMachine:State" name="RobotWins"/>
     <states xsi:type="stateMachine:State" name="HumanWins"/>
     <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.0 //@describes/@events.1 //@describes/@events.5 //@describes/@events.16" do="colore=CS.getColorNumber();" exit="arm.up();" entry="arm.down();"/>
