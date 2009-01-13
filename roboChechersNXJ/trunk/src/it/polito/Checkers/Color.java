@@ -118,6 +118,11 @@ public class Color {
 	public int toInt() {
 		return Numero;
 	}
+	private void selfCalibrate(ColorSensor CS) {
+		setBlue(CS.getBlue());
+		setRed(CS.getRed());
+		setGreen(CS.getGreen());
+	}
 	public static void calibrate() {
 		ColorSensor CS = new ColorSensor(SensorPort.S1);
 		Color c;
@@ -126,9 +131,7 @@ public class Color {
 		c=Color.getInstance(Color.EMPTY);
 		System.out.println("EMPTY...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("empty");
 		System.out.println("SETTING EMPTY OK");	
 		Button.waitForPress();
@@ -137,9 +140,7 @@ public class Color {
 		c=Color.getInstance(Color.WHITE);
 		System.out.println("WHITE...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("white");
 		System.out.println("SETTING WHITE OK");	
 		Button.waitForPress();
@@ -148,9 +149,7 @@ public class Color {
 		c=Color.getInstance(Color.BLACK);
 		System.out.println("BLACK...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("black");
 		System.out.println("SETTING BLACK OK");	
 		Button.waitForPress();
@@ -159,9 +158,7 @@ public class Color {
 		c=Color.getInstance(Color.BKING);
 		System.out.println("KING BLACK...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("king black");
 		System.out.println("SETTING KBLACK OK");	
 		Button.waitForPress();
@@ -170,19 +167,15 @@ public class Color {
 		c=Color.getInstance(Color.WKING);
 		System.out.println("KING WHITE...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("king white");
 		System.out.println("SETTING KWHITE OK");	
 		
 		//setto BORDO3
 		c=Color.getInstance(Color.BORDO3);
-		System.out.println("BORDO3 WHITE...");
+		System.out.println("BORDO3...");
 		Button.waitForPress();
-		c.setBlue(CS.getBlue());
-		c.setRed(CS.getRed());
-		c.setGreen(CS.getGreen());
+		c.selfCalibrate(CS);
 		c.setName("bordo");
 		System.out.println("SETTING BORDO3 OK");	
 		
