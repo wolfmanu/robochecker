@@ -26,9 +26,6 @@ public class HumanPlayer implements Player {
 
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
-		if (moves.size()==0)
-			throw new cantMoveException();
-		
 		System.out.println("Waiting for human to move");
 		Button.waitForPress();
 		
@@ -70,7 +67,9 @@ public class HumanPlayer implements Player {
 		return this.piece;
 	}
 
-	private Vector<MovesCollections> myPossibleMoves(Board board) {
-		return board.getPossibleMoves(this.piece); 
+	private Vector<MovesCollections> myPossibleMoves(Board board) throws cantMoveException {
+
+		return board.getPossibleMoves(this.piece);
+
 	}
 }

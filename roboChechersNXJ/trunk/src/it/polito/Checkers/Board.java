@@ -100,10 +100,12 @@ public class Board {
 		Engine.move_board(getArrayBoard(), lastMove.toArray());		
 	}
 	
-	public Vector<MovesCollections> getPossibleMoves(int piece) {
+	public Vector<MovesCollections> getPossibleMoves(int piece) throws cantMoveException {
 		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
 		Vector<MovesCollections> movesArray = new Vector<MovesCollections>();
 		int flag;
+		if (moves.size()==0)
+		   throw new cantMoveException();	
 		for (int i = 0; i < moves.size(); i++) {
 			try {
 				flag = 0;

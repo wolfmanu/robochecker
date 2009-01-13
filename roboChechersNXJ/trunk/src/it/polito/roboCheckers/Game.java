@@ -33,7 +33,7 @@ public class Game {
 				legalMove = true;
 				try {
 					lastMove = player.makeMove(this.board);
-					if (this.cancelled) { //TODO should use an exception
+					if (this.cancelled) {
 						test = CheckersConstants.CANCELLED;
 						break;
 					}
