@@ -11,18 +11,22 @@ import lejos.nxt.comm.NXTConnection;
 
 public class NXTCommHandle {
 	
-	private static NXTConnection nxtConnection = null;
-	private static DataInputStream dis = null;
-	private static DataOutputStream dos = null;
+	private static NXTCommHandle nxtCommHandle = null;
+	private NXTConnection nxtConnection = null;
+	private DataInputStream dis = null;
+	private DataOutputStream dos = null;
 	
-	public static NXTConnection getInstance (){
-		nxtConnection = Bluetooth.waitForConnection();
-		dis = nxtConnection.openDataInputStream();
-		dos = nxtConnection.openDataOutputStream();
-		return nxtConnection;
+	public static NXTCommHandle getInstance (){
+		if(nxtCommHandle == null)
+			nxtCommHandle = new NXTCommHandle();
+		return nxtCommHandle;
 	}
 	
-	private static char receiveCommand() throws IOException {
+	private NXTCommHandle(){
+		
+	}
+	
+	private char receiveCommand() throws IOException {
 		char data;
 		data = (char)dis.read();
 		switch(data){
@@ -39,26 +43,34 @@ public class NXTCommHandle {
 		return data;
 	}
 	
-	public static boolean waitForMove () throws IOException{
-		if (receiveCommand() == CommProtocol.MOVE_CMD)
-			return true;
-		return false;
+	public void waitForMove () throws IOException{
+		while (receiveCommand() != CommProtocol.MOVE_CMD);
 	}
 	
-	public static boolean waitForStart () throws IOException{
-		if (receiveCommand() == CommProtocol.START_CMD)
-			return true;
-		return false;
+	public void waitForStart () throws IOException{
+		while (receiveCommand() != CommProtocol.START_CMD);
 	}
 	
-	private static void sendACK () throws IOException{
+	private void sendACK () throws IOException{
 		dos.write(CommProtocol.ACK);
 		dos.flush();
 	}
 	
-	private static void sendNAK () throws IOException{
+	private void sendNAK () throws IOException{
 		dos.write(CommProtocol.NAK);
 		dos.flush();
+	}
+
+	public void connect() {
+		nxtConnection = Bluetooth.waitForConnection();
+		dis = nxtConnection.openDataInputStream();
+		dos = nxtConnection.openDataOutputStream();
+	}
+	
+	public void disconnect() throws IOException {
+		dis.close();
+		dos.close();
+		nxtConnection.close();
 	}
 	
 }

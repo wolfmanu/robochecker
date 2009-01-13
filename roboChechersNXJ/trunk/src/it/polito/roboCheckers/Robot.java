@@ -4,6 +4,7 @@ import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
+import it.polito.BluetoothComm.NXTCommHandle;
 import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
@@ -23,6 +24,10 @@ public class Robot {
 	
 	public static void main(String[] args) throws Exception {
 		System.out.println("Checkers GAME");
+		System.out.println("Waiting for BT Conn.");
+		NXTCommHandle.getInstance().connect();
+		System.out.println("Waiting for START");
+		NXTCommHandle.getInstance().waitForStart();
 		System.out.println("Calibrating Board");
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK, CheckersConstants.BKING);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE, CheckersConstants.WKING,3);
@@ -39,6 +44,7 @@ public class Robot {
 	    		System.out.println("Black wins");
 	    		break;
 	    }
-	    Button.waitForPress();
+	    NXTCommHandle.getInstance().waitForMove();
+	    NXTCommHandle.getInstance().disconnect();
 	}
 }

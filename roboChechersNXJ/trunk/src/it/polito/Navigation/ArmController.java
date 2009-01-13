@@ -5,7 +5,7 @@ import lejos.nxt.TouchSensor;
 
 public class ArmController extends Thread {
 
-	private final int goDownRounds = -850;
+	private final int goDownRounds = -550;
 	private Motor MC = null;
 	private TouchSensor TS = null;
 	private static ArmController controller = null;

@@ -8,7 +8,7 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = 2, STOP_ROTATE_R = 2, STOP_MOVE = 5;
+	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = 5, STOP_ROTATE_R = 2, STOP_MOVE = 5;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
@@ -20,7 +20,7 @@ public class MathNavigator implements CheckersNavigator {
 	private int x,y;
 	private final double
 		l = 16.0,
-		r = 11.5,
+		r = 11.3,
 		squareWidth = 2.0,
 		squareOffset = 1,
 		coeffB = 61142,
@@ -42,6 +42,7 @@ public class MathNavigator implements CheckersNavigator {
 		arm.down();
 		forward(1000);
 		//If start already on stop color find next one
+		
 		while (CS.getColorNumber()!=STOP_ROTATE_L) {
 			left();
 			try {
@@ -49,6 +50,7 @@ public class MathNavigator implements CheckersNavigator {
 			} catch (InterruptedException e) {}
 		}
 		MB.stop();
+		
 		left(2*lashB); // Remove lash
 		if (CS.getColorNumber()==STOP_ROTATE_L) {
 			while (CS.getColorNumber()==STOP_ROTATE_L) {

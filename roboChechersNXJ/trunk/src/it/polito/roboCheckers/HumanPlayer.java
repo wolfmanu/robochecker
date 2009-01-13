@@ -1,7 +1,10 @@
 package it.polito.roboCheckers;
 
+import java.io.IOException;
+
 import lejos.nxt.Button;
 import lejos.nxt.addon.ColorSensor;
+import it.polito.BluetoothComm.NXTCommHandle;
 import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
@@ -27,7 +30,13 @@ public class HumanPlayer implements Player {
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
 		System.out.println("Waiting for human to move");
-		Button.waitForPress();
+		try {
+			NXTCommHandle.getInstance().waitForMove();
+		} catch (IOException e) {
+			System.out.println("IOException");
+			System.out.println("Use NXT Button");
+			Button.waitForPress();
+		}
 		
 		Square from = null;
 		boolean foundFrom = false;
@@ -68,8 +77,6 @@ public class HumanPlayer implements Player {
 	}
 
 	private Vector<MovesCollections> myPossibleMoves(Board board) throws cantMoveException {
-
-		return board.getPossibleMoves(this.piece);
-
+		return board.getPossibleMoves(this.piece); 
 	}
 }

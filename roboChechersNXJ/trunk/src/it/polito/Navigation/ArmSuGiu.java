@@ -7,10 +7,7 @@ public class ArmSuGiu {
 		 * @param args
 		 */
 		public static void main(String[] args) throws Exception {
-			ArmControllerThr arm = ArmControllerThr.getInstance();
-			final Motor MA = new Motor(MotorPort.A);
-		
-			MA.forward();
+			ArmController arm = ArmController.getInstance();
 			
 			while (true) {
 				LCD.drawInt(Motor.C.getTachoCount(), 0, 0);

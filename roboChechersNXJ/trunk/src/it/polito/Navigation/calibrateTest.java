@@ -36,6 +36,26 @@ public class calibrateTest {
 		int[] X = {0,1,2,3,4,5,6,7};
 		int[] Y = {0,1,2,3,4,5,6,7};
 		for (int i=0; i<8 && !exit; i++) {
+			navigator.goTo(0,Y[i]);
+			if (Button.ESCAPE.isPressed())
+				exit = true;
+		}
+		for (int i=0; i<8 && !exit; i++) {
+			navigator.goTo(X[i],7);
+			if (Button.ESCAPE.isPressed())
+				exit = true;
+		}
+		for (int i=7; i>=0 && !exit; i--) {
+			navigator.goTo(7,Y[i]);
+			if (Button.ESCAPE.isPressed())
+				exit = true;
+		}
+		for (int i=7; i>=0 && !exit; i--) {
+			navigator.goTo(X[i],0);
+			if (Button.ESCAPE.isPressed())
+				exit = true;
+		}
+		for (int i=0; i<8 && !exit; i++) {
 			if (i%2==0) 
 				for (int j=0; j<8 && !exit; j++) {
 					navigator.goTo(X[j],Y[i]);
