@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="CHECKERSOURCE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="NXJ_CLASSES"/>
+	<classpathentry kind="var" path="PCCOMM_CLASSES"/>
+	<classpathentry kind="var" path="PCTOOLS_CLASSES"/>
+	<classpathentry kind="var" path="BLUECOVE_CLASSES"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
