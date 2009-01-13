@@ -8,12 +8,13 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 50, STOP_ROTATE = 2, STOP_MOVE = 5;
+	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = 2, STOP_ROTATE_R = 2, STOP_MOVE = 5;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
 	private static final LashMotor MB = new LashMotor(MotorPort.B,lashB);
 	private static final ColorSensor CS = new ColorSensor(SensorPort.S1);
+	private static final ArmController arm = ArmController.getInstance();
 	
 	private boolean calibrated;
 	private int x,y;
@@ -38,6 +39,7 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	public void calibrate() {
+		arm.down();
 		forward(3000);
 		//If start already on stop color find next one
 		if (CS.getColorNumber()==STOP_ROTATE)
@@ -94,7 +96,7 @@ public class MathNavigator implements CheckersNavigator {
 		beta = 2*java.lang.Math.acos(betaarg);
 		gamma = (java.lang.Math.PI - alpha - beta)/2;
 		Cx = r*java.lang.Math.sin((alpha+beta)/2);
-		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r))+0.5;
+		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r))+0.7;
 			
 		System.out.println("alpha: " + alpha);
 		System.out.println("betaarg: " + betaarg);

@@ -35,7 +35,7 @@ public class HumanPlayer implements Player {
 		Square from = null;
 		boolean foundFrom = false;
 		MovesCollections m=null;
-		for (int i=moves.size(); i>=0;i--) {
+		for (int i=moves.size()-1; i>=0;i--) {
 			m = moves.elementAt(i);
 			from = m.getFrom();
 			this.navigator.goTo(from);
@@ -53,6 +53,7 @@ public class HumanPlayer implements Player {
 		for (int i = 0; i < vTo.size(); i++) {
 			Square[] s = vTo.elementAt(i);
 			navigator.goTo(s[s.length - 1]);
+			System.out.println("color: "+CS.getColorNumber());
 			if (CS.getColorNumber() == piece || CS.getColorNumber() == piecek) {
 				theMove = Move.create(from, s);
 				break;

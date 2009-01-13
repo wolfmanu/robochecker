@@ -48,7 +48,7 @@ public class Game {
 				}
 			}
 			board.printBoard();
-			Button.waitForPress();
+			try {Thread.sleep(1000);	} catch (InterruptedException e) {}
 			player = (player == blackPlayer) ? whitePlayer : blackPlayer;
 		} while (test==CheckersConstants.NO_WIN);
 		return test;

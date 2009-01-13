@@ -70,36 +70,21 @@ public class Move {
 		int endy = arrayMove[3];
 		Move newMove = new Move(new Square(startx, starty), new Square(endx % 10, endy % 10));
 		for (endx /= 10, endy /= 10 ; endx > 0 || endy > 0; endx /= 10, endy /= 10) {
-			newMove.addTo(new Square(endx,endy));
+			newMove.addTo(new Square(endx%10,endy%10));
 		}
 		return newMove;
 	}
-	/*
-	public static final Square[] (int[] arrayMove) throws cantMoveException {
-		
-		int startx = arrayMove[0];
-		int starty = arrayMove[1];
-		if (startx == 0 && starty == 0)
-			throw new cantMoveException();
-		int endx = arrayMove[2];
-		int endy = arrayMove[3];
-		Move newMove = new Move(new Square(startx, starty), new Square(endx % 10, endy % 10));
-		for (endx /= 10, endy /= 10 ; endx > 0 || endy > 0; endx /= 10, endy /= 10) {
-			newMove.addTo(new Square(endx,endy));
-		}
-		return newMove;
-	}
-	*/
+
 	public int[] toArray() {
 		int[] arrayMove = new int[4];
 		arrayMove[0] = this.from.getRow();
 		arrayMove[1] = this.from.getCol();
 		arrayMove[2] = arrayMove[3] = 0;
-		for (Square s:to) {
+		for (int i=to.length-1;i>=0;i--) {
 			arrayMove[2] *= 10;
-			arrayMove[2] += s.getRow();
+			arrayMove[2] += to[i].getRow();
 			arrayMove[3] *= 10;
-			arrayMove[3] += s.getCol();
+			arrayMove[3] += to[i].getCol();
 		}
 		return arrayMove; 
 	}

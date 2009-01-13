@@ -42,15 +42,11 @@ public class ComputerPlayer implements Player {
 		System.out.println("MyMove:" + nextMove.toString());
 		navigator.goTo(nextMove.getFrom());
 		arm.down();
-		try {
-			Thread.sleep(800);
-		} catch (InterruptedException e) {}
+		try {	Thread.sleep(800);	} catch (InterruptedException e) {}
 		arm.up();
 		navigator.goTo(nextMove.getLastTo());
 		arm.down();
-		try {
-			Thread.sleep(800);
-		} catch (InterruptedException e) {}
+		try {	Thread.sleep(800);	} catch (InterruptedException e) {}
 		navigator.goHome(); //TODO: go home and recheck vertical alignment
 		return nextMove;
 	}
