@@ -24,6 +24,14 @@ public class Color {
 		this.Green=0;
 		this.Blue=0;
 	}
+
+	public Color(int n) {
+		this.name=null;
+		this.Numero=n;
+		this.Red=0;
+		this.Green=0;
+		this.Blue=0;
+	}
 	
 	public Color(int R, int G, int B) {
 		this.name=null;
@@ -43,7 +51,7 @@ public class Color {
 	static public Color getInstance(int col)
 	{
 		if (vett[col] == null)
-			vett[col]= new Color();
+			vett[col]= new Color(col);
 		return vett[col];
 	}
 	
@@ -122,7 +130,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("empty");
-		c.setNumero(Color.EMPTY);
 		System.out.println("SETTING EMPTY OK");	
 		Button.waitForPress();
 		
@@ -134,7 +141,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("white");
-		c.setNumero(Color.WHITE);
 		System.out.println("SETTING WHITE OK");	
 		Button.waitForPress();
 				
@@ -146,7 +152,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("black");
-		c.setNumero(Color.BLACK);
 		System.out.println("SETTING BLACK OK");	
 		Button.waitForPress();
 		
@@ -158,7 +163,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("king black");
-		c.setNumero(Color.BKING);
 		System.out.println("SETTING KBLACK OK");	
 		Button.waitForPress();
 		
@@ -170,7 +174,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("king white");
-		c.setNumero(Color.WKING);
 		System.out.println("SETTING KWHITE OK");	
 		
 		//setto BORDO3
@@ -181,7 +184,6 @@ public class Color {
 		c.setRed(CS.getRed());
 		c.setGreen(CS.getGreen());
 		c.setName("bordo");
-		c.setNumero(Color.BORDO3);
 		System.out.println("SETTING BORDO3 OK");	
 		
 		System.out.println("SETTING COLOR OK");		
