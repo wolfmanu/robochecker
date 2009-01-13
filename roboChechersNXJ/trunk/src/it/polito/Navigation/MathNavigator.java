@@ -40,26 +40,18 @@ public class MathNavigator implements CheckersNavigator {
 
 	public void calibrate() {
 		arm.down();
-		forward(3000);
+		forward(1000);
 		//If start already on stop color find next one
-		if (CS.getColorNumber()==STOP_ROTATE)
-			while (CS.getColorNumber()==STOP_ROTATE) {
-				left();
-				try {
-					Thread.sleep(POLLING_PERIOD);
-				} catch (InterruptedException e) {}
-			}
-			
-		while (CS.getColorNumber()!=STOP_ROTATE) {
+		while (CS.getColorNumber()!=STOP_ROTATE_L) {
 			left();
 			try {
 				Thread.sleep(POLLING_PERIOD);
 			} catch (InterruptedException e) {}
 		}
 		MB.stop();
-		left(3*lashB); // Remove lash
-		if (CS.getColorNumber()==STOP_ROTATE) {
-			while (CS.getColorNumber()==STOP_ROTATE) {
+		left(2*lashB); // Remove lash
+		if (CS.getColorNumber()==STOP_ROTATE_L) {
+			while (CS.getColorNumber()==STOP_ROTATE_L) {
 				right();
 				try {
 					Thread.sleep(POLLING_PERIOD);
@@ -68,7 +60,7 @@ public class MathNavigator implements CheckersNavigator {
 			MB.stop();
 		}
 		MB.resetTachoCount();
-		while (CS.getColorNumber()!=STOP_ROTATE) {
+		while (CS.getColorNumber()!=STOP_ROTATE_R) {
 			right();
 			try {
 				Thread.sleep(POLLING_PERIOD);
