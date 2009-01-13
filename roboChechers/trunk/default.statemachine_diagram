@@ -6,7 +6,7 @@
       <children xmi:type="notation:Node" xmi:id="_X_ApQN8tEd2F7IkGMWYcdQ" type="2003">
         <styles xmi:type="notation:ShapeStyle" xmi:id="_X_ApQd8tEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
         <element xmi:type="stateMachine:StartState" href="default.statemachine#//@describes/@states.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_X_ApQt8tEd2F7IkGMWYcdQ" x="27" y="20"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_X_ApQt8tEd2F7IkGMWYcdQ" x="217" y="20"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_m_YRIN8tEd2F7IkGMWYcdQ" type="2001">
         <children xmi:type="notation:Node" xmi:id="_m_ZfQN8tEd2F7IkGMWYcdQ" type="4001"/>
@@ -40,12 +40,20 @@
         <children xmi:type="notation:Node" xmi:id="_9KNUkd8tEd2F7IkGMWYcdQ" type="4003"/>
         <children xmi:type="notation:Node" xmi:id="_9KNUkt8tEd2F7IkGMWYcdQ" type="4004"/>
         <children xmi:type="notation:Node" xmi:id="_9KNUk98tEd2F7IkGMWYcdQ" type="5003">
+          <children xmi:type="notation:Node" xmi:id="_e2M-0OGDEd2kc_QK-JjpSA" type="2002">
+            <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@states.3/@variables.0"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_e2M-0eGDEd2kc_QK-JjpSA"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_PEC4MOGEEd2kc_QK-JjpSA" type="2002">
+            <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@states.3/@variables.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_PEC4MeGEEd2kc_QK-JjpSA"/>
+          </children>
           <styles xmi:type="notation:SortingStyle" xmi:id="_9KNUlN8tEd2F7IkGMWYcdQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_9KNUld8tEd2F7IkGMWYcdQ"/>
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_9KMGcd8tEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
         <element xmi:type="stateMachine:State" href="default.statemachine#//@describes/@states.3"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9KMGct8tEd2F7IkGMWYcdQ" x="735" y="428" width="105" height="65"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9KMGct8tEd2F7IkGMWYcdQ" x="722" y="465" width="136" height="68"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Hud9gN8uEd2F7IkGMWYcdQ" type="2001">
         <children xmi:type="notation:Node" xmi:id="_HuekkN8uEd2F7IkGMWYcdQ" type="4001"/>
@@ -84,7 +92,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_Ri8vUd8uEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
         <element xmi:type="stateMachine:State" href="default.statemachine#//@describes/@states.6"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ri8vUt8uEd2F7IkGMWYcdQ" x="22" y="76" width="101" height="57"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ri8vUt8uEd2F7IkGMWYcdQ" x="7" y="80" width="101" height="57"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_TjMv0N8uEd2F7IkGMWYcdQ" type="2001">
         <children xmi:type="notation:Node" xmi:id="_TjNW4N8uEd2F7IkGMWYcdQ" type="4001"/>
@@ -97,7 +105,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_TjMv0d8uEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
         <element xmi:type="stateMachine:State" href="default.statemachine#//@describes/@states.7"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TjMv0t8uEd2F7IkGMWYcdQ" x="903" y="446" width="101" height="55"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TjMv0t8uEd2F7IkGMWYcdQ" x="902" y="415" width="101" height="55"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_04w7cN8wEd2lUaeBLLzvqg" type="2001">
         <children xmi:type="notation:Node" xmi:id="_043pIN8wEd2lUaeBLLzvqg" type="4001"/>
@@ -200,6 +208,50 @@
       <children xmi:type="notation:Node" xmi:id="_AQQX0OCUEd2lOpQlLDeh_g" type="2004">
         <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.2"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_AQQX0eCUEd2lOpQlLDeh_g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-0DEOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.3"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-0DEeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-0qIOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.4"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-0qIeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-1RMOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.5"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-1RMeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-1RMuF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.6"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-1RM-F4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-14QOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.7"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-14QeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-2fUOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.8"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-2fUeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-2fUuF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.9"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-2fU-F4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L-3GYOF4Ed2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.10"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L-3GYeF4Ed2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TVAS4OGLEd2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.11"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TVAS4eGLEd2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_a1PKIOGLEd2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.12"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_a1PKIeGLEd2kc_QK-JjpSA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YDlscOGMEd2kc_QK-JjpSA" type="2004">
+        <element xmi:type="stateMachine:StateVariable" href="default.statemachine#//@describes/@variables.13"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_YDlsceGMEd2kc_QK-JjpSA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_LlaPUd8tEd2F7IkGMWYcdQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_LlaPUt8tEd2F7IkGMWYcdQ"/>
@@ -327,19 +379,19 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mFuAEN8_Ed2F7IkGMWYcdQ" id="(0.775,0.375)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mFuAEd8_Ed2F7IkGMWYcdQ" id="(0.0,0.44680852)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_JGxIAN9AEd2F7IkGMWYcdQ" type="3003" source="_Hud9gN8uEd2F7IkGMWYcdQ" target="_Ri8vUN8uEd2F7IkGMWYcdQ">
+  <edges xmi:type="notation:Edge" xmi:id="_JGxIAN9AEd2F7IkGMWYcdQ" type="3003" source="__Mtv0OCWEd2lOpQlLDeh_g" target="_Ri8vUN8uEd2F7IkGMWYcdQ">
     <children xmi:type="notation:Node" xmi:id="_JGxIBN9AEd2F7IkGMWYcdQ" type="4008">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_JGxIBd9AEd2F7IkGMWYcdQ" x="19" y="-58"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_JGxIBd9AEd2F7IkGMWYcdQ" x="-35" y="24"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_JGxIAd9AEd2F7IkGMWYcdQ"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_JGxIAt9AEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
     <element xmi:type="stateMachine:ImplicitEvent" href="default.statemachine#//@describes/@events.11"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JGxIA99AEd2F7IkGMWYcdQ" points="[-2, -4, 10, 48]$[-40, -23, -28, 29]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGxvEN9AEd2F7IkGMWYcdQ" id="(0.5982906,0.07017544)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JGxIA99AEd2F7IkGMWYcdQ" points="[-4, 0, 113, -14]$[-66, 8, 51, -6]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGxvEN9AEd2F7IkGMWYcdQ" id="(0.030534351,0.09836066)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_QflvsN9AEd2F7IkGMWYcdQ" type="3003" source="_9KMGcN8tEd2F7IkGMWYcdQ" target="_TjMv0N8uEd2F7IkGMWYcdQ">
     <children xmi:type="notation:Node" xmi:id="_QflvtN9AEd2F7IkGMWYcdQ" type="4008">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_Qflvtd9AEd2F7IkGMWYcdQ" x="1" y="26"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Qflvtd9AEd2F7IkGMWYcdQ" x="25" y="46"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_Qflvsd9AEd2F7IkGMWYcdQ"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Qflvst9AEd2F7IkGMWYcdQ" fontName="Lucida Grande"/>
@@ -369,7 +421,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_L0CcsOCXEd2lOpQlLDeh_g" type="3003" source="__Mtv0OCWEd2lOpQlLDeh_g" target="_Hud9gN8uEd2F7IkGMWYcdQ">
     <children xmi:type="notation:Node" xmi:id="_L0DDwOCXEd2lOpQlLDeh_g" type="4008">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_L0DDweCXEd2lOpQlLDeh_g" x="-7" y="-85"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_L0DDweCXEd2lOpQlLDeh_g" x="-11" y="-106"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_L0CcseCXEd2lOpQlLDeh_g"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_L0CcsuCXEd2lOpQlLDeh_g" fontName="Sans"/>

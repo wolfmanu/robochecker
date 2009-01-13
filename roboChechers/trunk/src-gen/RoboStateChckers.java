@@ -1,9 +1,8 @@
+import lejos.nxt.addon.ColorSensor;
 import it.polito.Navigation.*;
 import it.polito.Checkers.*;
 import de.nordakademie.lejos.statemachine.*;
 import lejos.nxt.*;
-import lejos.nxt.addon.ColorSensor;
-import lejos.navigation.*;
 public class RoboStateChckers {
 
 	private static CheckersNavigator navigator = SimpleNavigator.getInstance();
@@ -27,6 +26,12 @@ public class RoboStateChckers {
 	private static Square[] to = null;;
 
 	private ArmController arm = ArmController.getInstance();;
+
+	private static boolean humanWin = false;;
+
+	private static boolean robotWin = false;;
+
+	private final int depth = 3;;
 
 	private boolean initialized = false;
 
@@ -64,6 +69,25 @@ public class RoboStateChckers {
 	};
 
 	public IState think = new AbstractState() {
+
+		private int[] result = new int[4];;
+
+		private Move nextMove = null;
+
+		public void doIt() throws InterruptedException {
+			Engine.MiniMax(board.getArrayBoard(), 0, depth, result, pieceRobot,
+					new int[1]);
+			try {
+				nextMove = Move.fromArray(result);
+			} catch (cantMoveException e) {
+				humanWin = true;
+			}
+		}
+
+		public void exit() {
+			from = nextMove.getFrom();
+			to = nextMove.getTo();
+		}
 
 		public String getName() {
 			return "Think";
@@ -108,12 +132,20 @@ public class RoboStateChckers {
 
 	public IState robotWins = new AbstractState() {
 
+		public void doIt() throws InterruptedException {
+			System.out.println("White wins");
+		}
+
 		public String getName() {
 			return "RobotWins";
 		}
 	};
 
 	public IState humanWins = new AbstractState() {
+
+		public void doIt() throws InterruptedException {
+			System.out.println("Black wins");
+		}
 
 		public String getName() {
 			return "HumanWins";
@@ -152,12 +184,42 @@ public class RoboStateChckers {
 
 	public IState showFrom = new AbstractState() {
 
+		public void doIt() throws InterruptedException {
+			arm.down();
+		}
+
+		public void exit() {
+			arm.up();
+		}
+
+		public void entry() {
+			try {
+				navigator.goTo(from);
+			} catch (Exception e) {
+			}
+		}
+
 		public String getName() {
 			return "ShowFrom";
 		}
 	};
 
 	public IState showTo = new AbstractState() {
+
+		public void doIt() throws InterruptedException {
+			arm.down();
+		}
+
+		public void exit() {
+			arm.up();
+		}
+
+		public void entry() {
+			try {
+				navigator.goTo(to[to.length - 1]);
+			} catch (Exception e) {
+			}
+		}
 
 		public String getName() {
 			return "ShowTo";
@@ -167,7 +229,11 @@ public class RoboStateChckers {
 	public IState calculateMoves = new AbstractState() {
 
 		public void doIt() throws InterruptedException {
-			board.getPossibleMoves(piecehuman);
+			try {
+				board.getPossibleMoves(piecehuman);
+			} catch (cantMoveException e) {
+				robotWin = true;
+			}
 		}
 
 		public void exit() {
@@ -239,8 +305,14 @@ public class RoboStateChckers {
 			think.setImplicitTransitions(new ITransition[]{
 
 			new AbstractTransition(showFrom) {
+				public boolean guard() {
+					return humanWin == false;
+				}
 
 			}, new AbstractTransition(humanWins) {
+				public boolean guard() {
+					return humanWin == true;
+				}
 
 			}
 
@@ -249,8 +321,6 @@ public class RoboStateChckers {
 			guessMoveFrom.setImplicitTransitions(new ITransition[]{
 
 			new AbstractTransition(sensorRead) {
-
-			}, new AbstractTransition(robotWins) {
 
 			}
 
@@ -325,6 +395,14 @@ public class RoboStateChckers {
 			calculateMoves.setImplicitTransitions(new ITransition[]{
 
 			new AbstractTransition(guessMoveFrom) {
+				public boolean guard() {
+					return robotWin == false;
+				}
+
+			}, new AbstractTransition(robotWins) {
+				public boolean guard() {
+					return robotWin == true;
+				}
 
 			}
 
