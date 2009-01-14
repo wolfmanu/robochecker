@@ -17,8 +17,8 @@ public class ColorTest {
 		while (true) {
 			LCD.clearDisplay();
 			LCD.drawString("Red: "+CS.getRed(), 0, 0);
-			LCD.drawString("Green: "+CS.getGreen(), 0, 0);
-			LCD.drawString("Blue: "+CS.getBlue(), 0, 0);
+			LCD.drawString("Green: "+CS.getGreen(), 1, 1);
+			LCD.drawString("Blue: "+CS.getBlue(), 2, 2);
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {

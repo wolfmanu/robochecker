@@ -35,22 +35,22 @@ public class calibrateTest {
 		navigator.setSpeed(1000, 1000);
 		int[] X = {0,1,2,3,4,5,6,7};
 		int[] Y = {0,1,2,3,4,5,6,7};
-		for (int i=0; i<8 && !exit; i++) {
+		for (int i=0; i<8 && !exit; i=i+2) {
 			navigator.goTo(0,Y[i]);
 			if (Button.ESCAPE.isPressed())
 				exit = true;
 		}
-		for (int i=0; i<8 && !exit; i++) {
+		for (int i=0; i<8 && !exit; i=i+2) {
 			navigator.goTo(X[i],7);
 			if (Button.ESCAPE.isPressed())
 				exit = true;
 		}
-		for (int i=7; i>=0 && !exit; i--) {
+		for (int i=7; i>=0 && !exit; i=i-2) {
 			navigator.goTo(7,Y[i]);
 			if (Button.ESCAPE.isPressed())
 				exit = true;
 		}
-		for (int i=7; i>=0 && !exit; i--) {
+		for (int i=7; i>=0 && !exit; i=i-2) {
 			navigator.goTo(X[i],0);
 			if (Button.ESCAPE.isPressed())
 				exit = true;

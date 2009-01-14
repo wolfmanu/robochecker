@@ -1,7 +1,6 @@
 package it.polito.Navigation;
 
-import it.polito.Checkers.Color;
-import it.polito.Checkers.Square;
+import it.polito.Checkers.*;
 import lejos.nxt.Button;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
@@ -9,7 +8,7 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 50, STOP_ROTATE_L = Color.BORDO3, STOP_ROTATE_R = Color.BKING, STOP_MOVE = Color.WKING;
+	private static final int POLLING_PERIOD = 10, STOP_ROTATE_L = Color.BORDO3, STOP_ROTATE_R = Color.BKING, STOP_MOVE = Color.WKING;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
@@ -24,7 +23,7 @@ public class MathNavigator implements CheckersNavigator {
 		r = 11.3,
 		squareWidth = 2.0,
 		squareOffset = 1,
-		coeffB = 61142,
+		coeffB = 60000, //61142
 		coeffA = 510;
 	private double alpha,beta,gamma,yOffset,Cx;
 	
@@ -43,8 +42,8 @@ public class MathNavigator implements CheckersNavigator {
 		Color c = new Color();
 		arm.down();
 		forward(1000);
-		//If start already on stop color find next one
 		
+		setSpeed(500,1000);
 		while (CS.getColorNumber()!=STOP_ROTATE_L) {
 			left();
 			try {
@@ -52,8 +51,10 @@ public class MathNavigator implements CheckersNavigator {
 			} catch (InterruptedException e) {}
 		}
 		MB.stop();
-		
+		setSpeed(500,200);
 		left(2*lashB); // Remove lash
+		
+
 		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());		
 		if (c.equals(Color.getInstance(STOP_ROTATE_L))){//(CS.getColorNumber()==STOP_ROTATE_L) {
 
@@ -66,8 +67,14 @@ public class MathNavigator implements CheckersNavigator {
 			MB.stop();
 		}
 		MB.resetTachoCount();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) {	}
+		setSpeed(500,1000);
+		right(14000);
+		setSpeed(500, 200);
 		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
-		while (c.equals(Color.getInstance(STOP_ROTATE_R))){//(CS.getColorNumber()!=STOP_ROTATE_R) {
+		while (c.equals(Color.getInstance(STOP_ROTATE_R))){
 			right();
 			try {
 				Thread.sleep(POLLING_PERIOD);
@@ -75,6 +82,9 @@ public class MathNavigator implements CheckersNavigator {
 			} catch (InterruptedException e) {}
 		}		
 		MB.stop();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e1) { }
 		alpha = Math.abs((MB.getTachoCount()*2*java.lang.Math.PI)/coeffB);
 		
 		c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
