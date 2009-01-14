@@ -253,6 +253,17 @@ public class RoboStateChckers {
 		}
 	};
 
+	public IState calibrateColor = new AbstractState() {
+
+		public void doIt() throws InterruptedException {
+			Color.calibrate();
+		}
+
+		public String getName() {
+			return "CalibrateColor";
+		}
+	};
+
 	public ITransition humanMoved = new AbstractTransition(calculateMoves) {
 		public boolean guard() {
 			return false;//Insert java condition here;
@@ -271,9 +282,9 @@ public class RoboStateChckers {
 		init();
 		BTChangeListener bTChangeListener = new BTChangeListener();
 
-		calibration.setListener(bTChangeListener);
+		calibrateColor.setListener(bTChangeListener);
 
-		calibration.arbitrate(0);
+		calibrateColor.arbitrate(0);
 
 	}
 
@@ -282,7 +293,7 @@ public class RoboStateChckers {
 	}
 
 	public boolean isRunning() {
-		return initialized && calibration.isRunning();
+		return initialized && calibrateColor.isRunning();
 	}
 
 	private void init() {
@@ -407,6 +418,14 @@ public class RoboStateChckers {
 			calculateTo.setImplicitTransitions(new ITransition[]{
 
 			new AbstractTransition(guessMoveTo) {
+
+			}
+
+			});
+
+			calibrateColor.setImplicitTransitions(new ITransition[]{
+
+			new AbstractTransition(calibration) {
 
 			}
 
