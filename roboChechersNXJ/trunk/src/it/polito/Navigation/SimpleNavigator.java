@@ -25,9 +25,9 @@ public class SimpleNavigator implements CheckersNavigator {
 					ROTATE = 0;	// Black
 	// Board Mapping
 	private int offA = 1500, offB = 11000;//imperfetto
-	private int[] posx={-10700, -7700, -5700, -3900, -2000, -300, 1400, 3200, -3000};
+	private int[] posx={-9000, -7000, -5500, -3900, -2000, -300, 1400, 3200, -3000};
 	private int[] posy={     0,  1020,  2040,  3060,  4080, 5100, 6120, 7140, -4500};
-	private int[] dely={  2800,  1400,   750,   150,   -50,  -60,  300,  700, 0};
+	private int[] dely={  1900,  1000,   750,   150,   -50,  -60,  300,  700, 0};
 	
 	
 	private static SimpleNavigator navigator = null;
@@ -156,6 +156,7 @@ public class SimpleNavigator implements CheckersNavigator {
 	 * @author Matteo
 	 */
 	public void calibrate(ColorSensor CS) {
+		ArmController.getInstance().down();
 		int color = GO;
 		while (!Button.ESCAPE.isPressed()) {
 			color = (int)CS.getColorNumber();

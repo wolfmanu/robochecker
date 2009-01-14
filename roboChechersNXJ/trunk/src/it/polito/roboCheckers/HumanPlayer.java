@@ -8,6 +8,7 @@ import it.polito.BluetoothComm.NXTCommHandle;
 import it.polito.Checkers.*;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
+import it.polito.Navigation.SimpleNavigator;
 import it.polito.Navigation.notCalibratedException;
 import it.polito.util.Vector;
 
@@ -17,11 +18,10 @@ public class HumanPlayer implements Player {
 	private final int piecek;
 	private final CheckersNavigator navigator;
 	private final ColorSensor CS;
-	
 	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = MathNavigator.getInstance();
+		this.navigator = SimpleNavigator.getInstance();
 		this.CS = Robot.getColorSensor();
 	}
 
@@ -30,7 +30,6 @@ public class HumanPlayer implements Player {
 
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
-		Color c = new Color();
 		System.out.println("Waiting for human to move");
 		try {
 			NXTCommHandle.getInstance().waitForMove();
@@ -47,8 +46,7 @@ public class HumanPlayer implements Player {
 			m = moves.elementAt(i);
 			from = m.getFrom();
 			this.navigator.goTo(from);
-			c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
-			if (c.equals(Color.getInstance(Color.EMPTY))) {
+			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
 				foundFrom = true;
 				break;
 			}
@@ -63,8 +61,7 @@ public class HumanPlayer implements Player {
 			Square[] s = vTo.elementAt(i);
 			navigator.goTo(s[s.length - 1]);
 			System.out.println("color: "+CS.getColorNumber());
-			c.setColor(CS.getRed(), CS.getGreen(), CS.getBlue());
-			if (c.equals(Color.getInstance(piece)) || c.equals(Color.getInstance(piecek))) {
+			if (CS.getColorNumber() == piece || CS.getColorNumber() == piecek) {
 				theMove = Move.create(from, s);
 				break;
 			}

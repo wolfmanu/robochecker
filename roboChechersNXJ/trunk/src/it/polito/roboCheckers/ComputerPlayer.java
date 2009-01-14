@@ -3,6 +3,7 @@ import it.polito.Checkers.*;
 import it.polito.Navigation.ArmController;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
+import it.polito.Navigation.SimpleNavigator;
 import it.polito.Navigation.notCalibratedException;
 
 
@@ -17,7 +18,7 @@ public class ComputerPlayer implements Player {
 	public ComputerPlayer(final int piece, final int piecek, int depth) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = MathNavigator.getInstance();
+		this.navigator = SimpleNavigator.getInstance();
 		this.arm = ArmController.getInstance();
 		this.depth = depth;
 		this.score = 0;

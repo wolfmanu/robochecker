@@ -12,7 +12,7 @@ import it.polito.Navigation.SimpleNavigator;
 
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
-	static private CheckersNavigator navigator = MathNavigator.getInstance();
+	static private CheckersNavigator navigator = SimpleNavigator.getInstance();
 	
 	public static ColorSensor getColorSensor() {
 		return CS;
