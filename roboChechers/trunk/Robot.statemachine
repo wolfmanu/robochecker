@@ -6,7 +6,6 @@
     <variables name="Board board " type="static" initialValue=" new Board()"/>
     <variables name="int pieceRobot " type="static" initialValue=" CheckersConstants.WHITE"/>
     <variables name="int piecehuman " type="static" initialValue=" CheckersConstants.BLACK"/>
-    <variables/>
     <variables name="int colore " type="static" initialValue=" CS.getColorNumber()"/>
     <variables name="boolean searchFrom " type="static" initialValue=" true"/>
     <variables name="boolean searchTo " type="static" initialValue=" false"/>
@@ -16,24 +15,25 @@
     <variables name="boolean humanWin " type="static" initialValue=" false"/>
     <variables name="boolean robotWin " type="static" initialValue=" false"/>
     <variables name="int depth " type="final" initialValue=" 3"/>
-    <variables/>
+    <variables name="nextMove" type="Move" modifier="private static" initialValue="null"/>
+    <variables name="result" type="int[]" initialValue="new int[4];"/>
     <events xsi:type="stateMachine:NamedEvent" trigger="NXTCommHandle.getInstance().waitForMove();" name="HumanMoved" transitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.0" implicitTransitionTo="//@describes/@states.1"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.1" implicitTransitionTo="//@describes/@states.2"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==true" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==false" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.5"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.BLACK &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.5"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.6"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.6"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.6"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.7"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="" implicitTransitionsFrom="//@describes/@states.7" implicitTransitionTo="//@describes/@states.10"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.7" implicitTransitionTo="//@describes/@states.10"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="humanWin==true" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.11"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="humanWin==false" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.12"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="" delay="3000" implicitTransitionsFrom="//@describes/@states.12" implicitTransitionTo="//@describes/@states.13"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="" delay="3000" implicitTransitionsFrom="//@describes/@states.13" implicitTransitionTo="//@describes/@states.2"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="//" delay="3000" implicitTransitionsFrom="//@describes/@states.12" implicitTransitionTo="//@describes/@states.13"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="//" delay="3000" implicitTransitionsFrom="//@describes/@states.13" implicitTransitionTo="//@describes/@states.2"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.11" implicitTransitionTo="//@describes/@states.14"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.14"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.1"/>
@@ -49,7 +49,7 @@
     <states xsi:type="stateMachine:State" name="Think" implicitTransition="//@describes/@events.13 //@describes/@events.14" do="Engine.MiniMax(board.getArrayBoard(), 0, depth, result, pieceRobot,new int[1]);&#xA;try {&#xA;nextMove = Move.fromArray(result);&#xA;} catch (cantMoveException e) {humanWin = true;}"/>
     <states xsi:type="stateMachine:State" name="HumanWins" implicitTransition="//@describes/@events.17"/>
     <states xsi:type="stateMachine:State" name="ShowFrom" implicitTransition="//@describes/@events.15" do="arm.down();" exit="&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;navigator.goTo(from);&#xA;&#x9;&#x9;&#x9;} catch (Exception e) {&#xA;&#x9;&#x9;&#x9;}" entry="arm.up();"/>
-    <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.16" do="&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;navigator.goTo(to[to.length - 1]);&#xA;&#x9;&#x9;&#x9;} catch (Exception e) {&#xA;}" exit="arm.down()" entry="arm.up()"/>
+    <states xsi:type="stateMachine:State" name="ShowTo" implicitTransition="//@describes/@events.16" do="&#x9;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;&#x9;navigator.goTo(to[to.length - 1]);&#xA;&#x9;&#x9;&#x9;} catch (Exception e) {&#xA;}" exit="arm.down();" entry="arm.up();"/>
     <states xsi:type="stateMachine:EndState"/>
   </describes>
 </stateMachine:Diagram>

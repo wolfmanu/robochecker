@@ -6,7 +6,7 @@
       <children xmi:type="notation:Node" xmi:id="_XgJ9AOLxEd2U-vieOJv-wg" type="3003">
         <styles xmi:type="notation:ShapeStyle" xmi:id="_XgJ9AeLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:StartState" href="Robot.statemachine#//@describes/@states.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XgJ9AuLxEd2U-vieOJv-wg" x="450" y="11"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XgJ9AuLxEd2U-vieOJv-wg" x="425" y="6"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Y2alUOLxEd2U-vieOJv-wg" type="3001">
         <children xmi:type="notation:Node" xmi:id="_Y2bzcOLxEd2U-vieOJv-wg" type="5001"/>
@@ -32,7 +32,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_bBsKEeLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:State" href="Robot.statemachine#//@describes/@states.2"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bBsKEuLxEd2U-vieOJv-wg" x="970" y="125"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bBsKEuLxEd2U-vieOJv-wg" x="910" y="121"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_cTaQoOLxEd2U-vieOJv-wg" type="3005">
         <children xmi:type="notation:Node" xmi:id="_cTbewOLxEd2U-vieOJv-wg" type="5005"/>
@@ -214,49 +214,49 @@
         <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.4"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_J2A2UeLzEd2U-vieOJv-wg"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_NQKpAOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.5"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_NQKpAeLzEd2U-vieOJv-wg"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_O0neUOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.6"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.5"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_O0neUeLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RWygIOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.7"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.6"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_RWygIeLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_RtQfYOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.8"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.7"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_RtQfYeLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_bbQ1wOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.9"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.8"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_bbQ1weLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_dWMRYOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.10"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.9"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_dWMRYeLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_gzzAsOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.11"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.10"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_gzzAseLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_iik2sOLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.12"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.11"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_iik2seLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_lyRF0OLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.13"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.12"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_lyRF0eLzEd2U-vieOJv-wg"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_q2Ng0OLzEd2U-vieOJv-wg" type="3004">
-        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.14"/>
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.13"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_q2Ng0eLzEd2U-vieOJv-wg"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_QoMp4OL1Ed2U-vieOJv-wg" type="3004">
+      <children xmi:type="notation:Node" xmi:id="_dptK0eMVEd2iY9dwLcTDTw" type="3004">
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.14"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dptK0uMVEd2iY9dwLcTDTw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oUsG0OMVEd2iY9dwLcTDTw" type="3004">
         <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.15"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_QoMp4eL1Ed2U-vieOJv-wg"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oUsG0eMVEd2iY9dwLcTDTw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_UWcaEOLxEd2U-vieOJv-wg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_UWcaEeLxEd2U-vieOJv-wg"/>
@@ -396,7 +396,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_TrtlkOLyEd2U-vieOJv-wg" type="4003" source="_sK8xEOLxEd2U-vieOJv-wg" target="_2ZmWYOLxEd2U-vieOJv-wg">
     <children xmi:type="notation:Node" xmi:id="_TruMoOLyEd2U-vieOJv-wg" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_TruMoeLyEd2U-vieOJv-wg" y="40"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_TruMoeLyEd2U-vieOJv-wg" x="1" y="24"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_TrtlkeLyEd2U-vieOJv-wg"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_TrtlkuLyEd2U-vieOJv-wg" fontName="Sans"/>
