@@ -3,8 +3,7 @@
 	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="src" path="src_NXJ"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/roboChechersNXJ"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/lejosext.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_1.0.0/pccomm.jar"/>
-	<classpathentry kind="lib" path="E:/automatica/lejos_nxj/lib/classes.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_0.1.7/classes.jar" sourcepath="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_0.1.7/src"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_0.1.7/lejosext.jar" sourcepath="ECLIPSE_HOME/plugins/de.nordakademie.lejos.lib_0.1.7/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
