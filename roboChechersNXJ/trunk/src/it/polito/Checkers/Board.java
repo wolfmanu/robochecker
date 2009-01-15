@@ -136,13 +136,17 @@ public class Board {
 
 	}
 	
-	public Square getPossibleMoveFrom() {
-		indice2=0;
+	public Square getPossibleMoveFrom() throws cantMoveException {
+		indice2 = 0;
+		if (indice == mosse.size())
+			throw new cantMoveException();
 		return mosse.elementAt(indice++).getFrom();
 	}
-	
-	public Square[] getPossibleMoveTo() {
-		Square[] s= mosse.elementAt(indice).getTos().elementAt(indice2++);
+
+	public Square[] getPossibleMoveTo() throws cantMoveException {
+		if (indice2 == mosse.elementAt(indice).getTos().size())
+			throw new cantMoveException();
+		Square[] s = mosse.elementAt(indice).getTos().elementAt(indice2++);
 		return s;
 	}
 
