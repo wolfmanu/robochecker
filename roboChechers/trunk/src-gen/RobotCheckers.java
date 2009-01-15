@@ -56,12 +56,12 @@ public class RobotCheckers extends Statemachine {
 				return mosse == true;
 			}
 
-		}, new AbstractTransition(calculateMoves) {
+		}, new AbstractTransition(illegalMove) {
 			public boolean guard() {
 				return mosse = false;
 			}
 			public int getDelay() {
-				return 3000;
+				return 1000;
 			}
 		}
 
@@ -113,12 +113,12 @@ public class RobotCheckers extends Statemachine {
 				return mosse == true;
 			}
 
-		}, new AbstractTransition(calculateMoves) {
+		}, new AbstractTransition(illegalMove) {
 			public boolean guard() {
 				return mosse == false;
 			}
 			public int getDelay() {
-				return 3000;
+				return 1000;
 			}
 		}
 
@@ -167,6 +167,8 @@ public class RobotCheckers extends Statemachine {
 		}
 
 		});
+
+		illegalMove.setTransitions(new ITransition[]{resetMove});
 
 		setStartTransitions(new ITransition[]{new ITransition() {
 			final public boolean guard() {
@@ -310,7 +312,7 @@ public class RobotCheckers extends Statemachine {
 		public void entryMethod() {
 			try {
 				from = board.getPossibleMoveFrom();
-			} catch (cantMoveException e) {
+			} catch (IllegalMoveException e) {
 				mosse = false;
 			}
 		}
@@ -378,7 +380,7 @@ public class RobotCheckers extends Statemachine {
 		public void entryMethod() {
 			try {
 				to = board.getPossibleMoveTo();
-			} catch (cantMoveException e) {
+			} catch (IllegalMoveException e) {
 				mosse = false;
 			}
 		}
@@ -458,6 +460,21 @@ public class RobotCheckers extends Statemachine {
 
 	public IState newName = new EndState(this);
 
+	public IState illegalMove = new AbstractState(this) {
+
+		public void doMethod() throws InterruptedException {
+			while (true) {
+				if (Thread.interrupted())
+					throw new InterruptedException();
+				Thread.yield();
+			}
+		}
+
+		final public String getName() {
+			return "IllegalMove";
+		}
+	};
+
 	/**
 	 * Transtions of the statemachine including transitions from start state
 	 *
@@ -468,6 +485,13 @@ public class RobotCheckers extends Statemachine {
 			return HI.waitForMove(false);
 		}
 		final public static String NAME = "HumanMoved";
+	};
+
+	public ITransition resetMove = new AbstractTransition(calculateMoves) {
+		final public boolean guard() {
+			return HI.waitForMove(false);
+		}
+		final public static String NAME = "ResetMove";
 	};
 
 	/**
