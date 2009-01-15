@@ -1,11 +1,13 @@
 
 import de.nordakademie.lejos.statemachine.*;
 import lejos.nxt.*;
-import lejos.nxt.addon.ColorSensor;
 import lejos.navigation.*;
 import it.polito.Checkers.*;
 import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
+import lejos.nxt.addon.*;
+import it.polito.util.*;
+
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -65,12 +67,12 @@ public class RobotCheckers extends Statemachine {
 
 		}, new AbstractTransition(calculateTo) {
 			public boolean guard() {
-				return colore == CheckersConstants.WHITE && searchFrom == true;
+				return colore == CheckersConstants.EMPTY && searchFrom == true;
 			}
 
 		}, new AbstractTransition(guessMoveTo) {
 			public boolean guard() {
-				return colore == CheckersConstants.WHITE && searchFrom == true;
+				return colore == CheckersConstants.EMPTY && searchTo == true;
 			}
 
 		}, new AbstractTransition(updateBoard) {
@@ -199,6 +201,8 @@ public class RobotCheckers extends Statemachine {
 
 	private int[] result = new int[4];;
 
+	private static HumanInput HI = ButtonInput.getInstance();
+
 	/**
 	 * Internal states of the statemachine including exit, excluding initial states
 	 *
@@ -215,7 +219,7 @@ public class RobotCheckers extends Statemachine {
 		}
 
 		public void entryMethod() {
-			NXTCommHandle.getInstance().connect();
+			HI.init();
 			arm.down();
 		}
 
@@ -290,7 +294,11 @@ public class RobotCheckers extends Statemachine {
 	public IState sensorRead = new AbstractState(this) {
 
 		public void doMethod() throws InterruptedException {
-			colore = CS.getColorNumber();
+			try {
+				colore = CS.getColorNumber();
+			} catch (Exception e) {
+				System.out.println("eccezione " + e.getMessage());
+			}
 		}
 
 		public void exitMethod() {
@@ -424,7 +432,7 @@ public class RobotCheckers extends Statemachine {
 
 	public ITransition humanMoved = new AbstractTransition(calculateMoves) {
 		final public boolean guard() {
-			return NXTCommHandle.getInstance().waitForMove();;
+			return HI.waitForMove(false);
 		}
 		final public static String NAME = "HumanMoved";
 	};
