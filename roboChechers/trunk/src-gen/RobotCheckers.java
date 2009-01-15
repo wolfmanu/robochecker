@@ -7,7 +7,6 @@ import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
 import lejos.nxt.addon.*;
 import it.polito.util.*;
-
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -53,7 +52,17 @@ public class RobotCheckers extends Statemachine {
 		guessMoveFrom.setImplicitTransitions(new ITransition[]{
 
 		new AbstractTransition(sensorRead) {
+			public boolean guard() {
+				return mosse == true;
+			}
 
+		}, new AbstractTransition(calculateMoves) {
+			public boolean guard() {
+				return mosse = false;
+			}
+			public int getDelay() {
+				return 3000;
+			}
 		}
 
 		});
@@ -100,7 +109,17 @@ public class RobotCheckers extends Statemachine {
 		guessMoveTo.setImplicitTransitions(new ITransition[]{
 
 		new AbstractTransition(sensorRead) {
+			public boolean guard() {
+				return mosse == true;
+			}
 
+		}, new AbstractTransition(calculateMoves) {
+			public boolean guard() {
+				return mosse == false;
+			}
+			public int getDelay() {
+				return 3000;
+			}
 		}
 
 		});
@@ -203,6 +222,8 @@ public class RobotCheckers extends Statemachine {
 
 	private static HumanInput HI = ButtonInput.getInstance();
 
+	private static boolean mosse = true;
+
 	/**
 	 * Internal states of the statemachine including exit, excluding initial states
 	 *
@@ -261,6 +282,10 @@ public class RobotCheckers extends Statemachine {
 			}
 		}
 
+		public void exitMethod() {
+			mosse = true;
+		}
+
 		final public String getName() {
 			return "CalculateMoves";
 		}
@@ -283,7 +308,11 @@ public class RobotCheckers extends Statemachine {
 		}
 
 		public void entryMethod() {
-			from = board.getPossibleMoveFrom();
+			try {
+				from = board.getPossibleMoveFrom();
+			} catch (cantMoveException e) {
+				mosse = false;
+			}
 		}
 
 		final public String getName() {
@@ -347,7 +376,11 @@ public class RobotCheckers extends Statemachine {
 		}
 
 		public void entryMethod() {
-			to = board.getPossibleMoveTo();
+			try {
+				to = board.getPossibleMoveTo();
+			} catch (cantMoveException e) {
+				mosse = false;
+			}
 		}
 
 		final public String getName() {
