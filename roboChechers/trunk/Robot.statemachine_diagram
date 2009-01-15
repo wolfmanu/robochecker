@@ -6,7 +6,7 @@
       <children xmi:type="notation:Node" xmi:id="_XgJ9AOLxEd2U-vieOJv-wg" type="3003">
         <styles xmi:type="notation:ShapeStyle" xmi:id="_XgJ9AeLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:StartState" href="Robot.statemachine#//@describes/@states.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XgJ9AuLxEd2U-vieOJv-wg" x="425" y="6"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XgJ9AuLxEd2U-vieOJv-wg" x="275" y="28"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_Y2alUOLxEd2U-vieOJv-wg" type="3001">
         <children xmi:type="notation:Node" xmi:id="_Y2bzcOLxEd2U-vieOJv-wg" type="5001"/>
@@ -19,7 +19,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_Y2alUeLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:State" href="Robot.statemachine#//@describes/@states.1"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y2alUuLxEd2U-vieOJv-wg" x="630" y="2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y2alUuLxEd2U-vieOJv-wg" x="640" y="23"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_bBsKEOLxEd2U-vieOJv-wg" type="3001">
         <children xmi:type="notation:Node" xmi:id="_bBsxIOLxEd2U-vieOJv-wg" type="5001"/>
@@ -91,7 +91,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_qb5OQOLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:State" href="Robot.statemachine#//@describes/@states.6"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qb5OQeLxEd2U-vieOJv-wg" x="85" y="495"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qb5OQeLxEd2U-vieOJv-wg" x="70" y="486" width="306"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_sK8xEOLxEd2U-vieOJv-wg" type="3001">
         <children xmi:type="notation:Node" xmi:id="_sK9_MOLxEd2U-vieOJv-wg" type="5001"/>
@@ -104,7 +104,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_sK8xEeLxEd2U-vieOJv-wg" fontName="Sans"/>
         <element xmi:type="stateMachine:State" href="Robot.statemachine#//@describes/@states.7"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sK8xEuLxEd2U-vieOJv-wg" x="138" y="641"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sK8xEuLxEd2U-vieOJv-wg" x="140" y="706"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_uLcCIOLxEd2U-vieOJv-wg" type="3001">
         <children xmi:type="notation:Node" xmi:id="_uLcpMOLxEd2U-vieOJv-wg" type="5001"/>
@@ -258,6 +258,10 @@
         <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.15"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_oUsG0eMVEd2iY9dwLcTDTw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_WpRUUeMdEd2PxYUF-PzNBw" type="3004">
+        <element xmi:type="stateMachine:StateVariable" href="Robot.statemachine#//@describes/@variables.16"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WpRUUuMdEd2PxYUF-PzNBw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_UWcaEOLxEd2U-vieOJv-wg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_UWcaEeLxEd2U-vieOJv-wg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_UWcaEuLxEd2U-vieOJv-wg"/>
@@ -324,7 +328,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_Nn9TYOLyEd2U-vieOJv-wg" type="4003" source="_qb4nMOLxEd2U-vieOJv-wg" target="_l6s7AOLxEd2U-vieOJv-wg">
     <children xmi:type="notation:Node" xmi:id="_Nn96cOLyEd2U-vieOJv-wg" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_Nn96ceLyEd2U-vieOJv-wg" x="-16" y="-124"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Nn96ceLyEd2U-vieOJv-wg" x="-20" y="-39"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_Nn9TYeLyEd2U-vieOJv-wg"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Nn9TYuLyEd2U-vieOJv-wg" fontName="Sans"/>
@@ -375,7 +379,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_P9iqsOLyEd2U-vieOJv-wg" type="4003" source="_qb4nMOLxEd2U-vieOJv-wg" target="_v7XHoOLxEd2U-vieOJv-wg">
     <children xmi:type="notation:Node" xmi:id="_P9iqtOLyEd2U-vieOJv-wg" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_P9iqteLyEd2U-vieOJv-wg" x="-5" y="29"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_P9iqteLyEd2U-vieOJv-wg" x="51" y="62"/>
     </children>
     <styles xmi:type="notation:RoutingStyle" xmi:id="_P9iqseLyEd2U-vieOJv-wg"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_P9iqsuLyEd2U-vieOJv-wg" fontName="Sans"/>

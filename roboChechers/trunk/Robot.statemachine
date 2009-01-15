@@ -17,17 +17,18 @@
     <variables name="int depth " type="final" initialValue=" 3"/>
     <variables name="nextMove" type="Move" modifier="private static" initialValue="null"/>
     <variables name="result" type="int[]" initialValue="new int[4];"/>
-    <events xsi:type="stateMachine:NamedEvent" trigger="NXTCommHandle.getInstance().waitForMove();" name="HumanMoved" transitionTo="//@describes/@states.3"/>
+    <variables name="HumanInput HI " type="static" initialValue=" ButtonInput.getInstance()"/>
+    <events xsi:type="stateMachine:NamedEvent" trigger="HI.waitForMove(false)" name="HumanMoved" transitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.0" implicitTransitionTo="//@describes/@states.1"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.1" implicitTransitionTo="//@describes/@states.2"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==true" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==false" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.5"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.BLACK &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.5"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.6"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.8"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.EMPTY &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.6"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.WHITE &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.9"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.EMPTY &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.7"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.7" implicitTransitionTo="//@describes/@states.10"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="humanWin==true" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.11"/>
@@ -37,12 +38,12 @@
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.11" implicitTransitionTo="//@describes/@states.14"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.4" implicitTransitionTo="//@describes/@states.14"/>
     <states xsi:type="stateMachine:StartState" implicitTransition="//@describes/@events.1"/>
-    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.2" do="navigator.calibrate();" exit="arm.up();" entry="NXTCommHandle.getInstance().connect(); arm.down();"/>
+    <states xsi:type="stateMachine:State" name="Calibration" implicitTransition="//@describes/@events.2" do="navigator.calibrate();" exit="arm.up();" entry="HI.init(); arm.down();"/>
     <states xsi:type="stateMachine:State" name="Home" transitionsFrom="//@describes/@events.0" do="try {&#xA;       navigator.goHome();&#xA;     } catch (Exception e) {}&#xA;while(true){if (Thread.interrupted())&#xA;&#x9;&#x9;  throw new InterruptedException();&#xA;&#x9;&#x9;  Thread.yield();&#x9;&#xA;&#x9;&#x9;}" entry="arm.up();"/>
     <states xsi:type="stateMachine:State" name="CalculateMoves" implicitTransition="//@describes/@events.4 //@describes/@events.3" do="try {&#xA;&#x9;board.getPossibleMoves(piecehuman);&#xA;     } catch (cantMoveException e) {&#xA;&#x9;&#x9;&#x9;robotWin = true;}"/>
     <states xsi:type="stateMachine:State" name="RobotWins" implicitTransition="//@describes/@events.18"/>
     <states xsi:type="stateMachine:State" name="GuessMoveFrom" implicitTransition="//@describes/@events.6" do="try {navigator.goTo(from);}&#xA; catch (Exception e) {}" entry="from = board.getPossibleMoveFrom();"/>
-    <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.5 //@describes/@events.7 //@describes/@events.10 //@describes/@events.11" do="colore = CS.getColorNumber();" exit="arm.up();" entry="arm.down();"/>
+    <states xsi:type="stateMachine:State" name="SensorRead" implicitTransition="//@describes/@events.5 //@describes/@events.7 //@describes/@events.10 //@describes/@events.11" do="try {colore = CS.getColorNumber(); }&#xD;&#xA;catch(Exception e) { &#xD;&#xA;System.out.println(&quot;eccezione &quot; +&#xD;&#xA; e.getMessage()); }" exit="arm.up();" entry="arm.down();"/>
     <states xsi:type="stateMachine:State" name="UpdateBoard" implicitTransition="//@describes/@events.12" do="board.makeMove(new Move(from, to));"/>
     <states xsi:type="stateMachine:State" name="CalculateTo" implicitTransition="//@describes/@events.8" entry="searchFrom = false;&#xA;searchTo = true;"/>
     <states xsi:type="stateMachine:State" name="GuessMoveTo" implicitTransition="//@describes/@events.9" do="try {&#xA;navigator.goTo(to[to.length - 1]);&#xA;} catch (Exception e) {}" entry="to = board.getPossibleMoveTo();"/>
