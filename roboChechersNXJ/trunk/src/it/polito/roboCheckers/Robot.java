@@ -6,13 +6,13 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 import it.polito.BluetoothComm.NXTCommHandle;
 import it.polito.Checkers.*;
-import it.polito.Navigation.CheckersNavigator;
-import it.polito.Navigation.MathNavigator;
-import it.polito.Navigation.SimpleNavigator;
+import it.polito.Navigation.*;
+import it.polito.util.*;
 
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
-	static private CheckersNavigator navigator = SimpleNavigator.getInstance();
+	static private CheckersNavigator navigator = MathNavigator.getInstance();
+	static private HumanInput HI = NXTCommHandle.getInstance();
 	
 	public static ColorSensor getColorSensor() {
 		return CS;
@@ -25,9 +25,9 @@ public class Robot {
 	public static void main(String[] args) throws Exception {
 		System.out.println("Checkers GAME");
 		System.out.println("Waiting for BT Conn.");
-		NXTCommHandle.getInstance().connect();
+		HI.init();
 		System.out.println("Waiting for START");
-		NXTCommHandle.getInstance().waitForStart();
+		HI.waitForStart(true);
 		System.out.println("Calibrating Board");
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK, CheckersConstants.BKING);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE, CheckersConstants.WKING,3);
@@ -44,7 +44,6 @@ public class Robot {
 	    		System.out.println("Black wins");
 	    		break;
 	    }
-	    NXTCommHandle.getInstance().waitForMove();
-	    NXTCommHandle.getInstance().disconnect();
+	    HI.destroy();
 	}
 }

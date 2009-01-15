@@ -28,7 +28,7 @@ public class calibrateTest {
 		*/
 		
 		boolean exit = false;
-		CheckersNavigator navigator= SimpleNavigator.getInstance();
+		CheckersNavigator navigator= MathNavigator.getInstance();
 		ColorSensor CS = new ColorSensor(SensorPort.S1);
 		navigator.setSpeed(300, 1000);
 		navigator.calibrate();

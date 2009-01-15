@@ -156,7 +156,7 @@ public class SimpleNavigator implements CheckersNavigator {
 	 * @author Matteo
 	 */
 	public void calibrate(ColorSensor CS) {
-		ArmController.getInstance().down();
+		setSpeed(500, 500);
 		int color = GO;
 		while (!Button.ESCAPE.isPressed()) {
 			color = (int)CS.getColorNumber();
@@ -180,6 +180,7 @@ public class SimpleNavigator implements CheckersNavigator {
 		MB.rotate(lashB);
 		MA.resetTachoCount(); MB.resetTachoCount();
 		this.calibrated = true;
+		setSpeed(1000, 2000);
 	}
 	
 	public void calibrate() {

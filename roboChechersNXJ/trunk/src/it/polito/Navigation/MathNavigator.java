@@ -8,7 +8,7 @@ import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
-	private static final int POLLING_PERIOD = 10, STOP_ROTATE_L = 8, STOP_ROTATE_R = 0, STOP_MOVE = 2;
+	private static final int POLLING_PERIOD = 10, STOP_ROTATE_L = 4, STOP_ROTATE_R = 0, STOP_MOVE = 2;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A,lashA);
@@ -20,10 +20,10 @@ public class MathNavigator implements CheckersNavigator {
 	private int x,y;
 	private final double
 		l = 16.0,
-		r = 11.3,
+		r = 11.5,
 		squareWidth = 2.0,
 		squareOffset = 1,
-		coeffB = 60000, //61142
+		coeffB = 60000, //61142 // 60000
 		coeffA = 510;
 	private double alpha,beta,gamma,yOffset,Cx;
 	
@@ -39,52 +39,53 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	public void calibrate() {
+		setSpeed(500,1000);
+		
 		arm.down();
+		
 		backward(2000);
 		
-		setSpeed(500,1000);
+		// Reaches LEFT RED BAND
 		while (CS.getColorNumber()!=STOP_ROTATE_L) {
 			left();
 			try {
 				Thread.sleep(POLLING_PERIOD);
+				//System.out.println("Color: " + CS.getColorNumber());
 			} catch (InterruptedException e) {}
 		}
 		MB.stop();
-		setSpeed(500,200);
 		left(2*lashB); // Remove lash
 		
-		
+		// Recovers LEFT RED BAND BORDERS, moving to right
 		if (CS.getColorNumber()==STOP_ROTATE_L) {
-
-			while (CS.getColorNumber()==STOP_ROTATE_L) {
+			int x = CS.getColorNumber();
+			setSpeed(500, 200);
+			//while (CS.getColorNumber()!=STOP_ROTATE_L) {
+			while (CS.getColorNumber()==x) {
 				right();
 				try {
 					Thread.sleep(POLLING_PERIOD);
+					//System.out.println("Color: " + CS.getColorNumber());
 				} catch (InterruptedException e) {}
 			}
 			MB.stop();
 		}
+		setSpeed(500, 1000);
 		MB.resetTachoCount();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e1) {	}
-		setSpeed(500,1000);
-		right(14000);
-		setSpeed(500, 200);
 	
+		// Reaches RIGHT BLACK BAND
 		while (CS.getColorNumber()!=STOP_ROTATE_R){
 			right();
 			try {
 				Thread.sleep(POLLING_PERIOD);
-				//System.out.println("Color: "+Integer.toString(CS.getColorNumber()));
+				//System.out.println("Color: "+CS.getColorNumber());
 			} catch (InterruptedException e) {}
 		}		
 		MB.stop();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e1) { }
-		alpha = Math.abs(((MB.getTachoCount()-1000)*2*java.lang.Math.PI)/coeffB);
 		
+		alpha = Math.abs(((MB.getTachoCount())*2*java.lang.Math.PI)/coeffB);
+		
+		// Reaches UPPER BLUE BAND
 		while (CS.getColorNumber()!=STOP_MOVE) {
 			forward();
 			try {
@@ -102,7 +103,7 @@ public class MathNavigator implements CheckersNavigator {
 		beta = 2*java.lang.Math.acos(betaarg);
 		gamma = (java.lang.Math.PI - alpha - beta)/2;
 		Cx = r*java.lang.Math.sin((alpha+beta)/2);
-		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r));
+		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r))-0.5;
 			
 		System.out.println("alpha: " + alpha);
 		System.out.println("betaarg: " + betaarg);

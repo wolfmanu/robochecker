@@ -10,6 +10,7 @@ import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.MathNavigator;
 import it.polito.Navigation.SimpleNavigator;
 import it.polito.Navigation.notCalibratedException;
+import it.polito.util.HumanInput;
 import it.polito.util.Vector;
 
 
@@ -18,10 +19,12 @@ public class HumanPlayer implements Player {
 	private final int piecek;
 	private final CheckersNavigator navigator;
 	private final ColorSensor CS;
+	private final HumanInput HI = NXTCommHandle.getInstance();
+	
 	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = SimpleNavigator.getInstance();
+		this.navigator = MathNavigator.getInstance();
 		this.CS = Robot.getColorSensor();
 	}
 
@@ -31,13 +34,7 @@ public class HumanPlayer implements Player {
 	public Move makeMove(Board board) throws cantMoveException, notCalibratedException, IllegalMoveException {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
 		System.out.println("Waiting for human to move");
-		try {
-			NXTCommHandle.getInstance().waitForMove();
-		} catch (IOException e) {
-			System.out.println("IOException");
-			System.out.println("Use NXT Button");
-			Button.waitForPress();
-		}
+		HI.waitForMove(true);
 		
 		Square from = null;
 		boolean foundFrom = false;

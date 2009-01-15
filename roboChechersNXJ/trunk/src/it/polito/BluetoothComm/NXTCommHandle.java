@@ -1,15 +1,17 @@
 package it.polito.BluetoothComm;
 
 import it.polito.BluetoothComm.CommProtocol;
+import it.polito.util.HumanInput;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import lejos.nxt.Button;
 import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.NXTConnection;
 
-public class NXTCommHandle {
+public class NXTCommHandle implements HumanInput{
 	
 	private static NXTCommHandle nxtCommHandle = null;
 	private NXTConnection nxtConnection = null;
@@ -43,12 +45,38 @@ public class NXTCommHandle {
 		return data;
 	}
 	
-	public void waitForMove () throws IOException{
-		while (receiveCommand() != CommProtocol.MOVE_CMD);
+	public boolean waitForMove (boolean locking) {
+		if(locking){
+			try {
+				while( receiveCommand() != CommProtocol.MOVE_CMD );
+			} catch (IOException e) {
+				while( !Button.ENTER.isPressed() );
+			}
+			return true;
+		} else {
+			try {
+				return (receiveCommand() != CommProtocol.MOVE_CMD);
+			} catch (IOException e) {
+				return Button.ENTER.isPressed();
+			}
+		}
 	}
 	
-	public void waitForStart () throws IOException{
-		while (receiveCommand() != CommProtocol.START_CMD);
+	public boolean waitForStart (boolean locking) {
+		if(locking){
+			try {
+				while( receiveCommand() != CommProtocol.START_CMD );
+			} catch (IOException e) {
+				while( !Button.ENTER.isPressed() );
+			}
+			return true;
+		} else {
+			try {
+				return (receiveCommand() != CommProtocol.START_CMD);
+			} catch (IOException e) {
+				return Button.ENTER.isPressed();
+			}
+		}
 	}
 	
 	private void sendACK () throws IOException{
@@ -71,6 +99,22 @@ public class NXTCommHandle {
 		dis.close();
 		dos.close();
 		nxtConnection.close();
+	}
+
+	
+	public void destroy() {
+		try {
+			disconnect();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+	
+	}
+
+	
+	public void init() {
+		connect();
+		
 	}
 	
 }

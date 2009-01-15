@@ -15,6 +15,8 @@ public class MathCalibration {
 	public static void main(String[] args) throws Exception {
 		MathNavigator navigator = MathNavigator.getInstance();
 		
+		navigator.setSpeed(1000, 1000);
+		
 		while(!Button.ENTER.isPressed()){
 			navigator.left();
 			Thread.sleep(100);
@@ -34,6 +36,7 @@ public class MathCalibration {
 		}
 		
 		navigator.getMotorB().stop();
+		navigator.setSpeed(200, 200);
 		navigator.getMotorB().resetTachoCount();
 		Thread.sleep(100);
 		System.out.println("START!");
