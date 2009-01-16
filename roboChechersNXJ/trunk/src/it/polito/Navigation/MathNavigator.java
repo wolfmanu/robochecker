@@ -203,7 +203,6 @@ public class MathNavigator implements CheckersNavigator {
 	 * @throws InterruptedException 
 	 */
 	private void waitForMotors(Motor[] motorList){
-		//System.out.println("Length: " + motorList.length + motorList[0].isRotating() +motorList[0].isMoving());
 		for (int i=0; i < motorList.length; i++){
 			while (motorList[i].isRotating()){
 				try {

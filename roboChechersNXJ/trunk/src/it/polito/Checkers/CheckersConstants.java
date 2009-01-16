@@ -2,7 +2,7 @@ package it.polito.Checkers;
 
 public class CheckersConstants {
 	public final static int EMPTY = 17;
-	public final static int WHITE = 17;
+	public final static int WHITE = 7;
 	public final static int BLACK = 0;
 	public final static int WKING = 4;
 	public final static int BKING = 2;

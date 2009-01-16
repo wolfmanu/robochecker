@@ -40,7 +40,7 @@ public class HumanPlayer implements Player {
 		for (int i=moves.size()-1; i>=0;i--) {
 			m = moves.elementAt(i);
 			from = m.getFrom();
-			this.navigator.goTo(from);
+			navigator.goTo(from);
 			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
 				foundFrom = true;
 				break;
