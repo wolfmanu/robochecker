@@ -1,32 +1,29 @@
 package it.polito.roboCheckers;
 
-import java.io.IOException;
-
-import lejos.nxt.Button;
-import lejos.nxt.addon.ColorSensor;
-import it.polito.BluetoothComm.NXTCommHandle;
-import it.polito.Checkers.*;
+import it.polito.Checkers.Board;
+import it.polito.Checkers.CheckersConstants;
+import it.polito.Checkers.IllegalMoveException;
+import it.polito.Checkers.Move;
+import it.polito.Checkers.MovesCollections;
+import it.polito.Checkers.Square;
+import it.polito.Checkers.cantMoveException;
 import it.polito.Navigation.CheckersNavigator;
-import it.polito.Navigation.MathNavigator;
-import it.polito.Navigation.SimpleNavigator;
 import it.polito.Navigation.notCalibratedException;
-import it.polito.util.ButtonInput;
 import it.polito.util.HumanInput;
 import it.polito.util.Vector;
+import lejos.nxt.addon.ColorSensor;
 
 
 public class HumanPlayer implements Player {
 	private final int piece;
 	private final int piecek;
-	private final CheckersNavigator navigator;
-	private final ColorSensor CS;
-	private final HumanInput HI = ButtonInput.getInstance();
+	private final CheckersNavigator navigator = Factory.getCheckersNavigator();
+	private final ColorSensor CS = Factory.getColorSensor();
+	private final HumanInput HI = Factory.getHumanInput();
 	
 	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = MathNavigator.getInstance();
-		this.CS = Robot.getColorSensor();
 	}
 
 	public void startNewGame() {

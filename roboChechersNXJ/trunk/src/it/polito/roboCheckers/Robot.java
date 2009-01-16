@@ -1,18 +1,13 @@
 package it.polito.roboCheckers;
-import lejos.nxt.Button;
-import lejos.nxt.LCD;
-import lejos.nxt.Motor;
-import lejos.nxt.SensorPort;
+import it.polito.Checkers.CheckersConstants;
+import it.polito.Navigation.CheckersNavigator;
+import it.polito.util.HumanInput;
 import lejos.nxt.addon.ColorSensor;
-import it.polito.BluetoothComm.NXTCommHandle;
-import it.polito.Checkers.*;
-import it.polito.Navigation.*;
-import it.polito.util.*;
 
 public class Robot {
-	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
-	static private CheckersNavigator navigator = MathNavigator.getInstance();
-	static private HumanInput HI = ButtonInput.getInstance();
+	static private ColorSensor CS = Factory.getColorSensor();
+	static private CheckersNavigator navigator = Factory.getCheckersNavigator();
+	static private HumanInput HI = Factory.getHumanInput();
 	
 	public static ColorSensor getColorSensor() {
 		return CS;

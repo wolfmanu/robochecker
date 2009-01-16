@@ -12,14 +12,12 @@ public class ComputerPlayer implements Player {
 	private final int piecek;
 	private int depth;
 	private int score;
-	private CheckersNavigator navigator;
-	private ArmController arm;
+	private final CheckersNavigator navigator = Factory.getCheckersNavigator();
+	private final ArmController arm = Factory.getArmController();
 		
 	public ComputerPlayer(final int piece, final int piecek, int depth) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = MathNavigator.getInstance();
-		this.arm = ArmController.getInstance();
 		this.depth = depth;
 		this.score = 0;
 	}
