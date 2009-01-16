@@ -191,9 +191,9 @@ public class RobotCheckers extends Statemachine {
 	 *
 	 **/
 
-	private static CheckersNavigator navigator = SimpleNavigator.getInstance();
+	private static CheckersNavigator navigator = Factory.getCheckersNavigator();
 
-	private static ColorSensor CS = new ColorSensor(SensorPort.S1);
+	private static ColorSensor CS = Factory.getColorSensor();
 
 	private static Board board = new Board();
 
@@ -211,7 +211,7 @@ public class RobotCheckers extends Statemachine {
 
 	private static Square[] to = null;
 
-	private ArmController arm = ArmController.getInstance();
+	private ArmController arm = Factory.getArmController();
 
 	private static boolean humanWin = false;
 
@@ -223,7 +223,7 @@ public class RobotCheckers extends Statemachine {
 
 	private int[] result = new int[4];;
 
-	private static HumanInput HI = ButtonInput.getInstance();
+	private static HumanInput HI = Factory.getHumanInput();
 
 	private static boolean mosse = true;
 

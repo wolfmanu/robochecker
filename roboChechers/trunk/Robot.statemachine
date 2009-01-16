@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stateMachine:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stateMachine="http://stateMachine">
   <describes name="RobotCheckers">
-    <variables name="CheckersNavigator navigator " type="static" initialValue=" SimpleNavigator.getInstance()"/>
-    <variables name="ColorSensor CS " type="static" initialValue=" new ColorSensor(SensorPort.S1)"/>
+    <variables name="CheckersNavigator navigator " type="static" initialValue="Factory.getCheckersNavigator()"/>
+    <variables name="ColorSensor CS " type="static" initialValue="Factory.getColorSensor()"/>
     <variables name="Board board " type="static" initialValue=" new Board()"/>
     <variables name="int pieceRobot " type="static" initialValue=" CheckersConstants.WHITE"/>
     <variables name="int piecehuman " type="static" initialValue=" CheckersConstants.BLACK"/>
@@ -11,13 +11,13 @@
     <variables name="boolean searchTo " type="static" initialValue=" false"/>
     <variables name="Square from " type="static" initialValue=" null"/>
     <variables name="Square[] to " type="static" initialValue=" null"/>
-    <variables name="arm " type="ArmController" initialValue=" ArmController.getInstance()"/>
+    <variables name="arm " type="ArmController" initialValue="Factory.getArmController()"/>
     <variables name="boolean humanWin " type="static" initialValue=" false"/>
     <variables name="boolean robotWin " type="static" initialValue=" false"/>
     <variables name="int depth " type="final" initialValue=" 3"/>
     <variables name="nextMove" type="Move" modifier="private static" initialValue="null"/>
     <variables name="result" type="int[]" initialValue="new int[4];"/>
-    <variables name="HumanInput HI " type="static" initialValue=" ButtonInput.getInstance()"/>
+    <variables name="HumanInput HI " type="static" initialValue="Factory.getHumanInput()"/>
     <variables name="boolean mosse " type="static" initialValue=" true"/>
     <events xsi:type="stateMachine:NamedEvent" trigger="HI.waitForMove(false)" name="HumanMoved" transitionTo="//@describes/@states.3"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.0" implicitTransitionTo="//@describes/@states.1"/>
