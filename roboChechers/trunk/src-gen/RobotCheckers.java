@@ -86,6 +86,14 @@ public class RobotCheckers extends Statemachine {
 			}
 
 		}, new AbstractTransition(updateBoard) {
+			public boolean guard() {
+				return searchTo == true && colore == CheckersConstants.BLACK;
+			}
+
+		}, new AbstractTransition(sensorRead) {
+			public boolean guard() {
+				return CheckersConstans;
+			}
 
 		}
 
