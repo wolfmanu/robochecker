@@ -7,6 +7,7 @@ import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
 import lejos.nxt.addon.*;
 import it.polito.util.*;
+
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
