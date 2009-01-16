@@ -15,10 +15,11 @@ public class ColorTest {
 		arm.down();
 		ColorSensor CS = new ColorSensor(SensorPort.S1);
 		while (true) {
-			LCD.clearDisplay();
 			LCD.drawString("Red: "+CS.getRed(), 0, 0);
 			LCD.drawString("Green: "+CS.getGreen(), 1, 1);
 			LCD.drawString("Blue: "+CS.getBlue(), 2, 2);
+			LCD.drawString("Color: "+CS.getColorNumber(), 3, 3);
+			LCD.refresh();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
