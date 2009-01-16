@@ -19,6 +19,7 @@ public class MathNavigator implements CheckersNavigator {
 	private boolean calibrated;
 	private int x,y;
 	private final double
+	    offX=1,
 		l = 16.0,
 		r = 11.5,
 		squareWidth = 2.0,
@@ -26,6 +27,7 @@ public class MathNavigator implements CheckersNavigator {
 		coeffB = 60000, //61142 // 60000
 		coeffA = 510;
 	private double alpha,beta,gamma,yOffset,Cx;
+	private double[] correzioniY = new double[8];
 	
 	public static MathNavigator getInstance(){
 		if (navigator == null)
@@ -40,9 +42,7 @@ public class MathNavigator implements CheckersNavigator {
 
 	public void calibrate() {
 		setSpeed(500,1000);
-		
 		arm.down();
-		
 		backward(2000);
 		
 		// Reaches LEFT RED BAND
@@ -103,14 +103,17 @@ public class MathNavigator implements CheckersNavigator {
 		beta = 2*java.lang.Math.acos(betaarg);
 		gamma = (java.lang.Math.PI - alpha - beta)/2;
 		Cx = r*java.lang.Math.sin((alpha+beta)/2);
-		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r))-0.5;
+		yOffset = r*java.lang.Math.sin(java.lang.Math.acos(Cx/r));
 			
 		System.out.println("alpha: " + alpha);
 		System.out.println("betaarg: " + betaarg);
 		System.out.println("beta: " + beta);
 		System.out.println("gamma: " + gamma);
 		System.out.println("Cx: " + Cx);
+		
 		try {			Thread.sleep(1000);		} catch (InterruptedException e) {}
+		calibrateY();
+		
 		this.calibrated = true;
 	}
 	
@@ -127,14 +130,18 @@ public class MathNavigator implements CheckersNavigator {
 	public void goTo(int newX, int newY) throws notCalibratedException {
 		if (!isCalibrated())
 			throw new notCalibratedException();
-		
-		double theta, Cy, Px, Py;
-		int limitAngleA, limitAngleB;
-		
+		double Px, Py;
 		Px = (newX * squareWidth)+squareOffset;
-		Py = (newY * squareWidth)+squareOffset;
-		theta = Math.acos((Cx-Px)/r) - gamma;
-		Cy = Py - r*Math.sin(Math.acos((Cx-Px)/r)) + yOffset;
+		Py = (newY * squareWidth)+squareOffset+correzioniY[newX];
+		moveTo(Px,Py);
+		this.x = newX;
+		this.y = newY;
+	}
+	private void moveTo (double x, double y) {
+		double theta, Cy;
+		int limitAngleA, limitAngleB;
+		theta = Math.acos((Cx-(x+offX))/r) - gamma;
+		Cy = y - r*Math.sin(Math.acos((Cx-x)/r)) + yOffset;
 		
 		limitAngleA = Math.round((float)(Cy*coeffA));
 		limitAngleB = Math.round((float)((theta*coeffB)/(2*java.lang.Math.PI)));
@@ -142,11 +149,7 @@ public class MathNavigator implements CheckersNavigator {
 //		System.out.println("theta: " + theta);
 //		System.out.println("Px: " + Px + " Py: " + Py);
 		rotateTo(limitAngleA,limitAngleB);
-		
-		this.x = newX;
-		this.y = newY;
 	}
-
 	public boolean isCalibrated() {
 		return calibrated;
 	}
@@ -212,4 +215,50 @@ public class MathNavigator implements CheckersNavigator {
 			}
 		}
 	}
+
+	private void calibrateY() {
+		double row = 21;
+		setSpeed(1000,2000);
+		for (int i=0;i<8;i++) {
+			moveTo((i*squareWidth)+squareOffset,row);
+			setSpeed(500, 2000);
+			switch (CS.getColorNumber()) {
+			case CheckersConstants.EMPTY:
+				correzioniY[i] = 0;
+				break;
+			case STOP_ROTATE_L:
+				correzioniY[i] = MA.getTachoCount();
+				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
+					backward();
+				}
+				correzioniY[i] -= MA.getTachoCount();
+				break;
+			case STOP_ROTATE_R:
+				correzioniY[i] = MA.getTachoCount();
+				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
+					forward();
+				}
+				correzioniY[i] -= MA.getTachoCount();
+				break;
+			default:
+				correzioniY[i] = MA.getTachoCount();
+				while (CS.getColorNumber()!=STOP_ROTATE_R) {
+					forward();
+				}
+				MA.stop();
+				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
+					backward();
+				}
+				correzioniY[i] -= MA.getTachoCount();
+				break;
+			}
+			correzioniY[i]/=-coeffA;
+			System.out.print(Float.toString((float)correzioniY[i])+" ");
+		}
+		System.out.println("");
+		setSpeed(1000,2000);
+	}
+
+
+
 }

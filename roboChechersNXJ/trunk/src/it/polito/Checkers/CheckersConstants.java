@@ -1,14 +1,14 @@
 package it.polito.Checkers;
 
 public class CheckersConstants {
-	public final static int EMPTY = 0;
-	public final static int WHITE = 1;
-	public final static int BLACK = 2;
-	public final static int WKING = 3;
-	public final static int BKING = 4;
-	public final static int BLACK_WIN = 5;
-	public final static int WHITE_WIN = 6;
-	public final static int NO_WIN = 7;
-	public final static int DRAW = 8;
-	public final static int CANCELLED = 9;
+	public final static int EMPTY = 17;
+	public final static int WHITE = 8;
+	public final static int BLACK = 0;
+	public final static int WKING = 4;
+	public final static int BKING = 2;
+	public final static int BLACK_WIN = 100;
+	public final static int WHITE_WIN = 101;
+	public final static int NO_WIN = 102;
+	public final static int DRAW = 103;
+	public final static int CANCELLED = 104;
 }

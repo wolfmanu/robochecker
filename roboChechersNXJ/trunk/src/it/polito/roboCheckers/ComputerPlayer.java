@@ -18,7 +18,7 @@ public class ComputerPlayer implements Player {
 	public ComputerPlayer(final int piece, final int piecek, int depth) {
 		this.piece = piece;
 		this.piecek = piecek;
-		this.navigator = SimpleNavigator.getInstance();
+		this.navigator = MathNavigator.getInstance();
 		this.arm = ArmController.getInstance();
 		this.depth = depth;
 		this.score = 0;

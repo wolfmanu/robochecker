@@ -12,7 +12,7 @@ import it.polito.util.*;
 public class Robot {
 	static private ColorSensor CS = new ColorSensor(SensorPort.S1);
 	static private CheckersNavigator navigator = MathNavigator.getInstance();
-	static private HumanInput HI = NXTCommHandle.getInstance();
+	static private HumanInput HI = ButtonInput.getInstance();
 	
 	public static ColorSensor getColorSensor() {
 		return CS;
@@ -31,10 +31,9 @@ public class Robot {
 		System.out.println("Calibrating Board");
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK, CheckersConstants.BKING);
 	    Player pl2 = new ComputerPlayer(CheckersConstants.WHITE, CheckersConstants.WKING,3);
-		navigator.setSpeed(300, 1000);
 		navigator.calibrate();
-		navigator.setSpeed(1000, 1000);
-	    Game game = new Game(pl1,pl2);
+	    navigator.goHome();
+		Game game = new Game(pl1,pl2);
 	    int result = game.play();
 	    switch(result){
 	    	case CheckersConstants.WHITE_WIN:
