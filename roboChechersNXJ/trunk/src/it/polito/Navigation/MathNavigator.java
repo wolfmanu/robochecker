@@ -19,7 +19,7 @@ public class MathNavigator implements CheckersNavigator {
 	private boolean calibrated;
 	private int x,y;
 	private final double
-	    offX=1,
+	    offX=0.5,
 		l = 16.0,
 		r = 12,
 		squareWidth = 2.0,
@@ -216,38 +216,40 @@ public class MathNavigator implements CheckersNavigator {
 	}
 
 	private void calibrateY() {
-		double row = 21;
+		double row = 20;
 		setSpeed(1000,2000);
 		for (int i=0;i<8;i++) {
 			moveTo((i*squareWidth)+squareOffset,row);
-			setSpeed(500, 2000);
+			setSpeed(200, 2000);
 			switch (CS.getColorNumber()) {
 			case CheckersConstants.EMPTY:
 				correzioniY[i] = 0;
 				break;
 			case STOP_ROTATE_L:
 				correzioniY[i] = MA.getTachoCount();
-				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
+				while (CS.getColorNumber()==STOP_ROTATE_L) {
 					backward();
 				}
 				correzioniY[i] -= MA.getTachoCount();
 				break;
 			case STOP_ROTATE_R:
 				correzioniY[i] = MA.getTachoCount();
-				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
+				while (CS.getColorNumber()!=STOP_ROTATE_L) {
 					forward();
 				}
 				correzioniY[i] -= MA.getTachoCount();
 				break;
 			default:
 				correzioniY[i] = MA.getTachoCount();
-				while (CS.getColorNumber()!=STOP_ROTATE_R) {
+				while (CS.getColorNumber()!=STOP_ROTATE_L) {
 					forward();
 				}
-				MA.stop();
+				
+				/*
 				while (CS.getColorNumber()!=CheckersConstants.EMPTY) {
 					backward();
 				}
+				*/
 				correzioniY[i] -= MA.getTachoCount();
 				break;
 			}
@@ -255,6 +257,7 @@ public class MathNavigator implements CheckersNavigator {
 			System.out.print(Float.toString((float)correzioniY[i])+" ");
 		}
 		System.out.println("");
+		MA.stop();
 		setSpeed(1000,2000);
 	}
 
