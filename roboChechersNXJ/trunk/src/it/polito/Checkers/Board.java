@@ -1,5 +1,4 @@
 package it.polito.Checkers;
-import lejos.nxt.Button;
 import it.polito.util.*;
 
 public class Board {
@@ -71,7 +70,6 @@ public class Board {
 	}
 
 	public void printBoard() {
-
 		System.out.println("\\ 01234567");
 		for (int row = 0; row < rows; ++row) {
 			System.out.print(""+row);
@@ -100,12 +98,12 @@ public class Board {
 		Engine.move_board(getArrayBoard(), lastMove.toArray());		
 	}
 	
-	public Vector<MovesCollections> getPossibleMoves(int piece) throws cantMoveException {
+	public Vector<MovesCollections> getPossibleMoves(int piece) throws CantMoveException {
 		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
 		Vector<MovesCollections> movesArray = new Vector<MovesCollections>();
 		int flag;
 		if (moves.size()==0)
-		   throw new cantMoveException();	
+		   throw new CantMoveException();	
 		for (int i = 0; i < moves.size(); i++) {
 			try {
 				flag = 0;
@@ -120,20 +118,14 @@ public class Board {
 					movesArray.addElement(new MovesCollections(m));
 				}
 
-			} catch (cantMoveException e) {
+			} catch (CantMoveException e) {
 			}
 
 		}
 		indice = 0;
 		mosse = movesArray;
-		// System.out.println("movesArray.size = " + movesArray.size());
-		// Button.waitForPress();
-		return movesArray;
-		/*
-		 * } catch (Exception ne) { System.out .println(ne.getClass().toString()
-		 * + " " + ne.getMessage()); Button.waitForPress(); return mosse; }
-		 */
 
+		return movesArray;
 	}
 	
 	public Square getPossibleMoveFrom() throws IllegalMoveException {

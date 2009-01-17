@@ -1,17 +1,14 @@
 package it.polito.roboCheckers;
 
-import it.polito.Checkers.Board;
-import it.polito.Checkers.IllegalMoveException;
-import it.polito.Checkers.Move;
-import it.polito.Checkers.cantMoveException;
-import it.polito.Navigation.notCalibratedException;
-
+import it.polito.Checkers.*;
+import it.polito.Navigation.NotCalibratedException;
 
 public interface Player {
 
 	void startNewGame(); // TODO: Maybe useless... should remove?
 
-	Move makeMove(final Board board) throws cantMoveException, IllegalMoveException, notCalibratedException;
+	Move makeMove(final Board board) throws CantMoveException,
+			IllegalMoveException, NotCalibratedException;
 
 	int getPiece();
 

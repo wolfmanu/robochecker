@@ -13,15 +13,19 @@ public class Factory {
 	private static HumanInput HI = ButtonInput.getInstance();
 	private static ColorSensor CS = new ColorSensor(SensorPort.S1);
 	private static ArmController arm = ArmController.getInstance();
+
 	public static CheckersNavigator getCheckersNavigator() {
 		return navigator;
 	}
+
 	public static HumanInput getHumanInput() {
 		return HI;
 	}
+
 	public static ColorSensor getColorSensor() {
 		return CS;
 	}
+
 	public static ArmController getArmController() {
 		return arm;
 	}

@@ -1,7 +1,6 @@
 package it.polito.Navigation;
 
 import lejos.nxt.Button;
-import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.nxt.Sound;
 import lejos.nxt.addon.ColorSensor;
@@ -69,7 +68,7 @@ public class MathCalibration {
 		
 		int angle180 = navigator.getMotorB().getTachoCount();
 		
-		System.out.println("180° Angle: " + angle180);
+		System.out.println("180ï¿½ Angle: " + angle180);
 		
 		Button.waitForPress();
 		

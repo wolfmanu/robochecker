@@ -9,9 +9,9 @@ public interface CheckersNavigator {
 	public Motor getMotorA();
 	public Motor getMotorB();
 	public boolean isCalibrated();
-	public void goHome() throws notCalibratedException;
-	public void goTo(Square dest) throws notCalibratedException;
-	public void goTo(int newX, int newY) throws notCalibratedException;
+	public void goHome() throws NotCalibratedException;
+	public void goTo(Square dest) throws NotCalibratedException;
+	public void goTo(int newX, int newY) throws NotCalibratedException;
 	public boolean isMoving();
 	public void setSpeed(int speedA, int speedB);
 	public void calibrate();

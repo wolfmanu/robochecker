@@ -79,16 +79,16 @@ public class SimpleNavigator implements CheckersNavigator {
 	public boolean isCalibrated () {
 		return calibrated;
 	}
-	public void goHome () throws notCalibratedException {
+	public void goHome () throws NotCalibratedException {
 		this.goTo(8,8);
 	}
-	public void goTo(Square dest) throws notCalibratedException {
+	public void goTo(Square dest) throws NotCalibratedException {
 		goTo(dest.getRow(),dest.getCol());
 	}
-	public void goTo(int newX, int newY) throws notCalibratedException {
+	public void goTo(int newX, int newY) throws NotCalibratedException {
 
 		if (!isCalibrated()) {
-			throw new notCalibratedException();
+			throw new NotCalibratedException();
 		}
 		int destAngleA, destAngleB;
 

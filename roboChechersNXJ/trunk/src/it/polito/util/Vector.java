@@ -3,11 +3,12 @@ package it.polito.util;
 public class Vector<T> {
 	private int size;
 	Object[] arr;
-	
-	public Vector () {
+
+	public Vector() {
 		this.size = 0;
 		this.arr = new Object[size];
 	}
+
 	public int size() {
 		return size;
 	}
@@ -23,15 +24,13 @@ public class Vector<T> {
 	public T elementAt(int i) {
 		return (T) arr[i];
 	}
-	
-	boolean contains(Object o)
-	{
-		for (Object e : arr)
-			{
-			 if (e.equals(o))
+
+	boolean contains(Object o) {
+		for (Object e : arr) {
+			if (e.equals(o))
 				return true;
-			}
-	   return false;	
+		}
+		return false;
 	}
 
 }

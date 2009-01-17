@@ -1,8 +1,7 @@
 package it.polito.roboCheckers;
 
 import it.polito.Checkers.*;
-import it.polito.Navigation.notCalibratedException;
-import lejos.nxt.Button;
+import it.polito.Navigation.NotCalibratedException;
 
 public class Game {
 	private final int rows = 8, cols = 8;
@@ -23,10 +22,10 @@ public class Game {
 		return this.board;
 	}
 
-	public int play() throws notCalibratedException {
+	public int play() throws NotCalibratedException {
 		Move lastMove = Move.create();
 		this.cancelled = false;
-		int test=CheckersConstants.NO_WIN;
+		int test = CheckersConstants.NO_WIN;
 		Player player = this.whitePlayer;
 		do {
 			for (boolean legalMove = false; !legalMove;) {
@@ -38,7 +37,7 @@ public class Game {
 						break;
 					}
 					board.makeMove(lastMove);
-				} catch (cantMoveException e) {
+				} catch (CantMoveException e) {
 					test = opponentWins(player.getPiece());
 					System.out.println("Can't Move Exc");
 					break;
@@ -48,9 +47,12 @@ public class Game {
 				}
 			}
 			board.printBoard();
-			try {Thread.sleep(1000);	} catch (InterruptedException e) {}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
 			player = (player == blackPlayer) ? whitePlayer : blackPlayer;
-		} while (test==CheckersConstants.NO_WIN);
+		} while (test == CheckersConstants.NO_WIN);
 		return test;
 	}
 

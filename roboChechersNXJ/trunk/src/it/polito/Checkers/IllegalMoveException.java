@@ -1,10 +1,11 @@
 package it.polito.Checkers;
 
 public class IllegalMoveException extends Exception {
-	public IllegalMoveException () {
+	public IllegalMoveException() {
 		super();
 	}
-	public IllegalMoveException (String message) {
+
+	public IllegalMoveException(String message) {
 		super(message);
 	}
 }

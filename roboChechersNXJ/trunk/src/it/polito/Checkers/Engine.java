@@ -1,4 +1,5 @@
 package it.polito.Checkers;
+
 import it.polito.util.Vector;
 
 public class Engine {
@@ -64,7 +65,8 @@ public class Engine {
 			// check for new king
 			if (position[end_i][end_j] == CheckersConstants.WHITE && end_j == 7)
 				position[end_i][end_j] = CheckersConstants.WKING;
-			else if (position[end_i][end_j] == CheckersConstants.BLACK && end_j == 0)
+			else if (position[end_i][end_j] == CheckersConstants.BLACK
+					&& end_j == 0)
 				position[end_i][end_j] = CheckersConstants.BKING;
 
 		}
@@ -305,21 +307,16 @@ public class Engine {
 				return true;
 		return false;
 	} // isEmpty()
-/*
-	private static boolean isWhite(int[][] position, int i, int j) {
-		if (i > -1 && i < 8 && j > -1 && j < 8)
-			if (color(position[i][j]) == CheckersConstants.WHITE)
-				return true;
-		return false;
-	} // isWhite()
+	/*
+	 * private static boolean isWhite(int[][] position, int i, int j) { if (i >
+	 * -1 && i < 8 && j > -1 && j < 8) if (color(position[i][j]) ==
+	 * CheckersConstants.WHITE) return true; return false; } // isWhite()
+	 * 
+	 * private static boolean isBlack(int[][] position, int i, int j) { if (i >
+	 * -1 && i < 8 && j > -1 && j < 8) if (color(position[i][j]) ==
+	 * CheckersConstants.BLACK) return true; return false; } // isBlack()
+	 */
 
-	private static boolean isBlack(int[][] position, int i, int j) {
-		if (i > -1 && i < 8 && j > -1 && j < 8)
-			if (color(position[i][j]) == CheckersConstants.BLACK)
-				return true;
-		return false;
-	} // isBlack()
-*/
 	// returns the color of a piece
 	static int color(int piece) {
 		switch (piece) {
@@ -358,13 +355,13 @@ public class Engine {
 									int_array[2] = i + k;
 									int_array[3] = j + l;
 									int[][] temp_board = Engine
-											.copy_board(board);
-									move = ApplyMove(temp_board, i, j, i
-											+ k, j + l);
+									.copy_board(board);
+									move = ApplyMove(temp_board, i, j, i + k, j
+											+ l);
 									if (move == INCOMPLETEMOVE)/*
-																 * (canCapture(temp_board
-																 * ,i+k,j+l))
-																 */
+									 * (canCapture(temp_board
+									 * ,i+k,j+l))
+									 */
 									{
 										forceCaptures(temp_board, turn,
 												int_array, moves_list, 10);
@@ -419,7 +416,8 @@ public class Engine {
 	// captures
 	// until there is none. If there are multiple capture configurations,
 	// add all of them to moves_list
-	private static void forceCaptures(int[][] board, int turn, int[] move, Vector<int []> moves_list, int inc) {
+	private static void forceCaptures(int[][] board, int turn, int[] move,
+			Vector<int[]> moves_list, int inc) {
 		int newx = move[2], newy = move[3];
 
 		while (newx > 7 || newy > 7) {
@@ -454,7 +452,6 @@ public class Engine {
 
 	}// forceCaptures
 
-	
 	public static int Evaluation(int[][] position) {
 
 		int score = 0;
@@ -492,7 +489,8 @@ public class Engine {
 	}// end Evaluation
 
 	static int opponent(int turn) {
-		return turn == CheckersConstants.BLACK ? CheckersConstants.WHITE : CheckersConstants.BLACK;
+		return turn == CheckersConstants.BLACK ? CheckersConstants.WHITE
+				: CheckersConstants.BLACK;
 	}
 
 	static int which_turn(int turn) {
@@ -505,8 +503,9 @@ public class Engine {
 				INFINITY, -INFINITY);
 	}
 
-	public static int MiniMax(int[][] board, int depth, int max_depth, int[] the_move,
-			int turn, int[] counter, int white_best, int black_best) {
+	public static int MiniMax(int[][] board, int depth, int max_depth,
+			int[] the_move, int turn, int[] counter, int white_best,
+			int black_best) {
 		int the_score = 0;
 		int[][] new_board = new int[8][8];
 		int best_score;
@@ -541,7 +540,7 @@ public class Engine {
 			for (int i = 0; i < moves_list.size(); i++) {
 				new_board = copy_board(board); // board need not be touched
 				move_board(new_board, (int[]) moves_list.elementAt(i)); // returns
-																				// new_board
+				// new_board
 				int temp[] = new int[4];
 				the_score = MiniMax(new_board, depth + 1, max_depth, temp,
 						opponent(turn), counter, white_best, black_best);
@@ -557,7 +556,8 @@ public class Engine {
 					}
 				}
 
-				else if (turn == CheckersConstants.WHITE && the_score < best_score) {
+				else if (turn == CheckersConstants.WHITE
+						&& the_score < best_score) {
 					best_move = (int[]) moves_list.elementAt(i);
 					best_score = the_score;
 					if (best_score < white_best) {
@@ -587,7 +587,7 @@ public class Engine {
 	static boolean better(int the_score, int best, int turn) {
 		if (turn == CheckersConstants.BLACK)
 			return the_score > best;
-		return the_score < best;
+			return the_score < best;
 	}// end better
 }// end class engine
 

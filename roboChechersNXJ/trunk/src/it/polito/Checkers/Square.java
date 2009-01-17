@@ -1,6 +1,5 @@
 package it.polito.Checkers;
 
-
 public class Square {
 
 	private int row;
@@ -42,9 +41,9 @@ public class Square {
 	public static final Square create(int row, int col) {
 		return new Square(row, col);
 	}
-	
-	public boolean equals (Object x) {
-		if (x==null)
+
+	public boolean equals(Object x) {
+		if (x == null)
 			return false;
 		Square s = (Square) x;
 		return s.getRow() == getRow() && s.getCol() == getCol();
