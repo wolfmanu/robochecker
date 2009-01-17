@@ -4,23 +4,21 @@ import it.polito.Checkers.*;
 import it.polito.roboCheckers.Factory;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
-import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
 	private static final int POLLING_PERIOD = 10, STOP_ROTATE_L = 5,
-			STOP_ROTATE_R = 0, STOP_MOVE = 2;
+			STOP_ROTATE_R = 0, STOP_MOVE = 2, PLAY_SPEED_A = 1000, PLAY_SPEED_B = 2000;
 	private static final int lashA = 90, lashB = 230;
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A, lashA);
 	private static final LashMotor MB = new LashMotor(MotorPort.B, lashB);
 	private static final ColorSensor CS = Factory.getColorSensor();
-	private static final ArmController arm = Factory.getArmController();
 
 	private boolean calibrated;
 	private int x, y;
 	private final double offX = 0.5, l = 16.0, r = 12, squareWidth = 2.0,
-			squareOffset = 0.8, coeffB = 60000, // 61142 // 60000
+			squareOffset = 1.0, coeffB = 60000, // 61142 // 60000
 			coeffA = 510;
 	private double alpha, beta, gamma, yOffset, Cx;
 	private double[] correzioniY = new double[8];
@@ -37,7 +35,6 @@ public class MathNavigator implements CheckersNavigator {
 
 	public void calibrate() {
 		setSpeed(500, 1000);
-		arm.down();
 		backward(2000);
 
 		// Reaches LEFT RED BAND
@@ -111,13 +108,13 @@ public class MathNavigator implements CheckersNavigator {
 		} catch (InterruptedException e) {
 		}
 		calibrateY();
-
+		setSpeed(PLAY_SPEED_A, PLAY_SPEED_B);
 		this.calibrated = true;
 	}
 
 	private void calibrateY() {
 		double row = 20;
-		setSpeed(1000, 2000);
+		setSpeed(PLAY_SPEED_A, PLAY_SPEED_B);
 		for (int i = 0; i < 8; i++) {
 			moveTo((i * squareWidth) + squareOffset, row);
 			setSpeed(200, 2000);
@@ -129,13 +126,6 @@ public class MathNavigator implements CheckersNavigator {
 				correzioniY[i] = MA.getTachoCount();
 				while (CS.getColorNumber() == STOP_ROTATE_L) {
 					backward();
-				}
-				correzioniY[i] -= MA.getTachoCount();
-				break;
-			case STOP_ROTATE_R:
-				correzioniY[i] = MA.getTachoCount();
-				while (CS.getColorNumber() != STOP_ROTATE_L) {
-					forward();
 				}
 				correzioniY[i] -= MA.getTachoCount();
 				break;
@@ -153,7 +143,6 @@ public class MathNavigator implements CheckersNavigator {
 		}
 		System.out.println("");
 		MA.stop();
-		setSpeed(1000, 2000);
 	}
 	
 	public void goHome() throws NotCalibratedException {

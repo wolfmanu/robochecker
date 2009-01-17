@@ -18,7 +18,6 @@ public class SimpleNavigator implements CheckersNavigator {
 	private static final LashMotor MA = new LashMotor(MotorPort.A, lashA);
 	private static final LashMotor MB = new LashMotor(MotorPort.B, lashB);
 	private static final ColorSensor CS = Factory.getColorSensor();
-	private static final ArmController arm = Factory.getArmController();
 
 
 	// Calibration Color Constants
