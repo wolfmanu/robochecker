@@ -28,7 +28,7 @@ public class ArmControllerThread {
 	}
 	
 	public void calibrate() {
-		// calibration is a nonblocking up
+		// calibration is a blocking up
 		up(false);
 	}
 	
@@ -50,7 +50,7 @@ public class ArmControllerThread {
 		}
 		if (immediateReturn)
 			return;
-		while (MC.isMoving()) //should be equivalent to (state != STOP)
+		while (MC.isMoving()) //should be equivalent to (state != UP) but maybe more secure
 			Thread.yield();
 	}
 
