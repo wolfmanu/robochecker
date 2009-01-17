@@ -1,5 +1,7 @@
-package it.polito.Navigation;
+package it.polito.test;
 
+import it.polito.Navigation.CheckersNavigator;
+import it.polito.Navigation.MathNavigator;
 import lejos.nxt.Button;
 
 public class CalibrateTest {

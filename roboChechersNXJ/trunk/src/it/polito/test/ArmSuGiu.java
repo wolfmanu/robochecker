@@ -1,5 +1,6 @@
-package it.polito.Navigation;
+package it.polito.test;
 
+import it.polito.Navigation.ArmController;
 import lejos.nxt.*;
 
 public class ArmSuGiu {

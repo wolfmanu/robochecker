@@ -1,3 +1,4 @@
+package it.polito.test;
 import it.polito.Navigation.ArmController;
 import lejos.nxt.Button;
 import lejos.nxt.LCD;

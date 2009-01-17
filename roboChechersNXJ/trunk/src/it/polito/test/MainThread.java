@@ -1,4 +1,4 @@
-package it.polito.testthread;
+package it.polito.test;
 
 public class MainThread {
 
