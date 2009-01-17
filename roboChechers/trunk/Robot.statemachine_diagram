@@ -540,15 +540,4 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FHF3wOOxEd2GA9FiFbH-uw" id="(0.75524473,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FHHF4OOxEd2GA9FiFbH-uw" id="(0.26804122,0.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_vRsdsOPwEd2J7dP5QU9kUA" type="4003" source="_qb4nMOLxEd2U-vieOJv-wg" target="_qb4nMOLxEd2U-vieOJv-wg">
-    <children xmi:type="notation:Node" xmi:id="_vRsdtOPwEd2J7dP5QU9kUA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_vRsdtePwEd2J7dP5QU9kUA" x="-71" y="288"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_vRsdsePwEd2J7dP5QU9kUA"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_vRsdsuPwEd2J7dP5QU9kUA"/>
-    <element xmi:type="stateMachine:ImplicitEvent" href="Robot.statemachine#//@describes/@events.22"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vRsds-PwEd2J7dP5QU9kUA" points="[9, -43, 1, -5]$[9, -38, 1, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vRsdtuPwEd2J7dP5QU9kUA" id="(0.96202534,0.8513514)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_vRsdt-PwEd2J7dP5QU9kUA" id="(0.9957806,0.5945946)"/>
-  </edges>
 </notation:Diagram>

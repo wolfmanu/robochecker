@@ -7,7 +7,6 @@ import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
 import lejos.nxt.addon.*;
 import it.polito.util.*;
-
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -88,11 +87,6 @@ public class RobotCheckers extends Statemachine {
 		}, new AbstractTransition(updateBoard) {
 			public boolean guard() {
 				return searchTo == true && colore == CheckersConstants.BLACK;
-			}
-
-		}, new AbstractTransition(sensorRead) {
-			public boolean guard() {
-				return CheckersConstans;
 			}
 
 		}
@@ -288,7 +282,7 @@ public class RobotCheckers extends Statemachine {
 		public void doMethod() throws InterruptedException {
 			try {
 				board.getPossibleMoves(piecehuman);
-			} catch (cantMoveException e) {
+			} catch (CantMoveException e) {
 				robotWin = true;
 			}
 		}
@@ -406,7 +400,7 @@ public class RobotCheckers extends Statemachine {
 					new int[1]);
 			try {
 				nextMove = Move.fromArray(result);
-			} catch (cantMoveException e) {
+			} catch (CantMoveException e) {
 				humanWin = true;
 			}
 		}
