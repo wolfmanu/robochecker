@@ -59,7 +59,7 @@ public class RobotCheckers extends Statemachine {
 
 		}, new AbstractTransition(illegalMove) {
 			public boolean guard() {
-				return mosse = false;
+				return mosse == false;
 			}
 			public int getDelay() {
 				return 1000;
@@ -72,7 +72,7 @@ public class RobotCheckers extends Statemachine {
 
 		new AbstractTransition(guessMoveFrom) {
 			public boolean guard() {
-				return (colore != CheckersConstants.BKING || colore == CheckersConstants.BLACK)
+				return (colore == CheckersConstants.BKING || colore == CheckersConstants.BLACK)
 						&& searchFrom == true;
 			}
 
@@ -336,7 +336,9 @@ public class RobotCheckers extends Statemachine {
 
 		public void doMethod() throws InterruptedException {
 			try {
+				Thread.sleep(1000);
 				colore = CS.getColorNumber();
+				System.out.println("Color: " + colore);
 			} catch (Exception e) {
 				System.out.println("eccezione " + e.getMessage());
 			}
@@ -410,6 +412,11 @@ public class RobotCheckers extends Statemachine {
 			} catch (CantMoveException e) {
 				humanWin = true;
 			}
+		}
+
+		public void exitMethod() {
+			from = nextMove.getFrom();
+			to = nextMove.getTo();
 		}
 
 		final public String getName() {
@@ -519,8 +526,7 @@ public class RobotCheckers extends Statemachine {
 	 **/
 	public static void main(String[] args) {
 		RobotCheckers robotCheckers = new RobotCheckers();
-		StateChangeListener[] allListeners = new StateChangeListener[]{
-				new LCDChangeListener(), new BTChangeListener()};
+		StateChangeListener[] allListeners = new StateChangeListener[]{new LCDChangeListener()};
 		robotCheckers.setListener(allListeners);
 		try {
 			robotCheckers.doMethod();
