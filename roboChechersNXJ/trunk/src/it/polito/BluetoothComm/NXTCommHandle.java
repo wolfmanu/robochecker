@@ -55,7 +55,7 @@ public class NXTCommHandle implements HumanInput{
 			return true;
 		} else {
 			try {
-				return (receiveCommand() != CommProtocol.MOVE_CMD);
+				return (receiveCommand() == CommProtocol.MOVE_CMD);
 			} catch (IOException e) {
 				return Button.ENTER.isPressed();
 			}
@@ -72,7 +72,7 @@ public class NXTCommHandle implements HumanInput{
 			return true;
 		} else {
 			try {
-				return (receiveCommand() != CommProtocol.START_CMD);
+				return (receiveCommand() == CommProtocol.START_CMD);
 			} catch (IOException e) {
 				return Button.ENTER.isPressed();
 			}

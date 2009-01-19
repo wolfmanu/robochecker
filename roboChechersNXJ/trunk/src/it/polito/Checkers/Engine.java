@@ -340,6 +340,9 @@ public class Engine {
 		Vector<int[]> moves_list = new Vector<int[]>();
 		int move;
 
+		// TODO 
+		Thread.yield();
+		
 		for (int i = 7; i >= 0; i--)
 			for (int j = 0; j < 8; j++)
 				if (turn == color(board[i][j])) {
@@ -402,6 +405,10 @@ public class Engine {
 		int starty = move[1];
 		int endx = move[2];
 		int endy = move[3];
+		
+		// TODO 
+		Thread.yield();
+		
 		while (endx > 0 || endy > 0) {
 			ApplyMove(board, startx, starty, endx % 10, endy % 10);
 			startx = endx % 10;
@@ -456,6 +463,9 @@ public class Engine {
 
 		int score = 0;
 
+		// TODO 
+		Thread.yield();
+		
 		for (int i = 0; i < 8; i++)
 			for (int j = 0; j < 8; j++) {
 				if (position[i][j] == CheckersConstants.WHITE) {
@@ -511,6 +521,14 @@ public class Engine {
 		int best_score;
 		int[] best_move = new int[4];
 
+		System.out.println("f: "+(int)System.getRuntime().freeMemory());
+		//System.out.println("t: "+(int)System.getRuntime().totalMemory());
+		// TODO 
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+		}
+		
 		Vector<int[]> moves_list = new Vector<int[]>(); // vector of 4x1 arrays
 		// assumes that depth is never equal to max_depth to begin with since
 		// chosen_move is not set here
@@ -579,8 +597,12 @@ public class Engine {
 	static int[][] copy_board(int[][] board) {
 		int[][] copy = new int[8][8];
 
+		// TODO 
+		Thread.yield();
+		
 		for (int i = 0; i < 8; i++)
-			System.arraycopy(board[i], 0, copy[i], 0, 8);
+			for(int k = 0; k < 8; k++)
+				copy[i][k] = board[i][k];
 		return copy;
 	}// end copy_board
 

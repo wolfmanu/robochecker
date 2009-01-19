@@ -122,23 +122,23 @@ public class Board {
 			}
 
 		}
-		indice = 0;
+		
 		mosse = movesArray;
-
+		indice = mosse.size() - 1;
 		return movesArray;
 	}
 	
 	public Square getPossibleMoveFrom() throws IllegalMoveException {
-		indice2 = 0;
-		if (indice == mosse.size())
+		indice2 = mosse.elementAt(indice).getTos().size() - 1;
+		if (indice < 0)
 			throw new IllegalMoveException();
-		return mosse.elementAt(indice++).getFrom();
+		return mosse.elementAt(indice--).getFrom();
 	}
 
 	public Square[] getPossibleMoveTo() throws IllegalMoveException {
-		if (indice2 == mosse.elementAt(indice).getTos().size())
+		if (indice2 < 0)
 			throw new IllegalMoveException();
-		Square[] s = mosse.elementAt(indice).getTos().elementAt(indice2++);
+		Square[] s = mosse.elementAt(indice+1).getTos().elementAt(indice2--);
 		return s;
 	}
 
