@@ -7,6 +7,7 @@ import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
 import lejos.nxt.addon.*;
 import it.polito.util.*;
+
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -71,22 +72,28 @@ public class RobotCheckers extends Statemachine {
 
 		new AbstractTransition(guessMoveFrom) {
 			public boolean guard() {
-				return colore == CheckersConstants.BLACK && searchFrom == true;
+				return (colore != CheckersConstants.BKING || colore == CheckersConstants.BLACK)
+						&& searchFrom == true;
 			}
 
 		}, new AbstractTransition(calculateTo) {
 			public boolean guard() {
-				return colore == CheckersConstants.EMPTY && searchFrom == true;
+				return colore != CheckersConstants.BLACK
+						&& colore != CheckersConstants.BKING
+						&& searchFrom == true;
 			}
 
 		}, new AbstractTransition(guessMoveTo) {
 			public boolean guard() {
-				return colore == CheckersConstants.EMPTY && searchTo == true;
+				return colore != CheckersConstants.BKING
+						&& colore != CheckersConstants.BLACK
+						&& searchTo == true;
 			}
 
 		}, new AbstractTransition(updateBoard) {
 			public boolean guard() {
-				return searchTo == true && colore == CheckersConstants.BLACK;
+				return searchTo == true
+						&& (colore == CheckersConstants.BLACK || colore == CheckersConstants.BKING);
 			}
 
 		}

@@ -24,13 +24,13 @@
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.1" implicitTransitionTo="//@describes/@states.2"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==true" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.4"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="robotWin==false" implicitTransitionsFrom="//@describes/@states.3" implicitTransitionTo="//@describes/@states.5"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.BLACK &amp;&amp; searchFrom==true " implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.5"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="(colore!=CheckersConstants.BKING ||colore==CheckersConstants.BLACK )&amp;&amp; searchFrom==true " implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.5"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="mosse==true" implicitTransitionsFrom="//@describes/@states.5" implicitTransitionTo="//@describes/@states.6"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.EMPTY &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.8"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore!=CheckersConstants.BLACK  &amp;&amp; colore!=CheckersConstants.BKING &amp;&amp; searchFrom==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.8"/>
     <events xsi:type="stateMachine:ImplicitEvent" implicitTransitionsFrom="//@describes/@states.8" implicitTransitionTo="//@describes/@states.9"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="mosse==true" implicitTransitionsFrom="//@describes/@states.9" implicitTransitionTo="//@describes/@states.6"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore==CheckersConstants.EMPTY &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.9"/>
-    <events xsi:type="stateMachine:ImplicitEvent" trigger="searchTo == true &amp;&amp; colore == CheckersConstants.BLACK" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.7"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="colore!=CheckersConstants.BKING &amp;&amp; colore!=CheckersConstants.BLACK &amp;&amp; searchTo==true" implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.9"/>
+    <events xsi:type="stateMachine:ImplicitEvent" trigger="searchTo == true &amp;&amp; ( colore == CheckersConstants.BLACK  || colore==CheckersConstants.BKING) " implicitTransitionsFrom="//@describes/@states.6" implicitTransitionTo="//@describes/@states.7"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="//" implicitTransitionsFrom="//@describes/@states.7" implicitTransitionTo="//@describes/@states.10"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="humanWin==true" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.11"/>
     <events xsi:type="stateMachine:ImplicitEvent" trigger="humanWin==false" implicitTransitionsFrom="//@describes/@states.10" implicitTransitionTo="//@describes/@states.12"/>
