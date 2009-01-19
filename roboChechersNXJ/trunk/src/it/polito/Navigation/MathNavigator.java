@@ -1,9 +1,9 @@
 package it.polito.Navigation;
 
 import it.polito.Checkers.*;
-import it.polito.roboCheckers.Factory;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
+import lejos.nxt.SensorPort;
 import lejos.nxt.addon.ColorSensor;
 
 public class MathNavigator implements CheckersNavigator {
@@ -13,11 +13,11 @@ public class MathNavigator implements CheckersNavigator {
 	private static MathNavigator navigator = null;
 	private static final LashMotor MA = new LashMotor(MotorPort.A, lashA);
 	private static final LashMotor MB = new LashMotor(MotorPort.B, lashB);
-	private static final ColorSensor CS = Factory.getColorSensor();
+	private static final ColorSensor CS = new ColorSensor(SensorPort.S1);
 
 	private boolean calibrated;
 	private int x, y;
-	private final double offX = 0.5, l = 16.0, r = 12, squareWidth = 2.0,
+	private final double offX = 0.3, l = 16.0, r = 12, squareWidth = 2.0,
 			squareOffset = 1.0, coeffB = 60000, // 61142 // 60000
 			coeffA = 510;
 	private double alpha, beta, gamma, yOffset, Cx;
@@ -119,9 +119,11 @@ public class MathNavigator implements CheckersNavigator {
 			moveTo((i * squareWidth) + squareOffset, row);
 			setSpeed(200, 2000);
 			switch (CS.getColorNumber()) {
+			/*
 			case CheckersConstants.EMPTY:
 				correzioniY[i] = 0;
 				break;
+			*/
 			case STOP_ROTATE_L:
 				correzioniY[i] = MA.getTachoCount();
 				while (CS.getColorNumber() == STOP_ROTATE_L) {

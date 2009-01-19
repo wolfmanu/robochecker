@@ -1,6 +1,7 @@
 package it.polito.roboCheckers;
 
 import it.polito.Checkers.CheckersConstants;
+import it.polito.Navigation.ArmController;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.util.HumanInput;
 import lejos.nxt.addon.ColorSensor;
@@ -9,6 +10,7 @@ public class Robot {
 	static private ColorSensor CS = Factory.getColorSensor();
 	static private CheckersNavigator navigator = Factory.getCheckersNavigator();
 	static private HumanInput HI = Factory.getHumanInput();
+	static private ArmController arm = Factory.getArmController();
 
 	public static ColorSensor getColorSensor() {
 		return CS;
@@ -29,7 +31,9 @@ public class Robot {
 				CheckersConstants.BKING);
 		Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,
 				CheckersConstants.WKING, 3);
+		arm.down();
 		navigator.calibrate();
+		//arm.up();
 		navigator.goHome();
 		Game game = new Game(pl1, pl2);
 		int result = game.play();
