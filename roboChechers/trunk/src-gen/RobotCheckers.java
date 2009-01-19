@@ -7,7 +7,6 @@ import it.polito.Navigation.*;
 import it.polito.BluetoothComm.*;
 import lejos.nxt.addon.*;
 import it.polito.util.*;
-
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -526,7 +525,8 @@ public class RobotCheckers extends Statemachine {
 	 **/
 	public static void main(String[] args) {
 		RobotCheckers robotCheckers = new RobotCheckers();
-		StateChangeListener[] allListeners = new StateChangeListener[]{new LCDChangeListener()};
+		StateChangeListener[] allListeners = new StateChangeListener[]{
+				new LCDChangeListener(), new BTChangeListener()};
 		robotCheckers.setListener(allListeners);
 		try {
 			robotCheckers.doMethod();

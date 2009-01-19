@@ -355,7 +355,7 @@
     <styles xmi:type="notation:RoutingStyle" xmi:id="_Nn9TYeLyEd2U-vieOJv-wg"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Nn9TYuLyEd2U-vieOJv-wg" fontName="Sans"/>
     <element xmi:type="stateMachine:ImplicitEvent" href="Robot.statemachine#//@describes/@events.5"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Nn9TY-LyEd2U-vieOJv-wg" points="[1, 0, -146, -1288]$[148, 60, 1, -1228]$[148, 1288, 1, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Nn9TY-LyEd2U-vieOJv-wg" points="[1, 0, 30, -434]$[-28, 434, 1, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_x7VpEOL2Ed2U-vieOJv-wg" id="(0.6633663,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FHeSQOOxEd2GA9FiFbH-uw" id="(0.4935065,0.0)"/>
   </edges>
@@ -366,7 +366,7 @@
     <styles xmi:type="notation:RoutingStyle" xmi:id="_OAvm0eLyEd2U-vieOJv-wg"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_OAvm0uLyEd2U-vieOJv-wg" fontName="Sans"/>
     <element xmi:type="stateMachine:ImplicitEvent" href="Robot.statemachine#//@describes/@events.6"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OAvm0-LyEd2U-vieOJv-wg" points="[1, 0, 172, 1288]$[124, -61, 295, 1227]$[124, -1228, 295, 60]$[-170, -1288, 1, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OAvm0-LyEd2U-vieOJv-wg" points="[1, 0, -46, 434]$[48, -434, 1, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OA3ioOLyEd2U-vieOJv-wg" id="(0.74458873,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FHvYAOOxEd2GA9FiFbH-uw" id="(0.83168316,1.0)"/>
   </edges>
