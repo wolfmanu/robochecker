@@ -11,8 +11,17 @@
 	Ivan \textsc{Lazzero}}
 \sedutadilaurea{\textsc{Anno~accademico} 2008-2009}
 \logosede{logopolito}
-\addto\captionsitalian{\renewcommand{\chaptername}{Parte}} 
+\includeonly{% 
+	introduzione,%
+	capitolo1, %
+	%capitolo2,% 
+	%capitolo3,% 
+	%capitolo4% 
+} 
 \begin{document}\errorcontextlines=9
-	\frontespizio
-	\sommario
+	\include{introduzione}
+	\include{capitolo1} 
+	\include{capitolo2} 
+	\include{capitolo3} 
+	\include{capitolo4} 
 \end{document}
