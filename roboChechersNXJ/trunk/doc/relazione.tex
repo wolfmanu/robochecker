@@ -1,4 +1,6 @@
 \documentclass[12pt,twoside]{toptesi}
+\usepackage{listings}
+\lstset{language=Java,breaklines=true,basicstyle=\footnotesize,frameround=fttt,frame=trBL}
 \facolta[III]{Ingegneria}
 \NomeMonografia{Relazione di progetto} 
 \monografia{Automazione Discreta}
@@ -13,6 +15,7 @@
 \logosede{logopolito}
 \includeonly{% 
 	introduzione,%
+	meccanica,%
 	capitolo1, %
 	%capitolo2,% 
 	%capitolo3,% 
@@ -20,6 +23,7 @@
 } 
 \begin{document}\errorcontextlines=9
 	\include{introduzione}
+	\include{meccanica}
 	\include{capitolo1} 
 	\include{capitolo2} 
 	\include{capitolo3} 
