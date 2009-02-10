@@ -1,6 +1,6 @@
 \chapter{Il package roboCheckers}
 Il \emph{package} \texttt{it.polito.roboCheckers} contiene le classi per la gestione della partita e dei giocatori.\\
-Sono presenti un'interfaccia Player successivamente implementata in \texttt{HumanPlayer} e \texttt{ComputerPlayer} e la classe \texttt{Game} che effettua la partita vera e propria.
+Sono presenti un'interfaccia Player successivamente implementata in \texttt{Human\-Player} e \texttt{ComputerPlayer} e la classe \texttt{Game} che effettua la partita vera e propria.
 
 \section{L'interfaccia Player}
 Questa interfaccia è usata per uniformare il giocatore robotico, il quale deve pensare ed effettuare la mossa, con il giocatore umano, di cui, invece, deve capirne la mossa effettuata. \\
@@ -44,7 +44,7 @@ private static HumanInput HI = NXTCommHandle.getInstance();
 private static ColorSensor CS = new ColorSensor(SensorPort.S1);
 private static ArmController arm = ArmController.getInstance();
 \end{lstlisting}
-In questo modo, ad esempio, è possibile decidere di usare uno dei due
+In questo modo, ad esempio, è possibile decidere di usare uno dei due\\
 \texttt{CheckersNavigator} semplicemente istanziando l'oggetto che si desidera.
 Così anche per l'input da parte del giocatore umano che può essere, a seconda
 delle necessità, un pulsante sul brick NXT o un segnale inviato mediante

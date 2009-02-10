@@ -1,6 +1,6 @@
 \chapter{Il package Navigation}
 Il \emph{package} \texttt{it.polito.Navigation} contiene le classi deputate a gestire i movimenti del Robot sulla scacchiera.\\
-In particolare sono stati progettati due controllori: \texttt{CheckersNavigator} e \texttt{ArmController} che sono responsabili rispettivamente della navigazione nelle due direzioni orizzontali e in quella verticale.\\
+In particolare sono stati progettati due controllori: \texttt{CheckersNavigator} e\\ \texttt{ArmController} che sono responsabili rispettivamente della navigazione nelle due direzioni orizzontali e in quella verticale.\\
 Di seguito si entrerà nel dettaglio delle implementazioni delle classi sopra citate e dei relativi helper.
 \section{La classe LashMotor}
 I motori del NXT dispongono di un tachimetro incorporato, pertanto le API di
@@ -62,7 +62,7 @@ public void setSpeed(int speedA, int speedB);
 /** Effettua la calibrazione */
 public void calibrate();
 \end{lstlisting}
-Si noti come i metodi che comportano un movimento non possano essere eseguiti se prima non è stata effettuata la calibrazione (eccezione \texttt{NotCalibratedException}).\\
+Si noti come i metodi che comportano un movimento non possano essere eseguiti se prima non è stata effettuata la calibrazione (eccezione \texttt{NotCalibrated\-Exception}).\\
 Esamineremo ora le implementazioni che sono state progettate per questa interfaccia.
 
 \subsection{La classe SimpleNavigator}
@@ -71,7 +71,7 @@ Questa prima implementazione si basa su un mapping statico di tutte le caselle r
 \paragraph{Calibrazione}
 Il Robot, per come è costruito, può ruotare il suo braccio agendo sul motore B, o può spostarlo avanti e indietro agendo sul motore A.\\
 Il primo metodo di calibrazione che è stato pensato è pertanto semplicemente mirato a portare il braccio in una posizione nota (punto rosso in Figura \ref{simpleNavigatorGrid}), in modo da poter usare offset predeterminati (relativi ad essa) per spostarlo su tutte le altre caselle. \\
-\begin{figure}[htbp]
+\begin{figure}[h]
 \begin{center}
 \includegraphics{img/simpleNavigatorGrid.jpg}
 \caption{Scacchiera SimpleNavigator \label{simpleNavigatorGrid}}
