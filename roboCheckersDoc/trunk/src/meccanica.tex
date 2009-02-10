@@ -9,11 +9,9 @@ e modificato come segue: il motore B, che nello schema originale si occupava di
 far ruotare il braccio, continua nella sua funzione mentre il motore A
 trasferisce la sua funzione da far muovere in avanti il braccio a gestire la trazione del robot.\\
 
-\begin{figure}[ht]
-\begin{center}
+\begin{figure}
 \includegraphics[scale=0.5]{img/base.png}
 \caption{Struttura iniziale della Base \label{Base}}
-\end{center}
 \end{figure}
 
 Per permettere al robot di avanzare, la base è stata montata su quattro ruote di
@@ -26,16 +24,40 @@ necessario per l'avanzamento del robot.\\
 Questo sistema ha però mostrato delle carenze di precisione dovute da torsioni,
 flessioni e giochi meccanici.\\
 
-Per ovviare a ciò si è proceduto in due modi: 
+Per ovviare a ciò si è proceduto in più modi: 
 \begin{itemize} 
   \item Creando un nuovo sistema di aggancio dell'albero motore verticale, in
  		 modo da minimizzarne la flessione. Nello specifico, si è inserita una
   		 piastrina triangolare per 'agganciare' l'albero motore, il più vicino
-  		 possibile al punto di contatto tra gli ingranaggi conici.
+  		 possibile al punto di contatto tra gli ingranaggi conici. Figura
+  		 \ref{ALBERO} FOTO ALBERO MOTORE 
+  		 \begin{figure}
+			\includegraphics[scale=0.5]{img/base.png}
+			\caption{Struttura iniziale della Base \label{ALBERO}}
+		\end{figure}
  
   \item Inserendo sotto la base un asse rigido che arrivi da ruota a ruota, in
-  		 modo da ridurre 
+  		 modo da ridurre la flessione dell'albero motore, dovuta al peso del robot
+  		 stesso. \ref{SOSPENSIONI} FOTO SOSPENSIONI
  
+		\begin{figure}
+			\includegraphics[scale=0.5]{img/base.png}
+			\caption{Struttura iniziale della Base \label{SOSPENSIONI}}
+		\end{figure} 
+
+  \item Inserendo delle parti non non originali della 
+  		\emph{Lego}\textregistered~per cercare di ridurre i giochi meccanici,
+  		nello specifico si sono inserite delle rosette nella sede delle viti
+  		achimedee e nei vari supporti degli assi. \ref{ROSETTE} FOTO ROSETTE
+  		
+  		\begin{figure}		
+			\includegraphics[scale=0.5]{img/base.png}
+			\caption{Struttura iniziale della Base \label{ROSETTE}}
+		\end{figure}  	 
+
+
 \end{itemize} 
-Per cercare di ridurre i giochi meccanici introdotti, si sono aggiunte
-delle parte non originali della \emph{Lego}\textregistered (rosette metalliche).
+
+Per i problemi relativi alle torsioni degli alberi non si è potuto fare nulla,
+essendo questi puramente dipendenti dalla natura fisica degli stessi e non dal
+sistema di montaggio.
