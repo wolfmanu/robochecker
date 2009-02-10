@@ -19,10 +19,15 @@ Il livello di intelligenza della macchina è gestito mediante il livello di profo
 Questa classe si differenzia dalla precedente in quanto il suo compito è riconoscere (e non pensare) la mossa fatta dal giocatore. La ricerca avviene analizzando tutte le possibili mosse. Per ogni mossa si controlla se la posizione di partenza è libera o ancora occupata dalla pedina. Nel caso sia occupata si passa a controllare la mossa successiva, altrimenti significa che si è trovata la pedina che è stata mossa. A questo punto si ricerca la posizione in cui è stata spostata la pedina, solo tra le destinazioni realmente possibili. Se viene riconosciuta una mossa valida, questa viene ritornata al metodo chiamante, altrimenti si lancia l'eccezione \texttt{IllegalMoveException}.
 
 \section{Robot}
-Contiene principalmente il metodo \texttt{main()} in cui si inizializzano i due giocatori, di tipo ComputerPlayer o HumanPlayer, si fa eseguire la calibrazione, si crea e si fa partire il gioco e si decreta il vincitore. Questa classe richiama anche il sensore di colore, il controllore del braccio mobile, il navigator e uno \texttt{HumanInput}\footnote{Vedi sezione Factory} usato per l'interazione con il giocatore umano.
+Contiene principalmente il metodo \texttt{main()} in cui si inizializzano i due
+giocatori, di tipo ComputerPlayer o HumanPlayer, si fa eseguire la
+calibrazione, si crea e si fa partire il gioco e si decreta il vincitore.
+Questa classe istanzia anche il sensore di colore, il controllore del braccio
+mobile, il \texttt{CheckersNavigator} e uno \texttt{HumanInput}\footnote{Vedi
+sezione Factory} usato per l'interazione con il giocatore umano.
 
 \section{Game}
-Il metodo fondamentale di questa classe è sicuramente il metodo
+Il metodo fondamentale di questa classe è sicuramente il metodo:
 \begin{lstlisting}
 public int play() throws NotCalibratedException
 \end{lstlisting}
@@ -30,11 +35,17 @@ dove è gestita l'intera partita: sia l'alternarsi dei turni tra i due giocatori,
 \'E strutturato in un ciclo do-while che continua fino alla vittoria di uno dei giocatori. Al suo interno si controlla se il giocatore ha ancora una mossa disponibile e se l'ha effettuata correttamente, attraverso il valore restituito da \texttt{makeMove()} della classe \texttt{Player}. In caso affermativo viene aggiornata la scacchiera e si passa al giocatore successivo. In caso di mossa errata si attende per una nuova mossa corretta, altrimenti, se non vi sono più mosse disponibili, si decreta vincitore il giocatore avversario.
 
 \section{Factory}
-La classe \texttt{Factory} è stata implementata per permettere la modifica di alcuni parametri senza dover modificare troppo il resto del codice.
+La classe \texttt{Factory} è stata implementata per garantire una scelta
+univoca a livello di progetto delle diverse implementazioni disponibili per le
+varie interfacce.
 \begin{lstlisting}
 private static CheckersNavigator navigator = MathNavigator.getInstance();
 private static HumanInput HI = NXTCommHandle.getInstance();
 private static ColorSensor CS = new ColorSensor(SensorPort.S1);
 private static ArmController arm = ArmController.getInstance();
 \end{lstlisting}
-In questo modo, ad esempio, è possibile camiare il navigator con uno differente semplicemente modificanto l'istanza che si va a richiamare. Così anche per l'input da parte del giocatore umano, che poteva essere a seconda delle necessità un pulsante sul brick NXT o un segnale inviato mediante bluetooth.
+In questo modo, ad esempio, è possibile decidere di usare uno dei due
+\texttt{CheckersNavigator} semplicemente istanziando l'oggetto che si desidera.
+Così anche per l'input da parte del giocatore umano che può essere, a seconda
+delle necessità, un pulsante sul brick NXT o un segnale inviato mediante
+Bluetooth.
