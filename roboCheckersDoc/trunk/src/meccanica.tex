@@ -4,13 +4,12 @@ Il robot è costituito da tre diverse parti funzionali: una base dotata di ruote 
 
 \section{La base}
 La base del robot è stata costruita partendo da un modello presente sul sito
-della Lego 
-(\emph{http://www.active-robots.com/products/mindstorms4schools/building-\\instructions/Build-RoboArm.pdf} Figura \ref{Base})
+della \emph{Lego}\textregistered (\emph{http://www.active-robots.com/products/mindstorms4schools/building-\\instructions/Build-RoboArm.pdf} Figura \ref{Base})
 e modificato come segue: il motore B, che nello schema originale si occupava di
 far ruotare il braccio, continua nella sua funzione mentre il motore A
 trasferisce la sua funzione da far muovere in avanti il braccio a gestire la trazione del robot.\\
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.5]{img/base.png}
 \caption{Struttura iniziale della Base \label{Base}}
@@ -24,5 +23,19 @@ ingranaggi conici trasformando la rotazione dall'asse veticale, prodotta dal
 motore A più la vite archimedea, in un movimento sull'asse orizzontale
 necessario per l'avanzamento del robot.\\
 
-Per cercare di ridurre i giochi meccanici introdotti dal sistema di riduzioni
-meccaniche si sono inoltre aggiunte delle parte non originali della Lego. 
+Questo sistema ha però mostrato delle carenze di precisione dovute da torsioni,
+flessioni e giochi meccanici.\\
+
+Per ovviare a ciò si è proceduto in due modi: 
+\begin{itemize} 
+  \item Creando un nuovo sistema di aggancio dell'albero motore verticale, in
+ 		 modo da minimizzarne la flessione. Nello specifico, si è inserita una
+  		 piastrina triangolare per 'agganciare' l'albero motore, il più vicino
+  		 possibile al punto di contatto tra gli ingranaggi conici.
+ 
+  \item Inserendo sotto la base un asse rigido che arrivi da ruota a ruota, in
+  		 modo da irrigidire l'asse 
+ 
+\end{itemize} 
+Per cercare di ridurre i giochi meccanici introdotti, si sono aggiunte
+delle parte non originali della \emph{Lego}\textregistered (rosette metalliche).
