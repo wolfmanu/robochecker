@@ -69,7 +69,7 @@ Esamineremo ora le implementazioni che sono state progettate per questa interfac
 \subsection{La classe SimpleNavigator}
 Questa prima implementazione si basa su un mapping statico di tutte le caselle relativo ad un punto iniziale su cui il Robot tenta di posizionarsi in fase di calibrazione.
 
-\paragraph{Calibrazione}
+\subsubsection{Calibrazione}
 Il Robot, per come è costruito, può ruotare il suo braccio agendo sul motore B, o
 può spostarlo avanti e indietro agendo sul motore A.\\ Il primo metodo di
 calibrazione che è stato pensato, è pertanto semplicemente mirato a portare il
@@ -83,7 +83,7 @@ tutte le altre caselle. \\ \begin{figure}[ht]
 \end{figure}
 Il metodo \texttt{calibrate()} non fa altro che ruotare il braccio verso destra finché il sensore di colore montato su di esso non rileva il colore rosso, a quel punto recupera eventuali giochi dei motori e azzera i contatori di distanza angolare in essi contenuti.
 
-\paragraph{Navigazione}
+\subsubsection{Navigazione}
 Gli angoli di destinazione cui vengono fatti ruotare i motori sono calcolati semplicemente come\footnote{X e Y sono rispettivamente le  coordinate di ascissa e di ordinata delle caselle}: 
 \begin{lstlisting}
 destAngleA = offA+posy[newY]+dely[newX];
@@ -98,7 +98,7 @@ sulla casella (5,0) che costituiva il punto più comodo cui riferire la taratura 
 
 \subsection{La classe MathNavigator}
 Il limite più evidente del \texttt{SimpleNavigator} è dato dai vincoli statici di allineamento
-che devono sussistere tra Robot e scacchiera. \'E chiaro infatti che, nel caso in cui non si
+che devono sussistere tra Robot e scacchiera. \'E chiaro infatti che, qualora non si
 posizionasse il braccio in modo da far coincidere il suo centro di rotazione con il centro del
 tratto di circonferenza in Figura \ref{simpleNavigatorGrid}, questo non riuscirebbe a seguire l'arco stesso
 in fase di calibrazione e non potrebbe quindi successivamente posizionarsi sulla scacchiera.\\
@@ -106,7 +106,7 @@ Per ovviare a questo fatto è stato introdotto un modello geometrico del sistema,
 disposizione una soluzione analitica del problema.\\
 Di nuovo andremo ad illustrare separatamente le fasi di calibrazione e di navigazione che, in questo caso,
 risultano ovviamente più complesse.
-\paragraph{Calibrazione}
+\subsubsection{Calibrazione}
 La costruzione cui si farà riferimento nel seguito è quella in Figura \ref{mathNavigator1}, in cui si possono
 osservare la scacchiera quadrata di lato $l$ e la circonferenza di centro $C$ e raggio $r$ descritta dal braccio
 che si muove su di essa.\\
@@ -140,12 +140,13 @@ Il Robot deve essere posizionato tra le bande verticali rossa e verde, con l'uni
 movimento in avanti/indietro sia parallela all'asse $y$ della scacchiera.\\
 Per misurare $\alpha$ il braccio ruota verso sinistra fino a raggiungere la banda rossa, successivamente viene
 azzerato il contatore angolare del motore B e si ruota nel senso opposto finché non è stata raggiunta la banda
-verde. A questo punto il Robot determina la sua posizione rispetto alla scacchiera e avanza fino alla banda blu
+nera. A questo punto il Robot determina la sua posizione rispetto alla scacchiera e avanza fino alla banda blu
 (angolo in basso a destra della scacchiera).\\
 Chiaramente il rapporto (\texttt{coeffB}) tra la distanza angolare misurata dal contatore interno al motore e
 l'effettivo valore di $\alpha$ in radianti è un altro parametro che è necessario conoscere con sufficiente
 precisione, come anche l'analoga costante per il motore A (\texttt{coeffA}).
-\paragraph{Navigazione}
+
+\subsubsection{Navigazione}
 Per navigare verso una posizione qualsiasi sulla scacchiera, a questo punto, è sufficiente effettuare il
 cambio di coordinate $(\theta, C_y)=\mathcal{F}(P_x,P_y)$
 \begin{figure}[ht]
@@ -165,4 +166,45 @@ $$
 con
 $$\gamma = \frac{\pi-\alpha-\beta}{2}$$
 $$C_x = r\sin(\frac{\alpha+\beta}{2})$$
+Il cambio di coordinate viene eseguito dal metodo \texttt{moveTo()}, mentre \texttt{goTo()} si occupa soltanto
+di offrire compatibilità verso l'interfaccia (che impone una casella di destinazione) passando a \texttt{moveTo()}
+le coordinate di destinazione espresse in centimetri.
+
+\subsubsection{Stima dei parametri ed effetto delle incertezze}
+\'E già stato evidenziato come, al fine di ottenere un posizionamento soddisfacente, sia necessario disporre di una
+stima sufficientemente precisa delle costanti che compaiono nelle equazioni che sono state presentate.\\
+Intendiamo di seguito dare un'idea dei ragionamenti che sono stati fatti per ricavarle e dei limiti del modello
+matematico ricavato.
+\paragraph{Stima di \texttt{coeffA} e \texttt{coeffB}}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{img/theta(CoeffB).png}
+\caption{Comando motore B in funzione di $P_x$, al variare di coeffB\label{theta(CoeffB)}}
+\end{center}
+\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.6]{img/Cy(CoeffB).png}
+\caption{$C_y$ in funzione di $P_x$, al variare di coeffB\label{Cy(CoeffB)}}
+\end{center}
+\end{figure} 
+Per ricavare il legame che sussiste tra la rotazione dei rotori e la distanza o gli angoli effettivamente coperti
+dal movimento del braccio, si è pensato di misurare distanze (tacche parallele distanziate di 2 cm) e angoli
+(si è scelto l'angolo piatto per ridurre i problemi di allineamento rispetto al centro) noti, mediando i
+risultati ottenuti.\\
+Un ulteriore raffinamento delle stime ottenute è stato possibile grazie al confronto del movimento del braccio, con
+il plot dell'andamento delle coordinate $(\theta,C_y)$ al variare di \texttt{coeffB} (Figure \ref{theta(CoeffB)} e \ref{Cy(CoeffB)})
+\paragraph{Rapporto $\frac{l}{r}$}
+La lunghezza $l$ del lato della scacchiera è nota senza problemi ed è pari a 16 cm. Un discorso diverso dev'essere
+fatto per il raggio del braccio $r$ che, per ragioni meccaniche, dipende in modo non trascurabile da $\theta$.
+Infatti, al variare di $\theta$, il centro del sensore di colore montato sul braccio, descrive più precisamente un
+ellisse che nel modello presentato è stato approssimato ad una circonferenza.\\
+La stima del raggio è pertanto soggetta ad un'incertezza superiore al 4\%, $r=12\pm0.5$ cm e l'errore finale che 
+ne deriva dipende dalla posizione iniziale del Robot (perchè cambiano i parametri dell'ellisse) arrivando a
+superare la lunghezza di una casella.\\
+Il problema è stato risolto aggiungendo una fase di \emph{post-calibrazione} (metodo \texttt{calibrateY()}) durante
+la quale il Robot si porta sulla fascia bianca ricavata in cima alla scacchiera (Figura %\ref{})
+e, muovendosi a passi discreti di 2 cm (larghezza di una casella) costruisce un vettore di offset che contiene le
+correzioni da apportare lungo y alla sua posizione. Questo vettore viene poi usato per correggere ogni successivo
+posizionamento.
 \section{La classe ArmController}
