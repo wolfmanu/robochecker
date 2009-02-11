@@ -1,16 +1,17 @@
 \chapter{Il package Navigation}
 Il \emph{package} \texttt{it.polito.Navigation} contiene le classi deputate a gestire i movimenti del Robot sulla scacchiera.\\
 In particolare sono stati progettati due controllori: \texttt{CheckersNavigator} e\\ \texttt{ArmController} che sono responsabili rispettivamente della navigazione nelle due direzioni orizzontali e in quella verticale.\\
-Di seguito si entrerà nel dettaglio delle implementazioni delle classi sopra citate e dei relativi helper.
+Di seguito si entrerà nel dettaglio delle implementazioni delle classi sopra
+citate e dei relativi helper.
 \section{La classe LashMotor}
 I motori del NXT dispongono di un tachimetro incorporato, pertanto le API di
 \emph{Lejos} mettono a disposizione una classe \texttt{Motor} che consente di
 controllarli con una buona precisione. In particolare, mediante i metodi
 \texttt{rotate()} e \texttt{rotateTo()}, è possibile ruotare il rotore di un
 angolo arbitrario con un'incertezza di più o meno 2 gradi.\\
-Per come sono stati impiegati i motori, tuttavia, si sono determinati dei
-giochi meccanici non trascurabili tra il movimento dei rotori e lo spostamento
-effettivo del Robot sulla scacchiera, che avrebbero causato errori di
+Per come sono stati impiegati i motori, tuttavia, si sono determinati dei giochi
+meccanici non trascurabili tra il movimento dei rotori e lo spostamento effettivo
+del Robot sulla scacchiera, che avrebbero causato errori di
 posizionamento superiori alla lunghezza di mezza casella.\\
 La classe \texttt{LashMotor} estende l'API \texttt{Motor} di \emph{Lejos} e
 rappresenta un motore in grado di recuperare un gioco costante (che deve quindi
@@ -18,10 +19,10 @@ essere preventivamente stimato\footnote{La stima dei giochi è stata effettuata
 empiricamente cercando di determinare l'angolo minimo tale da indurre un
 movimento del Robot, in seguito a un cambio di verso di rotazione.}) in modo
 trasparente all'utilizzatore.\\
-Il metodo reimplementato in \texttt{LashMotor} è \texttt{rotateTo()}: il
-recupero del gioco avviene solo quando si verifica un'inversione (si è scelto
-il verso negativo perchè si richiede che i motori vengano inizializzati con
-gioco nullo nel verso positivo, ad esempio a fine calibrazione) semplicemente
+Il metodo reimplementato in \texttt{LashMotor} è \texttt{rotateTo()}: il recupero
+del gioco avviene solo quando si verifica un'inversione (si è scelto il verso
+negativo perchè si richiede che i motori vengano inizializzati con gioco nullo
+nel verso positivo, ad esempio a fine calibrazione) semplicemente
 decrementando l'angolo di destinazione della costante \texttt{lash} stimata.\\
 \begin{lstlisting}
 	public void rotateTo(int limitAngle, boolean nonBlocking) {
@@ -69,9 +70,12 @@ Esamineremo ora le implementazioni che sono state progettate per questa interfac
 Questa prima implementazione si basa su un mapping statico di tutte le caselle relativo ad un punto iniziale su cui il Robot tenta di posizionarsi in fase di calibrazione.
 
 \paragraph{Calibrazione}
-Il Robot, per come è costruito, può ruotare il suo braccio agendo sul motore B, o può spostarlo avanti e indietro agendo sul motore A.\\
-Il primo metodo di calibrazione che è stato pensato è pertanto semplicemente mirato a portare il braccio in una posizione nota (punto rosso in Figura \ref{simpleNavigatorGrid}), in modo da poter usare offset predeterminati (relativi ad essa) per spostarlo su tutte le altre caselle. \\
-\begin{figure}[ht]
+Il Robot, per come è costruito, può ruotare il suo braccio agendo sul motore B, o
+può spostarlo avanti e indietro agendo sul motore A.\\ Il primo metodo di
+calibrazione che è stato pensato, è pertanto semplicemente mirato a portare il
+braccio in una posizione nota (punto rosso in Figura \ref{simpleNavigatorGrid}),
+in modo da poter usare offset predeterminati (relativi ad essa) per spostarlo su
+tutte le altre caselle. \\ \begin{figure}[ht]
 \begin{center}
 \includegraphics{img/simpleNavigatorGrid.jpg}
 \caption{Scacchiera SimpleNavigator \label{simpleNavigatorGrid}}
@@ -85,11 +89,48 @@ Gli angoli di destinazione cui vengono fatti ruotare i motori sono calcolati sem
 destAngleA = offA+posy[newY]+dely[newX];
 destAngleB = offB+posx[newX];
 \end{lstlisting}
-I vettori \texttt{posx} e \texttt{posy} definiscono l'offset in funzione delle rispettive coordinate; il vettore \texttt{dely} contiene le correzioni da effettuare sull'asse y in funzione della coordinata x, in modo da recuperare gli scostamenti in verticale dati dal fatto che il braccio si muove su un arco di circonferenza.\\
-Le costanti \texttt{offA} e \texttt{offB} definiscono invece l'offset necessario a portare il braccio sulla casella (5,0) che costituiva il punto più comodo cui riferire la taratura di tutte le altre caselle.
+I vettori \texttt{posx} e \texttt{posy} definiscono l'offset in funzione delle rispettive coordinate;
+il vettore \texttt{dely} contiene le correzioni da effettuare sull'asse y in funzione della coordinata x,
+in modo da recuperare gli scostamenti in verticale dati dal fatto che il braccio si muove su un arco
+di circonferenza.\\
+Le costanti \texttt{offA} e \texttt{offB} definiscono invece l'offset necessario a portare il braccio
+sulla casella (5,0) che costituiva il punto più comodo cui riferire la taratura di tutte le altre caselle.
 
 \subsection{La classe MathNavigator}
+Il limite più evidente del \texttt{SimpleNavigator} è dato dai vincoli statici di allineamento
+che devono sussistere tra Robot e scacchiera. \'E chiaro infatti che, nel caso in cui non si
+posizionasse il braccio in modo da far coincidere il suo centro di rotazione con il centro del
+tratto di circonferenza in Figura \ref{simpleNavigatorGrid}, questo non riuscirebbe a seguire l'arco stesso
+in fase di calibrazione e non potrebbe quindi successivamente posizionarsi sulla scacchiera.\\
+Per ovviare a questo fatto è stato introdotto un modello geometrico del sistema, in modo da avere a
+disposizione una soluzione analitica del problema.\\
+Di nuovo andremo ad illustrare separatamente le fasi di calibrazione e di navigazione che, in questo caso,
+risultano ovviamente più complesse.
 \paragraph{Calibrazione}
+La costruzione cui si farà riferimento nel seguito è quella in Figura \ref{mathNavigator1}, in cui si possono
+osservare la scacchiera quadrata di lato $l$ e la circonferenza di centro $C$ e raggio $r$ descritta dal braccio
+che si muove su di essa.\\
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.65]{img/mathNavigator1.png}
+\caption{Calibrazione MathNavigator \label{mathNavigator1}}
+\end{center}
+\end{figure}
+L'idea è quella di permettere al Robot di determinare il rapporto $\frac{\overline{BC}}{\overline{CA}}$
+(e quindi la posizione del suo centro rispetto alla scacchiera) a partire dalla misura, eseguita in fase di
+calibrazione mediante i sensori disponibili, di parametri geometrici.\\
+Il parametro più comodo da misurare, semplicemente usando il sensore di colore e il tachimetro interno ai motori,
+è quello che in Figura \ref{mathNavigator1} è indicato come angolo $\alpha$, cioè l'angolo descritto dal braccio
+quando sorvola l'intera scacchiera. Una volta determinato $\alpha$ e
+ipotizzando $\overline{BC}<\overline{CA}$ si può risolvere il problema in forma chiusa:
+$$\delta = \frac{\pi - \alpha + \beta}{2}$$
+$$\gamma = \delta - \beta$$
+$$l = r(\cos\gamma+\cos\delta) = r(\cos(\frac{\pi-\alpha+\beta}{2})+\cos(\frac{\pi-\alpha+\beta}{2}-\beta)) =$$
+$$= r ( \cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) - \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) +
+\cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) + \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) ) =$$
+$$= 2r\cos(\frac{\pi-\alpha}{2})\cos\frac{\beta}{2}$$
+$$\beta = 2\arccos(\frac{l}{2r\cos(\frac{\pi-\alpha}{2})})  = 2\arccos(\frac{l}{2r\sin\frac{\alpha}{2}})$$
+$$\overline{CA} =  r\sin(\frac{\alpha+\beta}{2})$$ 
 \paragraph{Navigazione}
 
 \section{La classe ArmController}
