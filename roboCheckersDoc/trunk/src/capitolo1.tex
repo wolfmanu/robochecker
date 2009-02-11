@@ -113,7 +113,7 @@ che si muove su di essa.\\
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[scale=0.65]{img/mathNavigator1.png}
-\caption{Calibrazione MathNavigator \label{mathNavigator1}}
+\caption{MathNavigator, calibrazione \label{mathNavigator1}}
 \end{center}
 \end{figure}
 L'idea è quella di permettere al Robot di determinare il rapporto $\frac{\overline{BC}}{\overline{CA}}$
@@ -129,8 +129,40 @@ $$l = r(\cos\gamma+\cos\delta) = r(\cos(\frac{\pi-\alpha+\beta}{2})+\cos(\frac{\
 $$= r ( \cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) - \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) +
 \cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) + \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) ) =$$
 $$= 2r\cos(\frac{\pi-\alpha}{2})\cos\frac{\beta}{2}$$
+e quindi:
 $$\beta = 2\arccos(\frac{l}{2r\cos(\frac{\pi-\alpha}{2})})  = 2\arccos(\frac{l}{2r\sin\frac{\alpha}{2}})$$
 $$\overline{CA} =  r\sin(\frac{\alpha+\beta}{2})$$ 
+Le relazioni appena ricavate evidenziano immediatamente che l'accuratezza della stima del rapporto
+$\frac{l}{r}$ è un parametro critico. Più avanti si discuteranno le problematiche correlate a questo punto.\\
+La fase di calibrazione consiste quindi essenzialmente nell'eseguire la stima dell'angolo $\alpha$, perciò
+la scacchiera è stata ridisegnata come in Figura. %\ref{}
+Il Robot deve essere posizionato tra le bande verticali rossa e verde, con l'unico vincolo che la direzione del suo
+movimento in avanti/indietro sia parallela all'asse $y$ della scacchiera.\\
+Per misurare $\alpha$ il braccio ruota verso sinistra fino a raggiungere la banda rossa, successivamente viene
+azzerato il contatore angolare del motore B e si ruota nel senso opposto finché non è stata raggiunta la banda
+verde. A questo punto il Robot determina la sua posizione rispetto alla scacchiera e avanza fino alla banda blu
+(angolo in basso a destra della scacchiera).\\
+Chiaramente il rapporto (\texttt{coeffB}) tra la distanza angolare misurata dal contatore interno al motore e
+l'effettivo valore di $\alpha$ in radianti è un altro parametro che è necessario conoscere con sufficiente
+precisione, come anche l'analoga costante per il motore A (\texttt{coeffA}).
 \paragraph{Navigazione}
-
+Per navigare verso una posizione qualsiasi sulla scacchiera, a questo punto, è sufficiente effettuare il
+cambio di coordinate $(\theta, C_y)=\mathcal{F}(P_x,P_y)$
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.7]{img/mathNavigator2.png}
+\caption{MathNavigator, navigazione \label{mathNavigator2}}
+\end{center}
+\end{figure}
+dove $(P_x,P_y)$ sono le coordinate della destinazione, $(\theta,C_y)$ i comandi da fornire ai motori
+B e A (opportunamente riscalati per \texttt{coeffB} e \texttt{coeffA}) e
+$$\mathcal{F}:\bigg \{
+\begin{array}{l}
+\theta = \arccos(\frac{C_x-P_x}{r}) - \gamma \\
+C_y = P_y - r\sin(\arccos(\frac{C_x-P_x}{r}))
+\end{array}
+$$
+con
+$$\gamma = \frac{\pi-\alpha-\beta}{2}$$
+$$C_x = r\sin(\frac{\alpha+\beta}{2})$$
 \section{La classe ArmController}
