@@ -197,14 +197,22 @@ il plot dell'andamento delle coordinate $(\theta,C_y)$ al variare di \texttt{coe
 \paragraph{Rapporto $\frac{l}{r}$}
 La lunghezza $l$ del lato della scacchiera è nota senza problemi ed è pari a 16 cm. Un discorso diverso dev'essere
 fatto per il raggio del braccio $r$ che, per ragioni meccaniche, dipende in modo non trascurabile da $\theta$.
-Infatti, al variare di $\theta$, il centro del sensore di colore montato sul braccio, descrive più precisamente un
-ellisse che nel modello presentato è stato approssimato ad una circonferenza.\\
-La stima del raggio è pertanto soggetta ad un'incertezza superiore al 4\%, $r=12\pm0.5$ cm e l'errore finale che 
-ne deriva dipende dalla posizione iniziale del Robot (perchè cambiano i parametri dell'ellisse) arrivando a
+Infatti, al variare di $\theta$, il centro del sensore di colore montato sul braccio descrive più precisamente un
+ellisse, che nel modello presentato è invece stato approssimato ad una circonferenza.\\
+La stima del raggio è pertanto soggetta ad un'incertezza superiore al 4\%, $r=12\pm0.5$ cm e l'errore finale
+che ne deriva dipende dalla posizione iniziale del Robot (perchè cambiano i parametri dell'ellisse) arrivando a
 superare la lunghezza di una casella.\\
 Il problema è stato risolto aggiungendo una fase di \emph{post-calibrazione} (metodo \texttt{calibrateY()}) durante
 la quale il Robot si porta sulla fascia bianca ricavata in cima alla scacchiera (Figura %\ref{})
-e, muovendosi a passi discreti di 2 cm (larghezza di una casella) costruisce un vettore di offset che contiene le
+e, muovendosi a passi discreti di 2 cm (larghezza di una casella), costruisce un vettore di offset che contiene le
 correzioni da apportare lungo y alla sua posizione. Questo vettore viene poi usato per correggere ogni successivo
 posizionamento.
+
 \section{La classe ArmController}
+Questa classe controlla il movimento verticale del pantografo montato sul braccio. Per farlo, si serve del motore C
+montato sul braccio stesso e del sensore di pressione.\\
+Il pantografo è montato in modo che, quando è chiuso (braccio in alto), una delle leve agisca sul sensore di
+pressione. Perciò il metodo \texttt{up()} non fa altro che muovere il motore finchè non viene rilevata una pressione
+sul sensore.\\
+Il metodo \texttt{down()} invece ruota il motore di un angolo che è stato determinato in modo da portare il
+pantografo alla sua massima estensione (braccio in basso).
