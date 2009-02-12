@@ -1,6 +1,6 @@
 \documentclass[12pt,twoside]{toptesi}
 \usepackage{listings}
-\usepackage[latin9]{inputenc}
+%\usepackage[latin9]{inputenc}
 %\usepackage[italian]{babel}
 \lstset{language=Java,breaklines=true,basicstyle=\footnotesize,frameround=fttt,frame=trBL}
 \facolta[III]{Ingegneria}
@@ -18,7 +18,8 @@
 \includeonly{% 
 	introduzione,%
 	meccanica,%
-	capitolo1, %
+	navigation, %
+	checkers,%
 	capitolo_roboCheckers,%
 	%capitolo2,% 
 	%capitolo3,% 
@@ -27,7 +28,8 @@
 \begin{document}\errorcontextlines=9
 	\include{introduzione}
 	\include{meccanica}
-	\include{capitolo1} 
+	\include{navigation} 
+	\include{checkers}
 	\include{capitolo_roboCheckers}
 	\include{capitolo2} 
 	\include{capitolo3} 

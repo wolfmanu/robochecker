@@ -134,13 +134,19 @@ $$\beta = 2\arccos(\frac{l}{2r\cos(\frac{\pi-\alpha}{2})})  = 2\arccos(\frac{l}{
 $$\overline{CA} =  r\sin(\frac{\alpha+\beta}{2})$$ 
 Le relazioni appena ricavate evidenziano immediatamente che l'accuratezza della stima del rapporto
 $\frac{l}{r}$ è un parametro critico. Più avanti si discuteranno le problematiche correlate a questo punto.\\
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=0.7]{img/mathNavigatorGrid.png}
+\caption{Scacchiera MathNavigator \label{mathNavigatorGrid}}
+\end{center}
+\end{figure}
 La fase di calibrazione consiste quindi essenzialmente nell'eseguire la stima dell'angolo $\alpha$, perciò
-la scacchiera è stata ridisegnata come in Figura. %\ref{}
-Il Robot deve essere posizionato tra le bande verticali rossa e verde, con l'unico vincolo che la direzione del suo
-movimento in avanti/indietro sia parallela all'asse $y$ della scacchiera.\\
-Per misurare $\alpha$ il braccio ruota verso sinistra fino a raggiungere la banda rossa, successivamente viene
-azzerato il contatore angolare del motore B e si ruota nel senso opposto finché non è stata raggiunta la banda
-nera. A questo punto il Robot determina la sua posizione rispetto alla scacchiera e avanza fino alla banda blu
+la scacchiera è stata ridisegnata come in Figura \ref{mathNavigatorGrid}.
+Il Robot deve essere posizionato tra le bande verticali verde e nera, con
+l'unico vincolo che la direzione del suo movimento in avanti/indietro sia parallela all'asse $y$ della scacchiera.\\
+Per misurare $\alpha$ il braccio ruota verso sinistra fino a raggiungere la
+banda verde, successivamente viene azzerato il contatore angolare del motore B e
+si ruota nel senso opposto finché non è stata raggiunta la banda nera. A questo punto il Robot determina la sua posizione rispetto alla scacchiera e avanza fino alla banda blu
 (angolo in basso a destra della scacchiera).\\
 Chiaramente il rapporto (\texttt{coeffB}) tra la distanza angolare misurata dal contatore interno al motore e
 l'effettivo valore di $\alpha$ in radianti è un altro parametro che è necessario conoscere con sufficiente
@@ -203,8 +209,8 @@ La stima del raggio è pertanto soggetta ad un'incertezza superiore al 4\%, $r=12
 che ne deriva dipende dalla posizione iniziale del Robot (perchè cambiano i parametri dell'ellisse) arrivando a
 superare la lunghezza di una casella.\\
 Il problema è stato risolto aggiungendo una fase di \emph{post-calibrazione} (metodo \texttt{calibrateY()}) durante
-la quale il Robot si porta sulla fascia bianca ricavata in cima alla scacchiera (Figura %\ref{})
-e, muovendosi a passi discreti di 2 cm (larghezza di una casella), costruisce un vettore di offset che contiene le
+la quale il Robot si porta sulla fascia bianca ricavata in cima alla scacchiera
+(Figura \ref{mathNavigatorGrid}) e, muovendosi a passi discreti di 2 cm (larghezza di una casella), costruisce un vettore di offset che contiene le
 correzioni da apportare lungo y alla sua posizione. Questo vettore viene poi usato per correggere ogni successivo
 posizionamento.
 
