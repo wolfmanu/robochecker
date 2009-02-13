@@ -125,13 +125,21 @@ quando sorvola l'intera scacchiera. Una volta determinato $\alpha$ e
 ipotizzando $\overline{BC}<\overline{CA}$ si può risolvere il problema in forma chiusa:
 $$\delta = \frac{\pi - \alpha + \beta}{2}$$
 $$\gamma = \delta - \beta$$
-$$l = r(\cos\gamma+\cos\delta) = r(\cos(\frac{\pi-\alpha+\beta}{2})+\cos(\frac{\pi-\alpha+\beta}{2}-\beta)) =$$
-$$= r ( \cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) - \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) +
-\cos(\frac{\pi-\alpha}{2})\cos(\frac{\beta}{2}) + \sin(\frac{\pi-\alpha}{2})\sin(\frac{\beta}{2}) ) =$$
-$$= 2r\cos(\frac{\pi-\alpha}{2})\cos\frac{\beta}{2}$$
+\begin{center}
+\begin{math}
+l = r\left(\cos\gamma+\cos\delta\right) =
+r\left(\cos\left(\frac{\pi-\alpha+\beta}{2}\right)+
+\cos\left(\frac{\pi-\alpha+\beta}{2}-\beta\right)\right)=
+r \left(\cos\left(\frac{\pi-\alpha}{2}\right)\cos\left(\frac{\beta}{2}\right)-
+\sin\left(\frac{\pi-\alpha}{2}\right)\sin\left(\frac{\beta}{2}\right) +
+\cos\left(\frac{\pi-\alpha}{2}\right)\cos\left(\frac{\beta}{2}\right) +
+\sin\left(\frac{\pi-\alpha}{2}\right)\sin\left(\frac{\beta}{2}\right)\right) =
+2r\cos\left(\frac{\pi-\alpha}{2}\right)\cos\frac{\beta}{2}
+\end{math}
+\end{center}
 e quindi:
-$$\beta = 2\arccos(\frac{l}{2r\cos(\frac{\pi-\alpha}{2})})  = 2\arccos(\frac{l}{2r\sin\frac{\alpha}{2}})$$
-$$\overline{CA} =  r\sin(\frac{\alpha+\beta}{2})$$ 
+$$\beta = 2\arccos\left(\frac{l}{2r\cos\left(\frac{\pi-\alpha}{2}\right)}\right)  = 2\arccos\left(\frac{l}{2r\sin\frac{\alpha}{2}}\right)$$
+$$\overline{CA} =  r\sin\left(\frac{\alpha+\beta}{2}\right)$$ 
 Le relazioni appena ricavate evidenziano immediatamente che l'accuratezza della stima del rapporto
 $\frac{l}{r}$ è un parametro critico. Più avanti si discuteranno le problematiche correlate a questo punto.\\
 \begin{figure}[ht]
@@ -165,13 +173,13 @@ dove $(P_x,P_y)$ sono le coordinate della destinazione, $(\theta,C_y)$ i comandi
 B e A (opportunamente riscalati per \texttt{coeffB} e \texttt{coeffA}) e
 $$\mathcal{F}:\bigg \{
 \begin{array}{l}
-\theta = \arccos(\frac{C_x-P_x}{r}) - \gamma \\
-C_y = P_y - r\sin(\arccos(\frac{C_x-P_x}{r}))
+\theta = \arccos\left(\frac{C_x-P_x}{r}\right) - \gamma \\
+C_y = P_y - r\sin\left(\arccos\left(\frac{C_x-P_x}{r}\right)\right)
 \end{array}
 $$
 con
 $$\gamma = \frac{\pi-\alpha-\beta}{2}$$
-$$C_x = r\sin(\frac{\alpha+\beta}{2})$$
+$$C_x = r\sin\left(\frac{\alpha+\beta}{2}\right)$$
 Il cambio di coordinate viene eseguito dal metodo \texttt{moveTo()}, mentre \texttt{goTo()} si occupa soltanto
 di offrire compatibilità verso l'interfaccia (che impone una casella di destinazione) passando a \texttt{moveTo()}
 le coordinate di destinazione espresse in centimetri.
