@@ -1,7 +1,9 @@
 package it.polito.test;
 
 import it.polito.Navigation.ArmController;
-import lejos.nxt.*;
+import lejos.nxt.Button;
+import lejos.nxt.LCD;
+import lejos.nxt.Motor;
 
 public class ArmSuGiu {
 
@@ -10,22 +12,19 @@ public class ArmSuGiu {
 	 */
 	public static void main(String[] args) throws Exception {
 		ArmController arm = ArmController.getInstance();
-
+		arm.calibrate();
 		while (true) {
-			LCD.drawInt(Motor.C.getTachoCount(), 0, 0);
-			Motor.C.setSpeed(500);
+			Motor.A.forward();
 			if (Button.LEFT.isPressed()) {
-				arm.up();
+				arm.up(true);
 			}
 			if (Button.RIGHT.isPressed()) {
-				arm.down();
+				arm.down(true);
 			}
 			if (Button.ESCAPE.isPressed()) {
 				break;
 			}
-			if (Button.ENTER.isPressed()) {
-				Motor.C.stop();
-			}
+
 		}
 	}
 

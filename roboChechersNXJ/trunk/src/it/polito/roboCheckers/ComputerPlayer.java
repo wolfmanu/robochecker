@@ -45,13 +45,14 @@ public class ComputerPlayer implements Player {
 			Thread.sleep(800);
 		} catch (InterruptedException e) {
 		}
-		arm.up();
+		arm.up(true);
 		navigator.goTo(nextMove.getLastTo());
 		arm.down();
 		try {
 			Thread.sleep(800);
 		} catch (InterruptedException e) {
 		}
+		arm.up(true);
 		navigator.goHome(); // TODO: go home and recheck vertical alignment
 		return nextMove;
 	}

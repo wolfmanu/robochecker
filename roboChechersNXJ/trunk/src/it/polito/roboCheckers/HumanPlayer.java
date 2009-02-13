@@ -1,6 +1,7 @@
 package it.polito.roboCheckers;
 
 import it.polito.Checkers.*;
+import it.polito.Navigation.ArmController;
 import it.polito.Navigation.CheckersNavigator;
 import it.polito.Navigation.NotCalibratedException;
 import it.polito.util.HumanInput;
@@ -13,6 +14,7 @@ public class HumanPlayer implements Player {
 	private final CheckersNavigator navigator = Factory.getCheckersNavigator();
 	private final ColorSensor CS = Factory.getColorSensor();
 	private final HumanInput HI = Factory.getHumanInput();
+	private final ArmController arm = Factory.getArmController();
 
 	public HumanPlayer(final int piece, final int piecek) {
 		this.piece = piece;
@@ -27,7 +29,7 @@ public class HumanPlayer implements Player {
 		Vector<MovesCollections> moves = myPossibleMoves(board);
 		System.out.println("Waiting for human to move");
 		HI.waitForMove(true);
-
+		arm.down(true);
 		Square from = null;
 		boolean foundFrom = false;
 		MovesCollections m = null;
@@ -58,7 +60,7 @@ public class HumanPlayer implements Player {
 
 		if (theMove == null)
 			throw new IllegalMoveException();
-
+		arm.up(true);
 		return theMove;
 	}
 

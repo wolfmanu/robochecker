@@ -11,7 +11,7 @@ import it.polito.util.HumanInput;
 
 public class Factory {
 	private static CheckersNavigator navigator = MathNavigator.getInstance();
-	private static HumanInput HI = NXTCommHandle.getInstance();
+	private static HumanInput HI = ButtonInput.getInstance();
 	private static ColorSensor CS = new ColorSensor(SensorPort.S1);
 	private static ArmController arm = ArmController.getInstance();
 

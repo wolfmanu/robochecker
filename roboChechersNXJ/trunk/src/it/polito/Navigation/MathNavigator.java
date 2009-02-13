@@ -136,6 +136,10 @@ public class MathNavigator implements CheckersNavigator {
 				while (CS.getColorNumber() != STOP_ROTATE_L) {
 					forward();
 				}
+				forward(3*lashA);
+				while (CS.getColorNumber() == STOP_ROTATE_L) {
+					backward();
+				}
 
 				correzioniY[i] -= MA.getTachoCount();
 				break;
@@ -150,7 +154,10 @@ public class MathNavigator implements CheckersNavigator {
 	public void goHome() throws NotCalibratedException {
 		if (!isCalibrated())
 			throw new NotCalibratedException();
-		rotateTo(0, 0);
+		if (this.x > 3)
+			moveTo(16,0);
+		else
+			moveTo(0, 0);
 	}
 
 	public void goTo(Square dest) throws NotCalibratedException {

@@ -521,13 +521,13 @@ public class Engine {
 		int best_score;
 		int[] best_move = new int[4];
 
-		System.out.println("f: "+(int)System.getRuntime().freeMemory());
+		//System.out.println("f: "+(int)System.getRuntime().freeMemory());
 		//System.out.println("t: "+(int)System.getRuntime().totalMemory());
 		// TODO 
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-		}
+		//try {
+		//	Thread.sleep(100);
+		//} catch (InterruptedException e) {
+		//}
 		
 		Vector<int[]> moves_list = new Vector<int[]>(); // vector of 4x1 arrays
 		// assumes that depth is never equal to max_depth to begin with since

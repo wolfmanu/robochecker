@@ -30,10 +30,11 @@ public class Robot {
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK,
 				CheckersConstants.BKING);
 		Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,
-				CheckersConstants.WKING, 3);
+				CheckersConstants.WKING, 4);
+		arm.calibrate();
 		arm.down();
 		navigator.calibrate();
-		//arm.up();
+		arm.up(true);
 		navigator.goHome();
 		Game game = new Game(pl1, pl2);
 		int result = game.play();
