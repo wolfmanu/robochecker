@@ -49,10 +49,10 @@ ricorsione, si simula l'esecuzione della mossa che minimizza il valore della
 migliore posizione raggiungibile dall'altro giocatore. Quindi l'algoritmo assegna
 un valore ad ogni mossa legale, proporzionale a quanto essa diminuisce il valore della
 posizione per l'altro giocatore.\\
-La funzione \texttt{Evaluate} è fondamentale per valutare, la
+La funzione \texttt{Evaluate} è fondamentale per valutare, ad ogni passo, la
 bontà di quel determinato stato del gioco (i.e. quanto sia desiderabile per il
 dato giocatore raggiungere quella posizione). Se un nodo è terminale (mossa
-vincente) la funzione di valutazione deve ritornare $\pm\infty$ a seconda che il
+vincente) \texttt{MiniMax} deve ritornare $\pm\infty$ a seconda che il
 turno corrente sia rispettivamente del primo o del secondo giocatore.
 Altrimenti significa che si è raggiunto il limite di profondità prefissato, in questo caso
 \texttt{Evaluate} effettuerà una stima delle pedine in gioco assegnando un peso
