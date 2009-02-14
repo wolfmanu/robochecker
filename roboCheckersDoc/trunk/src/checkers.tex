@@ -63,9 +63,13 @@ sarebbe necessaria la stima euristica data da \texttt{Evaluate} e si
 determinerebbe ad ogni passo una mossa ottima; è altrettanto chiaro tuttavia che
 questa strategia è applicabile unicamente in giochi estremamente banali (ad
 esempio il Tris), in quanto il numero di nodi da valutare cresce
-esponenzialmente con la profondità di ricerca ed è pari $\overline{m}^d$ (dove
+esponenzialmente con la profondità di ricerca ed è pari\footnote{Più
+precisamente il \texttt{MiniMax} incluso nel progetto è ottimizzato mediante
+potatura alpha-beta dell'albero delle decisioni (si rimanda a letteratura
+specifica per eventuali approfondimenti) che riduce la complessità a
+$O\left(\sqrt{\overline{m}^d}\right)$} a $O(\overline{m}^d)$ (dove
 $\overline{m}$ è il numero medio di mosse possibili e $d$ è la profondità)
-determinando una complessità NP completa.
+determinando una complessità finale di tipo NP completo.
 
 \section{Square}
 Rappresenta una casella sulla scacchiera. Mantiene semplicemente due attributi
