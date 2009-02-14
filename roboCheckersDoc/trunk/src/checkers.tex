@@ -1,6 +1,6 @@
 \chapter{Il package Checkers}
 Il \emph{package} \texttt{it.polito.Checkers} racchiude un insieme di
-classi in grado di gestire una partita a dama.\\ 
+classi in grado di gestire una partita a Dama.\\ 
 Il motore del gioco è racchiuso nella classe \texttt{Engine}, mentre le altre
 classi fungono da interfaccia verso il resto del progetto.\\
 Il motivo di questa organizzazione è dato dal fatto che tutti i metodi di
@@ -15,6 +15,64 @@ occasioni avremmo preferito riscriverlo da zero!) nonché dal fatto che
 implementare l'intera intelligenza per il gioco della dama avrebbe esulato dalla
 natura del progetto stesso.
 \section{Engine}
+Il cuore della classe è costituito dai metodi \texttt{MiniMax()},
+\texttt{Evaluate()} e \texttt{generate\_moves()}. Tutti gli altri metodi
+servono a fornire supporto a questi tre.\\
+Tra essi \texttt{generate\_moves()} è quello più complicato, perchè si occupa di
+creare il vettore delle mosse possibili per un determinato giocatore, data una
+qualsiasi configurazione (purchè valida) delle pedine sulla scacchiera.
+Pertanto si serve di una serie di altre funzioni che, sostanzialmente,
+determinano quali mosse, tra tutte quelle possibili, sono effettivamente valide
+secondo le regole della Dama.
+\subsection{MiniMax}
+Nella teoria dei giochi un algoritmo si definisce di tipo \emph{MiniMax}, se è
+finalizzato a \emph{mini}mizzare la \emph{massima} perdita possibile.\\
+In un gioco a turni, come la Dama, l'algoritmo si esprime in modo ricorsivo
+come segue:
+\lstset{tabsize=2}
+\begin{lstlisting}
+function minimax(node, depth)
+	IF is_terminal(node) OR depth = 0
+		return Evaluate(Nodo)
+	IF turn = opponent
+		alpha := +inf
+		FOREACH child of node
+			alpha := min(alpha, minimax(child, depth-1))
+	ELSE {our turn}
+		alpha := -inf
+		FOREACH child of node
+			alpha := max(alpha, minimax(child, depth-1))
+	return alpha
+\end{lstlisting}
+Dato l'albero delle mosse possibili e data una profondità massima di
+ricorsione, si simula l'esecuzione della mossa che minimizza il valore della
+migliore posizione raggiungibile dall'altro giocatore. Quindi l'algoritmo assegna
+un valore ad ogni mossa legale, proporzionale a quanto essa diminuisce il valore della
+posizione per l'altro giocatore.\\
+La funzione \texttt{Evaluate} è fondamentale per valutare, la
+bontà di quel determinato stato del gioco (i.e. quanto sia desiderabile per il
+dato giocatore raggiungere quella posizione). Se un nodo è terminale (mossa
+vincente) la funzione di valutazione deve ritornare $\pm\infty$ a seconda che il
+turno corrente sia rispettivamente del primo o del secondo giocatore.
+Altrimenti significa che si è raggiunto il limite di profondità prefissato, in questo caso
+\texttt{Evaluate} effettuerà una stima delle pedine in gioco assegnando un peso
+ad ognuna di esse in funzione della loro posizione e del loro valore (ad
+esempio, una dama vale di più di una normale pedina).\\
+Ovviamente, se si fissasse una profondità di ricorsione pari a infinito, non
+sarebbe necessaria la stima euristica data da \texttt{Evaluate} e si
+determinerebbe ad ogni passo una mossa ottima; è altrettanto chiaro tuttavia che
+questa strategia è applicabile unicamente in giochi estremamente banali (ad
+esempio il Tris), in quanto il numero di nodi da valutare cresce
+esponenzialmente con la profondità di ricerca ed è pari $\overline{m}^d$ (dove
+$\overline{m}$ è il numero medio di mosse possibili e $d$ è la profondità)
+determinando una complessità NP completa.
+
 \section{Square}
+Rappresenta una casella sulla scacchiera. Mantiene semplicemente due attributi
+interi che rappresentano le coordinate della casella.\\
+I metodi contenuti in \texttt{Engine} non usano questo tipo di astrazione, ma
+tipicamente mantengono separate le coordinate; la conversione in oggetti
+\texttt{Square} viene eseguita dalle classi \texttt{Move} e \texttt{Board}
+
 \section{Move e MoveCollection}
 \section{Board}
