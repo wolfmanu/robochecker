@@ -224,9 +224,91 @@ posizionamento.
 
 \section{La classe ArmController}
 Questa classe controlla il movimento verticale del pantografo montato sul braccio. Per farlo, si serve del motore C
-montato sul braccio stesso e del sensore di pressione.\\
+posizionato sul braccio stesso e del sensore di pressione.\\
 Il pantografo è montato in modo che, quando è chiuso (braccio in alto), una delle leve agisca sul sensore di
 pressione. Perciò il metodo \texttt{up()} non fa altro che muovere il motore finchè non viene rilevata una pressione
 sul sensore.\\
 Il metodo \texttt{down()} invece ruota il motore di un angolo che è stato determinato in modo da portare il
-pantografo alla sua massima estensione (braccio in basso).
+pantografo alla sua massima estensione (braccio in basso).\\
+Al fine di rendere i movimenti del braccio più rapidi, si è manifestata la
+necessità di poter eseguire le chiamate ai metodi \texttt{up()} e
+\texttt{down()} in modo non bloccante, ad esempio:
+\begin{lstlisting}
+arm.up(true); // non bloccante
+navigator.goTo(nextMove.getLastTo()); // il braccio si alza e contemporanemente si posiziona sulla casella di destinazione
+\end{lstlisting}
+Implementare questo tipo di comportamento è banale per il metodo
+\texttt{down()}, perchè questo esegue al suo interno una chiamata al metodo
+\texttt{Motor.rotateTo()} che le API di Lejos già prevedono in versione non 
+bloccante.
+\begin{lstlisting}
+public void down(boolean immediateReturn) {
+	if (state == DOWN || state == GODOWN)
+		return;
+	// wait for stop
+	while (state != UP)
+		Thread.yield();
+	synchronized (armRegulator) {
+		state = GODOWN;
+	}
+	MC.rotateTo(goDownRounds,immediateReturn);
+}
+\end{lstlisting}
+Un discorso diverso deve essere fatto per il metodo \texttt{up()}. In questo
+caso è necessario disporre di un meccanismo che controlli periodicamente lo
+stato del sensore di pressione e fermi il motore al momento giusto, anche se
+\texttt{up()} è già ritornato.\\
+A questo scopo è stata progettata la classe innestata \texttt{ArmRegulator}:
+\begin{lstlisting}
+public class ArmRegulator extends Thread {
+   public void run() {
+     while (true) {
+        synchronized (this) {
+           switch (state) {
+              case GOUP:
+                 if (TS.isPressed()) {
+                    MC.stop();
+                    MC.resetTachoCount();
+                    state = UP;
+                 } break;
+              case GODOWN:
+                 if (!MC.isMoving()) state = DOWN;
+                 break;
+              } // end switch
+           } // end synchronized
+           try {sleep(1);} catch(InterruptedException ie ) {}
+        } // end while } }
+\end{lstlisting}
+Un oggetto di tipo \texttt{ArmRegulator} viene istanziato ed eseguito in un
+thread autonomo, al momento della creazione dell'\texttt{ArmController}:
+\begin{lstlisting}
+private ArmController (Motor MC, TouchSensor TS) {
+	this.MC = MC;
+	this.TS = TS;
+	this.armRegulator.setDaemon(true);
+	this.armRegulator.start();
+}
+\end{lstlisting}
+A questo punto il metodo \texttt{up()} non deve fare altro che aggiornare lo
+stato del sistema a \texttt{GOUP}, del resto si occuperà \texttt{armRegulator}:
+\begin{lstlisting}
+public void up(boolean immediateReturn) {
+	if (state == UP || state == GOUP)
+		return;
+	// wait for stop
+	while (state != DOWN)
+		Thread.yield();
+	synchronized (armRegulator) {
+		if (!TS.isPressed()) {
+			state = GOUP;
+			MC.forward();
+		} else {
+			state = UP;
+		}
+	}
+	if (immediateReturn)
+		return;
+	while (MC.isMoving()) //should be equivalent to (state != UP) but maybe more secure
+		Thread.yield();
+}
+\end{lstlisting}
