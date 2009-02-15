@@ -161,19 +161,20 @@ public class Board {
 	}
 	
 	public Square getPossibleMoveFrom() throws IllegalMoveException {
-		indice2 = mosse.elementAt(indice).getTos().size() - 1;
 		Square from;
 		if (direction == CheckersConstants.RIGHT) {
 			indice--;
 			if (indice < 0)
 				throw new IllegalMoveException();
-			return mosse.elementAt(indice).getFrom();
+			from = mosse.elementAt(indice).getFrom();
 		} else {
 			indice++;
 			if (indice >= mosse.size())
 				throw new IllegalMoveException();
-			return mosse.elementAt(indice).getFrom();
+			from = mosse.elementAt(indice).getFrom();
 		}
+		indice2 = mosse.elementAt(indice).getTos().size() - 1;
+		return from;
 	}
 
 	public Square[] getPossibleMoveTo() throws IllegalMoveException {
