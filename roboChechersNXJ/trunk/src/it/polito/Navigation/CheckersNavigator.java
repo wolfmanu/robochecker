@@ -15,4 +15,5 @@ public interface CheckersNavigator {
 	public boolean isMoving();
 	public void setSpeed(int speedA, int speedB);
 	public void calibrate();
+	public int homePosition();
 }

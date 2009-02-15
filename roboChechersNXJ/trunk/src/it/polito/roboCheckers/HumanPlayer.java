@@ -26,40 +26,43 @@ public class HumanPlayer implements Player {
 
 	public Move makeMove(Board board) throws CantMoveException,
 			NotCalibratedException, IllegalMoveException {
-		Vector<MovesCollections> moves = myPossibleMoves(board);
+		board.initPossibleMoves(getPiece(),navigator.homePosition());
 		System.out.println("Waiting for human to move");
 		HI.waitForMove(true);
 		arm.down(true);
 		Square from = null;
-		boolean foundFrom = false;
+		//boolean foundFrom = false;
 		MovesCollections m = null;
-		for (int i = moves.size() - 1; i >= 0; i--) {
-			m = moves.elementAt(i);
-			from = m.getFrom();
+		//for (int i = moves.size() - 1; i >= 0; i--) {
+		while(true) {
+			from = board.getPossibleMoveFrom();
+			//m = moves.elementAt(i);
+			//from = m.getFrom();
 			navigator.goTo(from);
 			if (CS.getColorNumber() == CheckersConstants.EMPTY) {
-				foundFrom = true;
 				break;
 			}
 		}
 
-		if (!foundFrom || m == null)
-			throw new IllegalMoveException();
+		//if (!foundFrom || m == null)
+		//	throw new IllegalMoveException();
 
 		Move theMove = null;
-		Vector<Square[]> vTo = m.getTos();
-		for (int i = 0; i < vTo.size(); i++) {
-			Square[] s = vTo.elementAt(i);
+		//Vector<Square[]> vTo = m.getTos();
+		//for (int i = 0; i < vTo.size(); i++) {
+		while (true) {
+			//Square[] s = vTo.elementAt(i);
+			Square[] s = board.getPossibleMoveTo();
 			navigator.goTo(s[s.length - 1]);
-			System.out.println("color: " + CS.getColorNumber());
+			//System.out.println("color: " + CS.getColorNumber());
 			if (CS.getColorNumber() == piece || CS.getColorNumber() == piecek) {
 				theMove = Move.create(from, s);
 				break;
 			}
 		}
 
-		if (theMove == null)
-			throw new IllegalMoveException();
+		//if (theMove == null)
+		//	throw new IllegalMoveException();
 		arm.up(true);
 		return theMove;
 	}
@@ -68,8 +71,4 @@ public class HumanPlayer implements Player {
 		return this.piece;
 	}
 
-	private Vector<MovesCollections> myPossibleMoves(Board board)
-			throws CantMoveException {
-		return board.getPossibleMoves(this.piece);
-	}
 }

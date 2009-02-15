@@ -17,6 +17,8 @@ public class MathNavigator implements CheckersNavigator {
 
 	private boolean calibrated;
 	private int x, y;
+	private int homePos = CheckersConstants.RIGHT;
+	
 	private final double offX = 0.3, l = 16.0, r = 12, squareWidth = 2.0,
 			squareOffset = 1.0, coeffB = 60000, // 61142 // 60000
 			coeffA = 510;
@@ -154,12 +156,20 @@ public class MathNavigator implements CheckersNavigator {
 	public void goHome() throws NotCalibratedException {
 		if (!isCalibrated())
 			throw new NotCalibratedException();
-		if (this.x > 3)
+		if (this.x > 3) {
 			moveTo(16,0);
-		else
+			homePos = CheckersConstants.LEFT;
+		}
+		else {
 			moveTo(0, 0);
+			homePos = CheckersConstants.RIGHT;
+		}
 	}
-
+	
+	public int homePosition () {
+		return homePos;
+	}
+	
 	public void goTo(Square dest) throws NotCalibratedException {
 		goTo(dest.getRow(), dest.getCol());
 	}

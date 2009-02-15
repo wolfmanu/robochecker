@@ -11,4 +11,5 @@ public class CheckersConstants {
 	public final static int NO_WIN = 102;
 	public final static int DRAW = 103;
 	public final static int CANCELLED = 104;
+	public final static int LEFT = 0, RIGHT = 1;
 }

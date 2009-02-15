@@ -3,6 +3,7 @@ import lejos.nxt.Button;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.addon.ColorSensor;
+import it.polito.Checkers.CheckersConstants;
 import it.polito.Checkers.Square;
 import it.polito.roboCheckers.Factory;
 /**
@@ -156,5 +157,7 @@ public class SimpleNavigator implements CheckersNavigator {
 			}
 		}
 	}
-	
+	public int homePosition () {
+		return CheckersConstants.RIGHT;
+	}
 }

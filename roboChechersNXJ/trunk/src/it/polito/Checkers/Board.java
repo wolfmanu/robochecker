@@ -1,4 +1,5 @@
 package it.polito.Checkers;
+import it.polito.Navigation.MathNavigator;
 import it.polito.util.*;
 
 public class Board {
@@ -6,6 +7,7 @@ public class Board {
 	private final int[][] pieces;
 	private int indice;
 	private int indice2;
+	private int direction;
 	private final short rows;
 	private final short cols;
 	private Vector<MovesCollections> mosse;
@@ -128,17 +130,56 @@ public class Board {
 		return movesArray;
 	}
 	
+	public void initPossibleMoves(int piece, int homePos) throws CantMoveException {
+		Vector<int[]> moves = Engine.generate_moves(getArrayBoard(), piece);
+		Vector<MovesCollections> movesArray = new Vector<MovesCollections>();
+		int flag;
+		if (moves.size()==0)
+		   throw new CantMoveException();	
+		for (int i = 0; i < moves.size(); i++) {
+			try {
+				flag = 0;
+				Move m = Move.fromArray(moves.elementAt(i));
+				for (int j = 0; j < movesArray.size() && flag == 0; j++) {
+					if (movesArray.elementAt(j).equals(m)) {
+						movesArray.elementAt(j).SetTo(m);
+						flag = 1;
+					}
+				}
+				if (flag == 0) {
+					movesArray.addElement(new MovesCollections(m));
+				}
+
+			} catch (CantMoveException e) {
+			}
+
+		}
+		
+		mosse = movesArray;
+		indice = (homePos==CheckersConstants.RIGHT) ?  mosse.size() : -1;
+		direction = homePos;
+	}
+	
 	public Square getPossibleMoveFrom() throws IllegalMoveException {
 		indice2 = mosse.elementAt(indice).getTos().size() - 1;
-		if (indice < 0)
-			throw new IllegalMoveException();
-		return mosse.elementAt(indice--).getFrom();
+		Square from;
+		if (direction == CheckersConstants.RIGHT) {
+			indice--;
+			if (indice < 0)
+				throw new IllegalMoveException();
+			return mosse.elementAt(indice).getFrom();
+		} else {
+			indice++;
+			if (indice >= mosse.size())
+				throw new IllegalMoveException();
+			return mosse.elementAt(indice).getFrom();
+		}
 	}
 
 	public Square[] getPossibleMoveTo() throws IllegalMoveException {
 		if (indice2 < 0)
 			throw new IllegalMoveException();
-		Square[] s = mosse.elementAt(indice+1).getTos().elementAt(indice2--);
+		Square[] s = mosse.elementAt(indice).getTos().elementAt(indice2--);
 		return s;
 	}
 
