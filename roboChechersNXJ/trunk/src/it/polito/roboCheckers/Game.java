@@ -46,7 +46,7 @@ public class Game {
 					System.out.println("Illegal Move Exc");
 				}
 			}
-			board.printBoard();
+			//board.printBoard();
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
