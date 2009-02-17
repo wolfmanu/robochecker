@@ -60,7 +60,35 @@ i più utilizzati sono:
  void stop(); 
 \end{lstlisting}
 
+\section{I sensori}
+Al brick \emph{Lego}\textregistered NXT è possibile
+collegare diversi tipi di sensori.\\
+I sensori prodotti dalla casa madre \emph{Lego}\textregistered  sono:
+\begin{itemize}
+  \item pressione
+  \item luce
+  \item suono
+  \item colore
+  \item ultasuoni
+  \item bussola
+  \item accelerometro
+  \item infrarossi
+  \item giroscopio
+\end{itemize} 
+Molti altri tipi di sensori, prodotti da ditte specializzate o da 
+appassionati, possono essere acquistati on-line.\\
+\\
+Il brick \emph{Lego}\textregistered NXT supporta fino a 4 sensori.\\
+La classe \texttt{SensorPort} mette a disposizione 4 campi statici
+(S1, S2, S3 ed S4), che sono istanze di \texttt{SensorPort} 
+e che coincidono alle 4 porte del bick.\\
+Siccome i dati letti hanno significato diverso per ogni tipo di
+sensore, per ciascuno di essi \emph{Lejos} fornisce
+una classe in grado di interpretare corretamente i dati ricevuti.
 
-\section{Il sensore di pressione}
+\subsection{Il sensore di pressione}
 
-\section{Il sensore di colore}
+
+
+
+\subsection{Il sensore di colore}
