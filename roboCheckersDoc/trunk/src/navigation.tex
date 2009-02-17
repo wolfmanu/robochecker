@@ -187,8 +187,8 @@ le coordinate di destinazione espresse in centimetri.
 \subsubsection{Stima dei parametri ed effetto delle incertezze}
 \'E già stato evidenziato come, al fine di ottenere un posizionamento soddisfacente, sia necessario disporre di una
 stima sufficientemente precisa delle costanti che compaiono nelle equazioni che sono state presentate.\\
-Intendiamo di seguito dare un'idea dei ragionamenti che sono stati fatti per ricavarle e dei limiti del modello
-matematico ricavato.
+Intendiamo di seguito dare un'idea dei ragionamenti che sono stati fatti per
+determinarle e dei limiti del modello matematico ricavato.
 \paragraph{Stima di \texttt{coeffA} e \texttt{coeffB}}
 \begin{figure}[ht]
 \begin{center}
@@ -207,7 +207,8 @@ dal movimento del braccio, si è pensato di misurare distanze (tacche parallele d
 (si è scelto l'angolo piatto per ridurre i problemi di allineamento rispetto al centro) noti, mediando i
 risultati ottenuti.\\
 Un ulteriore raffinamento delle stime ottenute è stato possibile grazie al confronto del movimento del braccio, con
-il plot dell'andamento delle coordinate $(\theta,C_y)$ al variare di \texttt{coeffB} (Figure \ref{theta(CoeffB)} e \ref{Cy(CoeffB)})
+il grafico dell'andamento delle coordinate $(\theta,C_y)$ al variare di
+\texttt{coeffB} (Figure \ref{theta(CoeffB)} e \ref{Cy(CoeffB)})
 \paragraph{Rapporto $\frac{l}{r}$}
 La lunghezza $l$ del lato della scacchiera è nota senza problemi ed è pari a 16 cm. Un discorso diverso dev'essere
 fatto per il raggio del braccio $r$ che, per ragioni meccaniche, dipende in modo non trascurabile da $\theta$.
@@ -258,7 +259,7 @@ Un discorso diverso deve essere fatto per il metodo \texttt{up()}. In questo
 caso è necessario disporre di un meccanismo che controlli periodicamente lo
 stato del sensore di pressione e fermi il motore al momento giusto, anche se
 \texttt{up()} è già ritornato.\\
-A questo scopo è stata progettata la classe innestata \texttt{ArmRegulator}:
+A questo scopo è stata progettata la classe annidata \texttt{ArmRegulator}:
 \begin{lstlisting}
 public class ArmRegulator extends Thread {
    public void run() {
