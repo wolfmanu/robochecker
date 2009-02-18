@@ -87,13 +87,30 @@ sensore, per ciascuno di essi \emph{Lejos} fornisce
 una classe in grado di interpretare corretamente i dati ricevuti.
 
 \subsection{Il sensore di pressione}
+\emph{Lejos} mette a disposizione la classe \texttt{TouchSensor}
+per la gestione del sensore di pressione, che è stato utilizzato
+per il controllo del movimento su-giù del braccio.\\
 \begin{figure}
   \begin{center}
-	\includegraphics[scale=0.3]{img/sensPress.jpg}
+	\includegraphics[scale=0.5]{img/sensPress.jpg}
 	\caption{Il sensore di pressione}
   \end{center}
-\end{figure}
-
+\end{figure}\\
+Il costruttore della classe \texttt{TouchSensor} permette di
+istanziare un nuovo oggetto di tipo \texttt{TouchSensor} connesso
+ad una porta del brick NXT.
+\begin{lstlisting}
+	TouchSensor(ADSensorPort port)
+\end{lstlisting}
+Dove il parametro \texttt{port} è un'implementazione dell'interfaccia
+\texttt{ADSensorPort}, ad esempio \texttt{SensorPort}, che indica
+a quale porta è connesso il sensore.\\
+\\
+La classe \texttt{TouchSensor} mette a disposizione un solo metodo:
+\begin{lstlisting}
+	/** restituisce vero quando il pulsante è premuto */
+	boolean isPressed();
+\end{lstlisting} 
 
 
 \subsection{Il sensore di colore}
