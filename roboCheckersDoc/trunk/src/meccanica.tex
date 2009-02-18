@@ -17,13 +17,13 @@ trasferisce la sua funzione da far muovere in avanti il braccio a gestire la tra
 \end{figure}
 
 Per permettere al robot di avanzare, la base è stata montata su quattro ruote di
-cui le due anteriori sono le ruote motrici. Quest'ultime sono collegate tra di
+cui le due anteriori sono le ruote motrici. Queste ultime sono collegate tra di
 loro con un asse motore comune, che riceve il movimento tramite un gioco di
-ingranaggi conici trasformando la rotazione dall'asse veticale, prodotta dal
+ingranaggi conici trasformando la rotazione dall'asse verticale, prodotta dal
 motore A più la vite archimedea, in un movimento sull'asse orizzontale
 necessario per l'avanzamento del robot.\\
 
-Questo sistema ha però mostrato delle carenze di precisione dovute da torsioni,
+Questo sistema ha però mostrato delle carenze di precisione dovute a torsioni,
 flessioni e giochi meccanici.\\
 
 Per ovviare a ciò si è proceduto in più modi: 
@@ -51,7 +51,7 @@ Per ovviare a ciò si è proceduto in più modi:
 		  \end{center}
 		\end{figure} 
 
-  \item Inserendo delle parti non non originali della 
+  \item Inserendo delle parti non originali della 
   		\emph{Lego}\textregistered~per cercare di ridurre i giochi meccanici,
   		nello specifico si sono inserite delle rosette nella sede delle viti
   		achimedee e nei vari supporti degli assi. Figura \ref{ROSETTE} 
@@ -70,9 +70,9 @@ Per i problemi relativi alle torsioni degli alberi non si è potuto fare nulla,
 essendo questi problemi puramente dipendenti dalla natura fisica degli stessi e
 non dal sistema di montaggio.
 \section{Il Braccio}
-Per la costrizione del braccio si è nuovamente presa ispirazione dalle
+Per la costruzione del braccio si è nuovamente presa ispirazione dalle
 istruzioni della \emph{Lego}\textregistered~, modificandolo in modo da renderlo
-rigido e non più snodabile Figura \ref{braccio1}.
+rigido e non più snodabile. Figura \ref{braccio1}.
 
   		\begin{figure}
           \begin{center}		
@@ -82,7 +82,7 @@ rigido e non più snodabile Figura \ref{braccio1}.
 		\end{figure} 
 
 Per effettuare questa modifica si è elimitato il movimento centrale e fissati i
-montanti del braccio tramite due 'traverse' Figura \ref{braccio0}
+montanti del braccio tramite due 'traverse'. Figura \ref{braccio0}
 
   		\begin{figure}
           \begin{center}		
@@ -91,20 +91,20 @@ montanti del braccio tramite due 'traverse' Figura \ref{braccio0}
 		  \end{center}
 		\end{figure} 
 
-In oltre per dare maggior solidità all'intera struttura si sono aggiunte delle
+Inoltre per dare maggior solidità all'intera struttura si sono aggiunte delle
 barre (\emph{Technic Beam}) che 'leghino' i due montanti insieme. Nello
 specifico ne sono state montate tre: una sulla punta del braccio, una sul
 montante anteriore ed una sul montante posteriore.
 
 \section{Sistema di leve a forbice}
 
-Per la costruzione della parte terminale del braccio si è dovuto risolvere due
-problemi: il primo è stato sul come generare un moto verticale, che abbassi la
+Per la costruzione della parte terminale del braccio si sono dovuti risolvere
+due problemi: il primo ha riguardato il modo di generare un moto verticale, che abbassi la
 punta del braccio da un moto rotatorio. Il secondo, e strettamente correlato al
-primo, è stato il come dare la giusta precizione in modo che il sensore sia
+primo, è stato quello di dare la giusta precizione in modo che il sensore sia
 sempre alla stessa altezza dalla scacchiera. \\
 
-Il per il primo problema si è deciso di risolverlo tramite un sitema di
+Il primo problema si è deciso di risolverlo tramite un sitema di
 leveraggi imperniati a forbice (in seguito per semplicità denominato
 \emph{pantografo}). Il pantografo prende il movimento da una coppia di
 ingranaggi gemelli, ognuno montato rispettivamente nel punto di ancoraggio
@@ -118,8 +118,8 @@ delle braccia del pantografo. Figura \ref{leve}
 		\end{figure} 
 
 Per risolvere il problema della precisione di nella discesa, problema in parte
-risolto dall'adozione del pantografo, si è inserito un gioco d'ingranaggi
-Figura \ref{ingranaggi} che riducono i giri del motore di NUMERODACALCOLARE
+risolto dall'adozione del pantografo, si è inserito un gioco d'ingranaggi (
+Figura \ref{ingranaggi}) che riducono i giri del motore di NUMERODACALCOLARE
 volte, in modo da ottenere un numero di giri sufficientemente elevato
 da permettere una stima empirica del comando da impartire al motore.\\
 
@@ -131,9 +131,9 @@ da permettere una stima empirica del comando da impartire al motore.\\
 		\end{figure} 
 
 Il pantografo è inoltre dotato di due sensori: il primo, situato sotto il gioco
-di ingranaggi, ed è qundi solidale con il braccio, è il sensore di pressione
+di ingranaggi, quindi solidale con il braccio, è il sensore di pressione
 \emph{Electric Touch Sensor NXT} che viene premuto dalla prima leva quando il
 pantografo è in alto. 
-Il secondo è il sensore di colore \emph{NXT Color Sensor} che posizionato alla
-terminazione inferiore del pantografo permette il riconoscimento dei colori.
+Il secondo è il sensore di colore \emph{NXT Color Sensor} che, posizionato alla
+terminazione inferiore del pantografo, permette il riconoscimento dei colori.
 
