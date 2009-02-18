@@ -15,7 +15,79 @@ Breña Moral e si può trovare a questo indirizzo\footnote{I documenti citati in
 questo paragrafo sono allegati alla presente relazione.}:
 \url{http://www.juanantonio.info/p_articles/archive/2008/LEJOS-NXJ-EBOOK.pdf}
 (Capitoli 2.2, 2.3, 3.1).
+
 \section{Ricompilazione del plugin}
+La versione ufficiale di \emph{Lejos Statemachine} presente a questo link:
+\url{http://fermat.nordakademie.de/update/} e installabile seguendo i
+riferimenti forniti in precedenza, è basata su una vecchia versione delle API di
+\emph{Lejos}.\\
+La release del progetto \emph{Lejos NXJ} più recente al momento attuale
+(Febbraio 2009) è la \texttt{0.7.0}, se si vuole avere compatibilità con questa
+versione delle API è pertanto necessario ottenere il sorgente (attualmente in
+fase di sviluppo) del plugin e compilarlo.
+
 \subsection{Checkout dal repository SVN}
+\subsubsection{}
+Per prima cosa occorre disporre un ambiente Eclipse provvisto di
+\emph{Plug-in Development Environment}, ad esempio la versione \emph{Classic}
+disponibile a questo indirizzo: \url{http://www.eclipse.org/downloads/}.\\
+Per eseguire il checkout del progetto è necessario installare \emph{Subclipse},
+un plugin che integra \emph{Subversion} (Sezione \ref{sec:subversion}) in
+\emph{Eclipse}. Per farlo selezionare il menù \texttt{Help}$\to$\texttt{Software Updates}
+e nella sezione \emph{Available Software} selezionare
+\texttt{Add Site}.\\
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.45]{img/howto01.png}
+			\caption{Installazione di Subclipse \label{fig:howto01}}
+		\end{center}
+	\end{figure}
+\subsubsection{}
+Nella finestra di dialogo digitare
+\url{http://subclipse.tigris.org/update_1.4.x} e premere \texttt{OK}.\\
+Espandere la voce appena aggiunta e selezionare tutti i sotto-elementi (o
+almeno quelli evidenziati come \texttt{required} o \texttt{recommended}),
+successivamente premere \texttt{Install} e procedere con l'installazione.
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.9]{img/howto02.png}
+			\caption{Installazione di Subclipse \label{fig:howto02}}
+		\end{center}
+	\end{figure}
+\subsubsection{}
+Una volta riavviato Eclipse, procedere all'import del progetto in questo modo:
+selezionare \texttt{Files}$\to$\texttt{New}$\to$\texttt{Other} e, nella
+finestra di dialogo, \texttt{SVN}$\to$\texttt{Checkout projects from SVN},
+premere quindi \texttt{Next}.\\
+Nella successiva finestra di dialogo selezionare \texttt{Create a new
+repository location} e premere \texttt{Next}.
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.7]{img/howto03.png}
+			\caption{Aggiunta del repository\label{fig:howto03}}
+		\end{center}
+	\end{figure}
+\subsubsection{}
+Digitare l'indirizzo \url{http://svn2.assembla.com/svn/vldt/development/} e
+premere ancora \texttt{Next}.\\
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.7]{img/howto04.png}
+			\caption{Inserimento dell'url del repository SVN \label{fig:howto04}}
+		\end{center}
+	\end{figure}
+Nella finestra successiva selezionare l'intera directory SVN (i.e. tutti i
+progetti presenti) e premere \texttt{Finish}.\\
+A questo punto il workspace dovrebbe presentarsi come in Figura
+\ref{fig:howto05}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.8]{img/howto05.png}
+			\caption{Stato finale del workspace\label{fig:howto05}}
+		\end{center}
+	\end{figure}
+
+\subsection{Modifica del template}
+\subsection{Generazione del plugin}
 
 \section{Uso di Lejos Statemachine} 
