@@ -7,7 +7,7 @@ comandi più comuni e utilizzati, si rimanda alla
 documentazione di \emph{Lejos} per approfondimenti.
 
 \section{Il motore}
-Nei motori di \emph{Lego}\textregistered~NXT sono dotati di un
+I motori di \emph{Lego}\textregistered~NXT sono dotati di un
 tachimetro che, con un controllo in retroazione,
 permette di far ruotare i motori per un determinato angolo,
 con un'incertezza di 2 gradi.\\
@@ -16,7 +16,7 @@ Al brick NXT è possibile collegare fino a tre motori.
 \subsection{La classe Motor}
 La classe \texttt{Motor} consente sia il controllo diretto
 di un motore collegato ad una porta (A,B,C), sia l'istanziamento
-di un nuovo oggeto di tipo \texttt{Motor} tramite il costruttore.\\
+di un nuovo oggetto di tipo \texttt{Motor} tramite il costruttore.\\
 La prima modalità è implementata tramite campi statici dichiarati
 nella classe, la seconda tramite il costruttore:
 \begin{lstlisting}
@@ -24,7 +24,7 @@ nella classe, la seconda tramite il costruttore:
 \end{lstlisting}
 che ha come parametro un'implementazione dell'interfaccia
 \texttt{TachoMotorPort}, ad esempio \texttt{MotorPort}, che 
-indichi a quale porta associare il nuovo oggetto.\\
+indica a quale porta associare il nuovo oggetto.\\
 \\
 La classe \texttt{Motor} mette a disposizione numerosi metodi,
 i più utilizzati sono:
@@ -37,8 +37,8 @@ i più utilizzati sono:
  int getSpeed();
  /** restituisce vero se il motore è in movimento */
  boolean isMoving();   
- /** restituisce vero se il movimneto di rotazione ad 
-  un angolo specifcio non è stato completato */
+ /** restituisce vero se il movimento di rotazione ad 
+  un angolo specifico non è stato completato */
  boolean isRotating();
  /** azzera il contatore del tachimetro */
  void resetTachoCount();
@@ -46,12 +46,12 @@ i più utilizzati sono:
  void reverseDirection();
  /** ruota di un determinato angolo rispetto alla  posizione 
 	 corrente, se  immediateReturn è true, allora il metodo non 
-	 è bloccante e resituisce subito il controllo completando 
+	 è bloccante e restituisce subito il controllo completando 
 	 la rotazione autonomamente */
  void rotate(int angle, boolean immediateReturn);  
  /** ruota all'angolo limitAngle rispetto al riferimento, 
 	 se  immediateReturn è  true, allora il metodo non è 
-	 bloccante e resituisce subito  il controllo completando 
+	 bloccante e restituisce subito  il controllo completando 
 	 la rotazione autonomamente */
  void rotateTo(int limitAngle, boolean immediateReturn);
  /* imposta la potenza del motore, power <= 900 */
@@ -69,7 +69,7 @@ I sensori prodotti dalla casa madre \emph{Lego}\textregistered~sono:
   \item luce
   \item suono
   \item colore
-  \item ultasuoni
+  \item ultrasuoni
   \item bussola
   \item accelerometro
   \item infrarossi
