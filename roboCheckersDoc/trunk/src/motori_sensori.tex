@@ -114,9 +114,24 @@ La classe \texttt{TouchSensor} mette a disposizione un solo metodo:
 
 
 \subsection{Il sensore di colore}
+Il sensore di colore non è fornito nella normale dotazione di
+\emph{Lego}\textregistered~NXT ma deve essere acquistato 
+separatamente.\\
+Per la gestione di questo sensore, \emph{Lejos} fornisce 
+la classe \texttt{ColorSensor}.\\
 \begin{figure}
   \begin{center}
 	\includegraphics[scale=0.3]{img/sensColor.jpg}
 	\caption{Il sensore di colore}
   \end{center}
-\end{figure}
+\end{figure}\\
+Il costruttore della classe \texttt{ColorSensor}
+\begin{lstlisting}
+ ColorSensor(I2CPort port)
+\end{lstlisting}
+ha come parametro un'implementazione dell'interfaccia
+\texttt{I2CPort}, ad esempio \texttt{SensorPort}, che
+indichi a quale porta del brick NXT il sensore è connesso.\\
+
+
+
