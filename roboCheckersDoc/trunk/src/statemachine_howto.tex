@@ -87,7 +87,76 @@ A questo punto il workspace dovrebbe presentarsi come in Figura
 	\end{figure}
 
 \subsection{Modifica del template}
+Il codice \texttt{Lejos} generato dal plugin si basa, come già evidenziato in
+precedenza, sulle API standard, ma anche su una serie di classi facenti parte
+del plugin stesso che implementano l'intero meccanismo della macchina a stati,
+le transizioni, gli eventi etc\dots\\
+Per questo motivo è essenziale che tutti questi helper vengano importati in
+testa al programma generato dal parser grafico, infatti il seguente segmento di
+codice è sempre presente quando si compila una \emph{Statemachine}:
+\begin{lstlisting}
+	import de.nordakademie.lejos.statemachine.*;
+	import lejos.nxt.*;
+	import lejos.navigation.*;
+\end{lstlisting}
+Questa lista di import è statica e non direttamente accessibile
+all'utilizzatore\footnote{A meno di scompattare i files .jar del plugin e
+cercare al loro interno il template di traduzione.}, tuttavia a questo livello
+è possibile modificarla a piacimento, semplicemente andando ad editare il
+template usato per la traduzione in codice \emph{Lejos}. Il file in questione
+si trova in \texttt{de.nordakademie.lejos.core/src/template/\\statemachine.xpt},
+per il progetto roboCheckers lo si è modificato come segue:
+\begin{lstlisting}
+[...]
+ «EXPAND javaClass(btFlag) FOREACH states.typeSelect(StateMachine)»
+ «FILE name+".java"»
+    
+	import de.nordakademie.lejos.statemachine.*;
+	import lejos.nxt.*;
+	import lejos.navigation.*;
+	import it.polito.Navigation.*;
+	import it.polito.util.*;
+	import it.polito.Checkers.*;
+	import lejos.nxt.addon.ColorSensor;
+	import it.polito.BluetoothComm.*;
+
+     public class «name» extends Statemachine{
+     
+        public «name»(){this(null);} 
+[...]
+\end{lstlisting}
 
 \subsection{Generazione del plugin}
+Per esportare il plugin selezionare \texttt{File}$\to$\texttt{Export} e
+successivamente \texttt{Plug-in Development}$\to$\texttt{Deployable features},
+premere quindi su \texttt{Next}.\\
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.6]{img/howto06.png}
+			\caption{Menù Export\label{fig:howto06}}
+		\end{center}
+	\end{figure}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.6]{img/howto07.png}
+			\caption{Deployable features\label{fig:howto07}}
+		\end{center}
+	\end{figure}
+Nella finestra successiva, selezionare la voce \texttt{de.nordakademie.lejos} e
+scegliere una directory di destinazione, prestare attenzione a impostare la
+scheda \texttt{Options} come in Figura \ref{fig:howto08}.\\
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.6]{img/howto08.png}
+			\caption{Deployable features, options\label{fig:howto08}}
+		\end{center}
+	\end{figure}
+Premere quindi su \texttt{Finish}.\\
+A questo punto non resta che installare la feature appena generata attraverso
+la procedura già illustrata per installare i plugin, avendo cura di specificare
+la directory locale scelta in precedenza, come repository sorgente nella
+finestra di dialogo \texttt{Add Site}.\\
+Per evitare conflitti, si consiglia di disinstallare preventivamente qualsiasi
+versione del plugin presente in \emph{Eclipse}.
 
 \section{Uso di Lejos Statemachine} 
