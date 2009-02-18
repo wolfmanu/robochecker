@@ -1,53 +1,67 @@
 \chapter{Team Work}
 Tra i vari progetti sviluppati in passato non ci si era mai posti il problema
-di come gestire il lavoro di gruppo in quanto nessuno dei precedenti progetti
-richiedeva la scrittura di circa 2000 righe di codice. Vista l'esperienza
-maturata esternamente al Politecnico da alcuni componenti del gruppo è stato
-proposto di utilizzare un sistema di controllo versioni, così da gestire
-facilmente la scrittura simultanea del codice da parte di più persone. Tra i
-vari sistemi disponibile è stato scelto Subversion principalmente perchè quello
-conosciuto da più componenti del gruppo.
-\section{Subverion}
+di come gestire il lavoro di gruppo. Nessun precedente lavoro di gruppo fatto
+al politecnico richiedeva la scrittura di circa 2000 righe di codice. Quindi ci
+siamo fin da subito posti il problema di coordinarci e sincronizzare i lavori
+fatti da ognuno. Vista l'esperienza maturata esternamente al Politecnico da
+alcuni componenti del gruppo è stato proposto di utilizzare un sistema di
+controllo versioni, così da gestire facilmente la scrittura simultanea del
+codice da parte di più persone.
+
+Tra i vari sistemi disponibili è stato scelto Subversion principalmente perchè
+quello conosciuto da più componenti del gruppo.
+\section{Subversion}
 \label{sec:subversion}
-Subverion (SVN) ed in generale qualunque programma per il controllo versione
-viene utilizzato nel mondo ingegneristico e in particolare in quello informatico per
-esempio la possibilità di tornare ad uno stato precedente del progetto, nei
-casi in cui si raggiungeva un vicolo cieco.
-SVN permette di tenere traccia e di controllare i cambiamenti al codice
-sorgente, sapendo sempre chi è l'autore della singola modifica. 
-Man mano che il software viene sviluppato, è sempre più probabile che versioni distinte 
-dello stesso software siano dispiegate in posti diversi, e che gli sviluppatori
-del software lavorando autonomamente allo sviluppo rischino di avere
-successivamente difficolta a condividere con gli altri membri del team le
-proprie modifiche.
-Tradizionalmente, i sistemi di controllo versione hanno usato un modello
-centralizzato, in cui tutte le funzioni di controllo versione sono eseguite da
+Subverion o più brevemente SVN, ed in generale qualunque programma per il
+controllo versione, viene utilizzato nel mondo ingegneristico e in particolare
+nel campo informatico al fine di semplificare le operazioni per gestire un
+lavoro di gruppo. Tra le funzioni svolte da SVN troviamo la possibilità di
+tornare ad uno stato precedente del progetto, tenere traccia dei
+cambiamenti al codice e sincronizzare il lavoro svolto dai membri del gruppo.
+
+Tutte queste funzioni sono risultate molto utile nello scrivere il progetto,
+infatti spesso ci si trova ad aver intrapreso delle strade che non si sono
+dimostrate praticabili, quindi con poche operazioni si è pututo facilmente
+ritornare al codice funzionante senza doversi ricordare tutte le modifiche
+fatte. 
+
+Molto utile è anche stata la funzione di sincronizzazione che ci ha permesso di
+lavorare sullo stesso codice da posti diversi dalle nostre case ai computer dei
+laboratori il tutto senza perdere la sincronizzazione con il lavoro fatto dagli
+altri membri del gruppo, questo sia per la scrittura del codice Java che per la
+scrittura dei questa relazione in \LaTeX.
+
+Tradizionalmente, i sistemi di controllo versione avevano usato un modello
+centralizzato, in cui tutte le funzioni di controllo versione erano eseguite da
 un server condiviso. Alcuni anni fa, certi sistemi come TeamWare, BitKeeper e
 GNU arch hanno cominciato a usare un modello distribuito, in cui ogni
-sviluppatore lavora direttamente con il suo repository locale, e le modifiche
+sviluppatore lavora direttamente con il suo repository locale, e le modifiche 
 sono condivise tra i repository in un passo separato. Questa modalità di
 operare permette di lavorare senza una connessione di rete, e consente anche
 agli sviluppatori di accedere alle funzioni di controllo versione senza aver
 bisogno di permessi concessi da un'autorità centrale.
+
 Nella maggior parte dei progetti di sviluppo software, come il caso di questo
 ``piccolo'' progetto, più sviluppatori lavorano in parallelo sullo stesso
 software. Se due sviluppatori tentano di modificare lo stesso file
 contemporaneamente, in assenza di un metodo di gestione degli accessi, essi
-possono facilmente sovrascrivere o perdere le modifiche effettuate contestualmente.
-Alcuni sistemi prevengono i problemi dovuti ad accessi simultanei,
-semplicemente bloccando (lock) i file, cosicché solamente uno sviluppatore per
-volta ha diritto di accesso in scrittura alla copia di quel file contenuta nel
-repository centrale. Altri, come quello scelto per il nostro progetto,
-permettono a più sviluppatori di modificare lo stesso file nello stesso tempo,
-e forniscono degli strumenti per combinare le modifiche in seguito (merge).
-La maggior parte dei sistemi di controllo versione usano la compressione delta,
-che conserva solamente le differenze fra le versioni successive dei file.
-Questo consente un immagazzinamento efficiente di più versioni di un file,
-purché, come solitamente succede, le modifiche tra una versione e la successiva
-riguardino solamente una piccola parte del testo.
+possono facilmente sovrascrivere o perdere le modifiche effettuate
+contestualmente. Alcuni sistemi prevengono i problemi dovuti ad accessi
+simultanei, semplicemente bloccando (lock) i file, cosicché solamente uno
+sviluppatore per volta ha diritto di accesso in scrittura alla copia di quel
+file contenuta nel repository centrale. Altri, come quello scelto per il nostro
+progetto, permettono a più sviluppatori di modificare lo stesso file nello
+stesso tempo, e forniscono degli strumenti per combinare le modifiche in
+seguito (merge).
+
+La maggior parte dei sistemi di controllo versione usano la
+compressione delta, che conserva solamente le differenze fra le versioni
+successive dei file. Questo consente un immagazzinamento efficiente di più
+versioni di un file, purché, come solitamente succede, le modifiche tra una
+versione e la successiva riguardino solamente una piccola parte del testo.
 
 \section{Glossario di Subverion}
-Di seguito elenchiamo i pricipali termini con cui in questi due mesi siamo
+Di seguito elenchiamo i principali termini con cui in questi due mesi siamo
 diventati famigliari per utilizzare Subverion:
 
 \begin{description} 
