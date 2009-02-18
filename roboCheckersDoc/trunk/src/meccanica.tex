@@ -92,6 +92,33 @@ montanti del braccio tramite due 'traverse' Figura \ref{braccio0}
 		\end{figure} 
 
 In oltre per dare maggior solidità all'intera struttura si sono aggiunte delle
-parti 
+barre che 'leghino' i due montanti insieme. Nello specifico ne sono state
+montate tre: una sulla punta del braccio, una sul montante anteriore ed una sul
+montante posteriore.
 
 \section{Sistema di leve a forbice}
+
+Per la costruzione della parte terminale del braccio si è dovuto risolvere due
+problemi: il primo è stato sul come generare un moto verticale, che abbassi la punta del braccio da
+un moto rotatorio. Il secondo, e strettamente correlato al primo, è stato il
+come dare la giusta precizione in modo che il sensore sia sempre alla stessa
+altezza dalla scacchiera. \\
+Il per il primo problema si è deciso di risolverlo tramite un sitema di
+leveraggi imperniati a forbice (in seguito per semplicità denominato
+\emph{pantografo}). Il pantografo prende il movimento da una coppia di
+ingranaggi gemelli, ogniuno montato rispettivamente nel punto di ancoraggio
+delle braccia del pantografo. Figura \ref{leve}
+
+  		\begin{figure}
+          \begin{center}		
+			\includegraphics[scale=0.4]{img/leve.png}
+			\caption{Sistema di leve a forbice \label{leve}}
+		  \end{center}
+		\end{figure} 
+
+Per risolvere il problema della precisione di nella discesa, problema in parte
+risolto dall'adozione del pantografo, si è inserito un gioco d'ingranaggi
+Figura \ref{ingranaggi} che riducono i giri del motore di NUMERODACALCOLARE
+volte, in modo da ottenere un numero di giri sufficientemente elevato
+da permettere una stima empirica del comando da impartire al motore.\\
+
