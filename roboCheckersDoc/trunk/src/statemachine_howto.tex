@@ -27,14 +27,13 @@ versione delle API è pertanto necessario ottenere il sorgente (attualmente in
 fase di sviluppo) del plugin e compilarlo.
 
 \subsection{Checkout dal repository SVN}
-\subsubsection{}
 Per prima cosa occorre disporre un ambiente Eclipse provvisto di
 \emph{Plug-in Development Environment}, ad esempio la versione \emph{Classic}
 disponibile a questo indirizzo: \url{http://www.eclipse.org/downloads/}.\\
 Per eseguire il checkout del progetto è necessario installare \emph{Subclipse},
 un plugin che integra \emph{Subversion} (Sezione \ref{sec:subversion}) in
-\emph{Eclipse}. Per farlo selezionare il menù \texttt{Help}$\to$\texttt{Software Updates}
-e nella sezione \emph{Available Software} selezionare
+\emph{Eclipse}. Per farlo, selezionare il menù
+\texttt{Help}$\to$\texttt{Software Updates} e nella sezione \emph{Available Software} selezionare
 \texttt{Add Site}.\\
 	\begin{figure}
 		\begin{center}
@@ -42,7 +41,7 @@ e nella sezione \emph{Available Software} selezionare
 			\caption{Installazione di Subclipse \label{fig:howto01}}
 		\end{center}
 	\end{figure}
-\subsubsection{}
+\paragraph{}
 Nella finestra di dialogo digitare
 \url{http://subclipse.tigris.org/update_1.4.x} e premere \texttt{OK}.\\
 Espandere la voce appena aggiunta e selezionare tutti i sotto-elementi (o
@@ -54,7 +53,7 @@ successivamente premere \texttt{Install} e procedere con l'installazione.
 			\caption{Installazione di Subclipse \label{fig:howto02}}
 		\end{center}
 	\end{figure}
-\subsubsection{}
+\paragraph{}
 Una volta riavviato Eclipse, procedere all'import del progetto in questo modo:
 selezionare \texttt{Files}$\to$\texttt{New}$\to$\texttt{Other} e, nella
 finestra di dialogo, \texttt{SVN}$\to$\texttt{Checkout projects from SVN},
@@ -67,7 +66,7 @@ repository location} e premere \texttt{Next}.
 			\caption{Aggiunta del repository\label{fig:howto03}}
 		\end{center}
 	\end{figure}
-\subsubsection{}
+\paragraph{}
 Digitare l'indirizzo \url{http://svn2.assembla.com/svn/vldt/development/} e
 premere ancora \texttt{Next}.\\
 	\begin{figure}
@@ -88,6 +87,7 @@ A questo punto il workspace dovrebbe presentarsi come in Figura
 	\end{figure}
 
 \subsection{Modifica del template}
+
 \subsection{Generazione del plugin}
 
 \section{Uso di Lejos Statemachine} 

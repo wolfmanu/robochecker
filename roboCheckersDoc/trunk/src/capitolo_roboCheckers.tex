@@ -16,7 +16,14 @@ Il suo metodo principale (\texttt{makeMove()}) si può sostanzialmente suddivider
 Il livello di intelligenza della macchina è gestito mediante il livello di profondità massimo della ricorsione, eseguita in \texttt{MiniMax()}, e viene impostato attraverso l'attributo \texttt{depth}.
 
 \subsection{HumanPlayer}
-Questa classe si differenzia dalla precedente in quanto il suo compito è riconoscere (e non pensare) la mossa fatta dal giocatore. La ricerca avviene analizzando tutte le possibili mosse. Per ogni mossa si controlla se la posizione di partenza è libera o ancora occupata dalla pedina. Nel caso sia occupata si passa a controllare la mossa successiva, altrimenti significa che si è trovata la pedina che è stata mossa. A questo punto si ricerca la posizione in cui è stata spostata la pedina, solo tra le destinazioni realmente possibili. Se viene riconosciuta una mossa valida, questa viene ritornata al metodo chiamante, altrimenti si lancia l'eccezione \texttt{IllegalMoveException}.
+Questa classe si differenzia dalla precedente in quanto il suo compito è
+riconoscere (e non pensare) la mossa fatta dal giocatore. La ricerca avviene
+analizzando tutte le possibili mosse. Per ogni mossa si controlla se la
+posizione di partenza è libera o ancora occupata dalla pedina. Nel caso sia
+occupata si passa a controllare la mossa successiva, altrimenti significa che
+si è trovata la pedina che è stata mossa. A questo punto si fa eseguire la
+ricerca della posizione in cui è stata spostata la pedina, solo tra le
+destinazioni realmente possibili. Se viene riconosciuta una mossa valida, questa viene ritornata al metodo chiamante, altrimenti si lancia l'eccezione \texttt{IllegalMoveException}.
 
 \section{Robot}
 Contiene principalmente il metodo \texttt{main()} in cui si inizializzano i due
@@ -27,7 +34,7 @@ mobile, il \texttt{CheckersNavigator} e uno \texttt{HumanInput}\footnote{Vedi
 sezione Factory} usato per l'interazione con il giocatore umano.
 
 \section{Game}
-Il metodo fondamentale di questa classe è sicuramente il metodo:
+Il metodo fondamentale di questa classe è sicuramente:
 \begin{lstlisting}
 public int play() throws NotCalibratedException
 \end{lstlisting}
