@@ -9,7 +9,7 @@ del \emph{California Institute of Technology} (http://www.cs.caltech.edu).
 Essendo questo codice poco orientato ad oggetti e per la quasi totalità
 costituito da metodi statici, è stato racchiuso in una sola classe i cui metodi
 vengono richiamati dagli oggetti \emph{wrapper} che la circondano.\\
-La scelta di impiegare codice già pronto in questa parte è stata
+la scelta di impiegare codice già pronto in questa parte è stata
 mutuata essenzialmente dai limiti temporali (anche se non nascondiamo che in più
 occasioni avremmo preferito riscriverlo da zero!) nonché dal fatto che
 implementare l'intera intelligenza per il gioco della dama avrebbe esulato dalla
@@ -54,7 +54,7 @@ bontà di quel determinato stato del gioco (i.e. quanto sia desiderabile per il
 dato giocatore raggiungere quella posizione). Se un nodo è terminale (mossa
 vincente) \texttt{MiniMax} deve ritornare $\pm\infty$ a seconda che il
 turno corrente sia rispettivamente del primo o del secondo giocatore.
-Altrimenti significa che si è raggiunto il limite di profondità prefissato, in questo caso
+Altrimenti significa che si è raggiunto il limite di profondità prefissato. In questo caso
 \texttt{Evaluate} effettuerà una stima delle pedine in gioco assegnando un peso
 ad ognuna di esse in funzione della loro posizione e del loro valore (ad
 esempio, una dama vale di più di una normale pedina).\\
@@ -79,6 +79,9 @@ tipicamente mantengono separate le coordinate; la conversione in oggetti
 \texttt{Square} viene eseguita dalle classi \texttt{Move} e \texttt{Board}
 
 \section{Move e MoveCollection}
+Le classi Move e MoveCollection sono state implementate per permettere una più
+semplice gestione delle mosse da controllare 
+\subsubsection{Classe Move} 
 La classe Move contiene
 
 
