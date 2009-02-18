@@ -132,6 +132,34 @@ Il costruttore della classe \texttt{ColorSensor}
 ha come parametro un'implementazione dell'interfaccia
 \texttt{I2CPort}, ad esempio \texttt{SensorPort}, che
 indichi a quale porta del brick NXT il sensore è connesso.\\
-
-
+\\
+La classe \texttt{ColorSensor} fornisce  seguenti metodi:
+\begin{lstlisting}
+ /** restituisce la saturazione del blu (0-255)*/
+ int getBlue();
+ /** restituisce un numero a 0 e 17 che indica il colore letto,
+	 0 = nero
+	 1 = violetto
+	 2 = viola
+	 3 = blu
+	 4 = verde
+	 5 = lime
+	 6 = giallo
+	 7 = arancione
+	 8 = rosso
+	 9 = cremisi
+	 10 = magenta
+	 11 to 16 = pastelli
+	 17 = bianco	
+	 */	
+ int getColorNumber();
+ /** restituisce la saturazione del verde (0-255)*/
+ int getGreen();
+ /** restituisce la saturazione del rosso (0-255)*/
+ int getRed(); 
+ /** comandi per la calibrazione, si rimanda alla documentazione
+	 per maggiori dettagli */
+ int initBlackLevel();
+ int initWhiteBalance();  
+\end{lstlisting}
 
