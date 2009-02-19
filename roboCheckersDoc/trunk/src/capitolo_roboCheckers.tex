@@ -56,3 +56,41 @@ In questo modo, ad esempio, è possibile decidere di usare uno dei due\\
 Così anche per l'input da parte del giocatore umano che può essere, a seconda
 delle necessità, un pulsante sul brick NXT o un segnale inviato mediante
 Bluetooth.
+
+\section{Bluetooth}
+La singleton \texttt{NXTCommHandle} è una classe che implementa l'interfaccia
+\texttt{HumanInput}.
+Tale classe permette l'utilizzo di dispositivi remoti per la comunicazione e più
+in particolare per il controllo del brick NXT.
+Per dispositivi remoti si intendono PC o Smartphone compatibili con Java VM, con
+il package \texttt{lejos.pc.comm} e che forniscono uno stack bluetooth
+gestibile via \texttt{bluecove}.\\
+Durante i primi test si verificava un problema durante l'inizializzazione del
+Bluetooth, dovuto al costruttore della classe
+\texttt{javax.bluetooth.RemoteDevice} contenuta nel \texttt{jar} di Lejos.
+L'errore era dovuto al tipo di parametro atteso, una variabile di tipo
+\texttt{String}. Nel codice sorgente è presente solo il costruttore avente un
+argomento di tipo \texttt{byte[]}.
+\begin{lstlisting}
+/**
+ * Note: The standard JSR 82 method for obtaining a RemoteDevice
+ * uses a String rather than byte[]. Protected so shouldn't matter.
+ * @param addr
+ */
+protected RemoteDevice(byte [] addr) { \ldots }
+\end{lstlisting}
+E' stato quindi effettuato un overloading, aggiungendo un nuovo costruttore
+avente un parametro \texttt{String}.
+Tale \texttt{RemoteDevice} carica l'indirizzo del brick NXT in formato
+\texttt{byte[]} dalla classe \texttt{CommProtocol}. La classe
+\texttt{CommProtocol} contiene alcune costanti come il \texttt{Bluetooth
+friendly name} del brick NXT e comandi previsti dal protocollo.
+\begin{lstlisting}
+// Temporary FIX
+// TODO Dynamically generate byte[] from String
+protected RemoteDevice(String address) {
+	this.addr = CommProtocol.bBT_ADDR;
+		// Do Not Set Friendly name !
+	this.getFriendlyName(false); // Refresh name
+}
+\end{lstlisting}
