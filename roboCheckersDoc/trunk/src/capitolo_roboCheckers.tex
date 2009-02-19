@@ -77,7 +77,7 @@ argomento di tipo \texttt{byte[]}.
  * uses a String rather than byte[]. Protected so shouldn't matter.
  * @param addr
  */
-protected RemoteDevice(byte [] addr) { \ldots }
+protected RemoteDevice(byte [] addr) { . . . }
 \end{lstlisting}
 E' stato quindi effettuato un overloading, aggiungendo un nuovo costruttore
 avente un parametro \texttt{String}.
@@ -94,3 +94,9 @@ protected RemoteDevice(String address) {
 	this.getFriendlyName(false); // Refresh name
 }
 \end{lstlisting}
+E' possibile utilizzare il controllo via Bluetooth per notificare al brick NXT
+che il giocatore ha effettuato una mossa.
+Il codice fornito comprende anche il client, la classe \texttt{TestPc}.\\
+\texttt{TestPc} tenta di instaurare una connessione con il brick e
+successivamente richiede comandi da console.
+
