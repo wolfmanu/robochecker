@@ -85,31 +85,29 @@ gestione orientata agli oggetti delle mosse restituite dalla classe
 
 \paragraph{Classe Move} 
 Si occupa principalmente di rimappare a livello di oggetto la
-singola mossa generate dalla classe \texttt{Engine}, questa strazione viene
+singola mossa generata dalla classe \texttt{Engine}, questa astrazione viene
 implementata dai metodi \texttt{toArray()}, che fa il mapping da oggetto a
-vettore di interi, e \texttt{fromArray()},si occupa di astrarre le mosse da
-vettore ad oggetto.\\
-Nello specifico la classe move salva le mosse come una \texttt{Square}
-contenente la casella di partenza ed un vettore di \texttt{Square} contenente
-tutte le destinazioni, cioè in caso di prese multiple non sarà presente solo i
-valori della casella di partenza e di destinazione finale, ma anche di tutti i
-salti intermedi.
+vettore di interi, e \texttt{fromArray()}, che si occupa di convertire le mosse
+da vettore ad oggetto.\\
+La classe \texttt{Move} mantiene l'informazione sulle mosse in un attributo di
+tipo \texttt{Square} contenente la casella di partenza, e in un vettore di
+\texttt{Square} contenente tutte le destinazioni (in caso di prese
+multiple vi sono memorizzati tutti i salti intermedi).
 
 \paragraph{Classe MoveCollection} 
 Rappresenta l'albero di tutte le destinazioni raggiungibili da una casella.
-Viene utilizzata durante il controllo delle mosse fatte da \texttt{HumanPlayer}
+Viene utilizzata durante il controllo delle mosse fatte da \texttt{HumanPlayer}.
 
 \section{Board}
-\'E la rappresentazione della scacchiera all'interno del bricco. La classe al
-suo interno, oltre alla posione attuale delle pedine, contiene una collezione
-di \texttt{MoveCollection} in cui sono incluse tutte le possibili mosse
-effettuabili dall'avversario. Queste possono essere prelevate
-con il metodo \texttt{getPossibleMoves()} che le restituisce sotto forma di
-\texttt{Vector<MovesCollections>}, oppure, se si necessita delle caselle di
+\'E la rappresentazione della scacchiera all'interno del bricco. La classe
+contiene, oltre alla posione attuale delle pedine, una collezione di
+\texttt{MoveCollection} in cui sono incluse tutte le possibili mosse effettuabili dall'avversario.
+Queste possono essere prelevate con il metodo \texttt{getPossibleMoves()} che
+le restituisce sotto forma di \texttt{Vector<MovesCollections>}, oppure, se si necessita delle caselle di
 partenza e di arrivo separatamente, sono disponibili i metodi
 \texttt{getPossibleMoveFrom()} e \texttt{getPossibleMoveTo()}.\\
 Quando si esegue una chiamata a \texttt{getPossibleMoves()}, il vettore
-delle mosse possibili viene memorizzato anche in un attributo interno a
+delle mosse possibili viene memorizzato in un attributo interno a
 \texttt{Board}. In questo modo il vettore può essere scandito implicitamente
 mediante il metodo \texttt{getPossibleMoveFrom()}, che restituisce una per
 volta, ad ogni chiamata, le caselle di partenza delle mosse possibili.\\
