@@ -1,6 +1,16 @@
 \chapter{RoboCheckers Statemachine}
 \section{Descrizione del progetto}
+
+Lo stato iniziale conduce forzatamente allo stato \emph{Calibration}.
+Una volta effettuata la calibrazione, il robot passa allo stato \emph{Home}.
+In questo stato il braccio viene portato fuori dalla scacchiera.
+All'evento \emph{Move}, si passa allo stato \emph{CalculateMoves}.
+Questa sezione del diagramma è differente dall'implementazione sequenziale: il
+tutto è gestito attraverso una serie di \emph{flag di stato}.
+
+
 \includepdfmerge{img/robocheckerssmd.pdf}
+
 \section{Problemi di Lejos Statemachine IDE}
 Durante la realizzazione della macchina a stati, si sono evidenziate una serie
 di problematiche più o meno gravi, che hanno determinato la necessità di
