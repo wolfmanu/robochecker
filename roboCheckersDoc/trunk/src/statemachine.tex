@@ -11,7 +11,7 @@ tutto è gestito attraverso una serie di \emph{flag di stato}.
 
 \includepdfmerge{img/robocheckerssmd.pdf}
 
-\section{Problemi di Lejos Statemachine IDE}
+\section{Osservazioni su Lejos Statemachine IDE}
 Durante la realizzazione della macchina a stati, si sono evidenziate una serie
 di problematiche più o meno gravi, che hanno determinato la necessità di
 impiegare alcuni workaround. Nel seguito si illustreranno i limiti riscontrati
@@ -26,8 +26,10 @@ plugin.
 degli stati o degli eventi, non funzionano nè l'autocompletamento nè il
 \emph{syntax checking} di \emph{Eclipse};
 \item[Difficoltà di editing degli stati] durante l'editing degli stati non è
-possibile andare a capo, questo riduce la leggibilità del programma e rende
-difficoltoso l'input del codice;
+possibile andare a capo premendo invio (l'unico modo per forzare un \emph{line
+break} è inserire il carattere di carriage return, ad esempio tramite
+cut\&paste), questo riduce la leggibilità del programma e rende difficoltoso
+l'input del codice;
 \item[Editing delle variabili a campi fissi] l'inserimento e la modifica di
 variabili è gestita a campi fissi (probabilmente per semplificare il parsing e
 la generazione del codice). Ogni variabile è definita da quattro campi
@@ -57,3 +59,34 @@ poter aggiungere gli \texttt{import} dei package contenti le classi helper
 necessarie alla navigazione, alla gestione della partita a Dama, etc\ldots~
 Nello specifico si è modificato il template di traduzione contenuto nel file
 \texttt{template/statemachine.xpt} (si veda Appendice \ref{sec:template}).
+
+\subsection*{Gestione degli eventi}
+\emph{Lejos} fornisce un approccio piuttosto limitato alla programmazione ad
+eventi. L'API relativa è denominata \texttt{Behavior} e permette di definire un
+certo numero di ``comportamenti'' (stati) da assegnare al robot.\\
+La transizione tra gli stati è affidata ad un'istanza della classe
+\texttt{Arbitrator}, che si occupa di effettuare periodicamente un polling su
+tutti gli stati per controllare se sono scattati o meno gli eventi che
+determinano una transizione. Gli eventi, pertanto, non sono veri e propri
+interrupt asincroni, ma il risultato della valutazione (eseguita centinaia di
+volte al secondo) di un'espressione booleana definita dall'utente.\\
+\emph{Lejos Statemachine} implementa un meccanismo molto simile (probabilmente
+un wrapper evoluto di \texttt{Behavior}), che permette di definire due tipi di
+transizioni\footnote{Si veda Appendice \ref{sec:howtouse} per maggiori
+dettagli.}:
+\begin{description}
+\item[Transizione mediata da evento] o forzante, transisce appena si verifica
+la condizione definita nell'evento. Si realizza interponendo un oggetto
+\texttt{Event} tra due stati;
+\item[Transizione standard] attende che l'esecuzione del codice contenuto nello
+stato sia terminata e transisce solo se la condizione associata è verificata.
+\end{description}
+La gestione degli eventi risulta essere quindi una sorta di ``simulazione'' che
+poco si addice alla natura di una macchina a stati.
+
+\subsection*{Occupazione di memoria}
+\begin{quote}
+``\small
+\textit{Nobody will ever need more than 64k}
+\normalsize''
+\end{quote}
