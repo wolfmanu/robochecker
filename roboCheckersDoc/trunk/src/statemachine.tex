@@ -5,7 +5,8 @@ Durante la realizzazione della macchina a stati, si sono evidenziate una serie
 di problematiche più o meno gravi, che hanno determinato la necessità di
 impiegare alcuni workaround. Nel seguito si illustreranno i limiti riscontrati
 e le soluzioni che, ove possibile, sono state adottate.
-\subsubsection{Editor grafico}
+
+\subsection*{Editor grafico}
 I problemi relativi all'editor sono essenzialmente legati ad una scarsa
 usabilità dell'interfaccia, ma non inficiano il corretto funzionamento del
 plugin.
@@ -24,7 +25,7 @@ obbligatori:
 <modifier> <type> <name> = <value>;
 \end{lstlisting}
 Essendo tutti i campi obbligatori, non è possibile, ad esempio, dichiarare una
-variabile non inizializzata.
+variabile non inizializzata;
 \item[Cut\&Paste di variabili errato] quando si effettua il
 copia/incolla di una variabile, ad esempio:
 \begin{lstlisting}
@@ -35,3 +36,13 @@ private static int[] result = ...;
 shiftati (il modificatore è \texttt{private}, il tipo è \texttt{static} il nome
 è \texttt{int[] result});
 \end{description}
+
+\subsection*{Lista statica degli import}
+Il generatore di codice non consente all'utente di inserire statement
+arbritrario prima della dichiarazione della classe che contiene il resto del
+programma (ad esempio per modificare la lista degli \texttt{import}).\\
+Questo limite ha reso indispensabile modificare parte del plugin, in modo da
+poter aggiungere gli \texttt{import} dei package contenti le classi helper
+necessarie alla navigazione, alla gestione della partita a Dama, etc\ldots~
+Nello specifico si è modificato il template di traduzione contenuto nel file
+\texttt{template/statemachine.xpt} (si veda Appendice \ref{sec:template}).
