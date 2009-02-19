@@ -79,11 +79,24 @@ tipicamente mantengono separate le coordinate; la conversione in oggetti
 \texttt{Square} viene eseguita dalle classi \texttt{Move} e \texttt{Board}
 
 \section{Move e MoveCollection}
-Le classi Move e MoveCollection sono state implementate per permettere una più
-semplice gestione delle mosse da controllare 
-\subsubsection{Classe Move} 
-La classe Move contiene
+Le classi Move e MoveCollection sono state implementate per permettere una
+gestione orientata agli oggetti delle mosse restituite dalla classe 
+\texttt{Engine}.
 
+\paragraph{Classe Move} 
+Si occupa principalmente di rimappare a livello di oggetto la
+singola mossa generate dalla classe \texttt{Engine}, questa strazione viene
+implementata dai metodi \texttt{toArray}, che fa il mapping da oggetto a
+vettore di interi, e \texttt{fromArray},si occupa di astrarre le mosse da
+vettore ad oggetto.\\
+Nello specifico la classe move salva le mosse come una \texttt{Square}
+contenente la casella di partenza ed un vettore di \texttt{Square} contenente
+tutte le destinazioni, cioè in caso di prese multiple non sarà presente solo i
+valori della casella di partenza e di destinazione finale, ma anche di tutti i
+salti intermedi.
 
+\paragraph{Classe MoveCollection} 
+Rappresenta l'albero di tutte le destinazioni raggiungibili da una casella.
+Viene utilizzata durante il controllo delle mosse fatte da \texttt{HumanPlayer}
 
 \section{Board}
