@@ -56,6 +56,19 @@ In questo modo, ad esempio, è possibile decidere di usare uno dei due\\
 Così anche per l'input da parte del giocatore umano che può essere, a seconda
 delle necessità, un pulsante sul brick NXT o un segnale inviato mediante
 Bluetooth.
+L'input è gestito da due classi, che implementano \texttt{HumanInput}:
+\texttt{ButtonInput} e \texttt{NXTCommHandle}.
+L'interfaccia \texttt{HumanInput} prevede i seguenti metodi.
+\begin{lstlisting}
+public boolean waitForStart(boolean locking);
+public boolean waitForMove(boolean locking);
+public void init();
+public void destroy();
+\end{lstlisting}
+I primi due metodi attendono rispettivamente un comando di \texttt{Start} ed uno
+di \texttt{Move}. Entrambi possono essere bloccanti e non.
+La init e la destroy sono state incluse principalmente per
+permettere l'inizializzazione e disconnessione del Bluetooth.
 
 \section{Bluetooth}
 La singleton \texttt{NXTCommHandle} è una classe che implementa l'interfaccia
