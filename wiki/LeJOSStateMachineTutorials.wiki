@@ -8,15 +8,12 @@ Howto Screencast for creating State Machines using LeJOS StateMachine Editing to
 Una macchina a stati semplice.
 ----
 A simple state machine.
-
-=== ScreenCast ===
+----
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z Link]
-
 
 == Tutorial II ==
 Una macchina a stati con transizione ad eventi, composta da due processi.
 ----
 A state machine with three Event elements, made up of 2 processes.
-
-=== ScreenCast ===
+----
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF5aWV9c Link]
