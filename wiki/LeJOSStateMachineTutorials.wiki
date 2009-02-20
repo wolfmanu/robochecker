@@ -6,7 +6,6 @@ Howto Screencast for creating State Machines using LeJOS StateMachine Editing to
 Una macchina a stati semplice.
 ----
 A simple state machine.
-
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z Link]
 
 = Tutorial II =
