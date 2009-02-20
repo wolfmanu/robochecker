@@ -8,7 +8,7 @@ Una macchina a stati semplice.
 ----
 A simple state machine.
 
-== ScreeCast ==
+== ScreenCast ==
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z Link]
 
 
@@ -17,5 +17,5 @@ Una macchina a stati con transizione ad eventi, composta da due processi.
 ----
 A state machine with three Event elements, made up of 2 processes.
 
-== ScreeCast ==
+== ScreenCast ==
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF5aWV9c Link]
