@@ -1,7 +1,9 @@
-Screencast for LeJOS StateMachine Developing tool for Eclipse.
+Screencast for LeJOS StateMachine Editing tool for Eclipse.
 
 = Tutorial I =
 
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z Link to screencast]
 
 = Tutorial II =
+
+[http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF5aWV9c Link to screencast]
