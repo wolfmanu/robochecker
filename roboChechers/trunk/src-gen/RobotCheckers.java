@@ -2,11 +2,11 @@
 import de.nordakademie.lejos.statemachine.*;
 import lejos.nxt.*;
 import lejos.navigation.*;
-import it.polito.Checkers.*;
 import it.polito.Navigation.*;
-import it.polito.BluetoothComm.*;
-import lejos.nxt.addon.*;
 import it.polito.util.*;
+import it.polito.Checkers.*;
+import lejos.nxt.addon.ColorSensor;
+import it.polito.BluetoothComm.*;
 public class RobotCheckers extends Statemachine {
 
 	public RobotCheckers() {
@@ -287,7 +287,7 @@ public class RobotCheckers extends Statemachine {
 
 		public void doMethod() throws InterruptedException {
 			try {
-				board.getPossibleMoves(piecehuman);
+				board.initPossibleMoves(piecehuman);
 			} catch (CantMoveException e) {
 				robotWin = true;
 			}

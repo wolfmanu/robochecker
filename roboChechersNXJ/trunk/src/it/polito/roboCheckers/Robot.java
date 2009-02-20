@@ -22,20 +22,28 @@ public class Robot {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Checkers GAME");
-		System.out.println("Waiting for BT Conn.");
+		System.out.println("Waiting for Human Input.");
 		HI.init();
 		System.out.println("Waiting for START");
 		HI.waitForStart(true);
-		System.out.println("Calibrating Board");
+		
+		// Init players
 		Player pl1 = new HumanPlayer(CheckersConstants.BLACK,
 				CheckersConstants.BKING);
 		Player pl2 = new ComputerPlayer(CheckersConstants.WHITE,
 				CheckersConstants.WKING, 4);
+		
+		// Do calibration
+		System.out.println("Calibrating Board");
 		arm.calibrate();
 		arm.down();
 		navigator.calibrate();
+		
+		// Go Home
 		arm.up(true);
 		navigator.goHome();
+		
+		// Start new game
 		Game game = new Game(pl1, pl2);
 		int result = game.play();
 		switch (result) {
