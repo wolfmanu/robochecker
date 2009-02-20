@@ -2,11 +2,13 @@ Howto Screencast per la creazione di macchine a stati utilizzando LeJOS StateMac
 ----
 Howto Screencast for creating State Machines using LeJOS StateMachine Editing tool for Eclipse.
 
+
 = Tutorial I =
 Una macchina a stati semplice.
 ----
 A simple state machine.
 [http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z Link]
+
 
 = Tutorial II =
 Una macchina a stati con transizione ad eventi, composta da due processi.
