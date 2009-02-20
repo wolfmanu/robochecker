@@ -201,22 +201,22 @@ ognuno avente una sola transizione uscente)
 Le transizioni possono essere di diverso tipo:
 \begin{itemize}
 \item inserendo un \texttt{Link} tra due \texttt{State}, la transizione avverrà solo
-al termine dell'esecuzione del codice del primo (Figura \ref{fig:simple})
+al termine dell'esecuzione del codice del primo (Figura \ref{fig:standardt})
 \item per far sì che la transizione sia effettuata non appena una certa condizione
 viene soddisfatta, è necessario introdurre un \texttt{Event} tra due \texttt{State}
 e inserire un blocco di codice in coda alla sezione \emph{do} del primo stato, rendendolo
-\emph{interrompibile} (Figura \ref{fig:event})
+\emph{interrompibile} (Figura \ref{fig:eventt})
 \end{itemize}
 	\begin{figure}
 		\begin{center}
 			\includegraphics[scale=0.5]{img/simpletransition.png}
-			\caption{Transizione semplice\label{fig:simple}}
+			\caption{Transizione standard\label{fig:standardt}}
 		\end{center}
 	\end{figure}
 	\begin{figure}
 		\begin{center}
 			\includegraphics[scale=0.5]{img/eventtransition.png}
-			\caption{Transizione ad evento\label{fig:event}}
+			\caption{Transizione mediata da evento\label{fig:eventt}}
 		\end{center}
 	\end{figure}
 Il blocco di codice in questione è il seguente:
