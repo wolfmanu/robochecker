@@ -162,4 +162,86 @@ Per evitare conflitti, si consiglia di disinstallare preventivamente qualsiasi
 versione del plugin presente in \emph{Eclipse}.
 
 \section{Uso di Lejos Statemachine} 
-\label{sec:howtouse}
+In questa sezione andiamo ad analizzare gli strumenti forniti dal \emph{Lejos 
+Statemachine development toolkit}.\\
+Creare un nuovo progetto, mediante \texttt{File}$\to$\texttt{New}$\to$\texttt{Java
+Project} e seguire il \emph{wizard}. Il nostro progetto è ora presente nel
+\texttt{Package Explorer}: cliccare con il destro su di esso e premere
+sulla voce \texttt{leJos NXJ}$\to$\texttt{Convert to leJos NXJ project}.\\
+Dal menù contestuale, scegliere \texttt{New}$\to$\texttt{StateMachine Diagram}. Se
+tale voce non viene visualizzata, cliccare su \texttt{Other\ldots}: essa è catalogata
+sotto la voce \texttt{Lejos StateMachine Diagrams}.
+A questo punto selezioniamo il file del diagramma della macchina a stati all'interno 
+del nostro progetto facendo doppio click su di esso.
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.5]{img/lsmgraphicaleditor.png}
+			\caption{leJOS StateMachine graphical editor\label{fig:lsmge}}
+		\end{center}
+	\end{figure}
+L'editor grafico è suddiviso in 3 sezioni (Figura \ref{fig:lsmge}):
+\begin{itemize}
+\item \emph{a}, l'area di lavoro, dove è possibile costruire la \emph{StateMachine}
+\item \emph{b}, la casella degli strumenti, dove troviamo tutti gli elementi base
+\item \emph{c}, la \texttt{Properties View}, dove ogni elemento può essere modificato
+sia dal punto di vista comportamentale che estetico (se non viene visualizzata, cliccare 
+con il destro sull'area di lavoro e selezionare \texttt{Show Properties View}).
+\end{itemize}
+Per quanto riguarda gli elementi base di una \emph{StateMachine}, abbiamo:
+\begin{itemize}
+\item \texttt{StateMachine}, la macchina a stati
+\item \texttt{StateVariable}, una variabile di stato
+\item \texttt{State}, uno stato
+\item \texttt{Event}, un evento
+\item \texttt{Start State}, lo stato di partenza (uno o più per macchina, ma
+ognuno avente una sola transizione uscente)
+\item \texttt{End State}, lo stato finale
+\item \texttt{Link}, la transizione
+\end{itemize}
+Le transizioni possono essere di diverso tipo:
+\begin{itemize}
+\item inserendo un \texttt{Link} tra due \texttt{State}, la transizione avverrà solo
+al termine dell'esecuzione del codice del primo (Figura \ref{fig:simple})
+\item per far sì che la transizione sia effettuata non appena una certa condizione
+viene soddisfatta, è necessario introdurre un \texttt{Event} tra due \texttt{State}
+e inserire un blocco di codice in coda alla sezione \emph{do} del primo stato, rendendolo
+\emph{interrompibile} (Figura \ref{fig:event})
+\end{itemize}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.5]{img/simpletransition.png}
+			\caption{Transizione semplice\label{fig:simple}}
+		\end{center}
+	\end{figure}
+	\begin{figure}
+		\begin{center}
+			\includegraphics[scale=0.5]{img/eventtransition.png}
+			\caption{Transizione ad evento\label{fig:event}}
+		\end{center}
+	\end{figure}
+Il blocco di codice in questione è il seguente:
+\begin{lstlisting}
+while (true) {
+	if (Thread.interrupted())
+		throw new InterruptedException();
+	Thread.yield();
+}
+\end{lstlisting}
+Procediamo ora nel costruire una macchina a stati d'esempio.\\
+Selezionare l'elemento \texttt{StateMachine} dalla casella degli strumenti e tracciare
+un rettangolo nell'area di lavoro.
+Attraverso la \texttt{Properties View} è possibile modificarne il nome.
+Introduciamo all'interno della \texttt{StateMachine} uno \texttt{Start State} e gli
+\texttt{State} necessari per realizzare il flusso del processo richiesto.
+I \texttt{Link} possono essere creati selezionando \texttt{Link} nella casella degli strumenti
+ed effettuando un \emph{drag and drop} dal primo al secondo elemento da collegare.
+E' possibile assegnare delle condizioni alle transizioni, ma la copertura deve essere completa:
+uno stato che ha eseguito le proprie istruzioni deve avere una transizione uscente \emph{valida},
+altrimenti la macchina a stati salterà allo stato \texttt{End State}.
+Sono disponibili due \emph{ScreenCast}: 
+\begin{itemize}
+\item StateMachine semplice
+\url{http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF9fU11Z}
+\item StateMachine con due processi
+\url{http://www.screentoaster.com/watch/stUk1dSkVLRlxeRF5aWV9c}
+\end{itemize}
