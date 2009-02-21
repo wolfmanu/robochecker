@@ -83,6 +83,7 @@ stato sia terminata e transisce solo se la condizione associata è verificata.
 \end{description}
 La gestione degli eventi risulta essere quindi una sorta di ``simulazione'' che
 poco si addice alla natura di una macchina a stati.
+
 \clearpage
 \subsection*{Occupazione di memoria}
 \begin{quote}
@@ -90,6 +91,33 @@ poco si addice alla natura di una macchina a stati.
 \textit{Nobody will ever need more than 64K} 
 \normalsize''\footnote{B. Gates, \textit{The future of computing}, 1981}
 \end{quote}
-Pur mantenendo infinito rispetto per l'autorevolezza di certe opinioni e
+Pur nutrendo infinito rispetto per l'autorevolezza di certe opinioni e
 celando a stento una piccola vena nostalgica dei bei tempi andati, ci sentiamo
-di rispondere ``\textit{We do!}''.
+di rispondere: ``\textit{We do!}''.\\
+Il brick NXT contiene appunto 64 KB di memoria RAM, questo fatto non ha tuttavia
+determinato particolari problemi durante le prime fasi di progetto, infatti,
+finchè le dimensioni del codice rimanevano contenute, tutto appariva funzionare
+correttamente.\\
+Quando sono state assemblate tutte le ``parti'' costitutive del progetto e sono
+stati effettuati i primi test completi di funzionamento della
+\emph{Statemachine}, sono iniziate a comparire (in modo apparentemente casuale)
+delle eccezioni di tipo \texttt{NOMEECCEZIONE!!} che interrompevano
+l'esecuzione della macchina a stati.\\
+Molto probabilmente, come altresì confermato da alcune ricerche effettuate in
+Rete, questo tipo di eccezione è correlata con l'esaurimento di memoria da
+parte della \emph{Java Virtual Machine} inclusa nel firmware \emph{Lejos}.
+Questa ipotesi ha trovato ulteriore conferma in seguito a nuovi test,
+effettuati monitorando l'occupazione di memoria durante l'esecuzione della
+procedura di \texttt{MiniMax}. Questo punto del codice è particolarmente
+critico per quanto riguarda la complessità spaziale (oltre che temporale)
+dell'intero programma. Si può infatti notare - confrontando l'esecuzione del
+programma sequenziale (\texttt{RoboCheckersNXJ}) con quella della
+\emph{Statemachine} (\texttt{RoboCheckers}) - che, durante la discesa ricorsiva
+di \texttt{MiniMax}, mentre il primo riesce a liberare correttamente memoria
+quando ne ha la necessità, il secondo scatena l'eccezione
+\texttt{NOMEECCEZIONE!!} proprio quando la memoria è esaurita.\\
+Lo stesso comportamento è stato anche osservato eseguendo il programma
+sequenziale e facendo uso dello \texttt{HumanInput} di tipo
+\emph{Bluetooth}; si presuppone che anche in questo caso le eccezioni siano
+dovute all'esaurimento di memoria, considerata l'ingombranza della classe che
+gestisce lo \emph{stack Bluetooth}.
