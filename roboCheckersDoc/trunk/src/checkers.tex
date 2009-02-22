@@ -99,18 +99,20 @@ Rappresenta l'albero di tutte le destinazioni raggiungibili da una casella.
 Viene utilizzata durante il controllo delle mosse fatte da \texttt{HumanPlayer}.
 
 \section{Board}
-\'E la rappresentazione della scacchiera all'interno del bricco. La classe
+\'E la rappresentazione della scacchiera all'interno del brick. La classe
 contiene, oltre alla posione attuale delle pedine, una collezione di
-\texttt{MoveCollection} in cui sono incluse tutte le possibili mosse effettuabili dall'avversario.
-Queste possono essere prelevate con il metodo \texttt{getPossibleMoves()} che
-le restituisce sotto forma di \texttt{Vector<MovesCollections>}, oppure, se si necessita delle caselle di
-partenza e di arrivo separatamente, sono disponibili i metodi
-\texttt{getPossibleMoveFrom()} e \texttt{getPossibleMoveTo()}.\\
-Quando si esegue una chiamata a \texttt{getPossibleMoves()}, il vettore
-delle mosse possibili viene memorizzato in un attributo interno a
-\texttt{Board}. In questo modo il vettore può essere scandito implicitamente
+\texttt{MoveCollection} di tipo \texttt{Vector<MovesCollections>} in cui sono
+incluse tutte le possibili mosse effettuabili dall'avversario.
+Queste devono essere inizializzate, ad ogni turno, con il metodo
+\texttt{initPossibleMoves()}.\\
+Sono inoltre disponibili i metodi \texttt{getPossibleMoveFrom()} e
+\texttt{getPossibleMoveTo()} che consentono di visitare l'intero albero delle
+mosse possibili.\\
+Quando si esegue una chiamata a \texttt{initPossibleMoves()},
+il vettore delle mosse possibili viene memorizzato in un attributo interno a \texttt{Board}.
+In questo modo il vettore può essere scandito implicitamente
 mediante il metodo \texttt{getPossibleMoveFrom()}, che restituisce una per
-volta, ad ogni chiamata, le caselle di partenza delle mosse possibili.\\
+volta (ad ogni chiamata) le caselle di partenza delle mosse possibili.\\
 L'indice relativo all'ultima casella restituita da
 \texttt{getPossibleMoveFrom()} viene anch'esso memorizzato in un attributo di
 \texttt{Board}, per cui - una volta individuata la casella di partenza - si può
