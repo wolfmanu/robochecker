@@ -3,17 +3,28 @@ Il \emph{package} \texttt{it.polito.roboCheckers} contiene le classi per la gest
 Sono presenti un'interfaccia Player successivamente implementata in \texttt{Human\-Player} e \texttt{ComputerPlayer} e la classe \texttt{Game} che effettua la partita vera e propria.
 
 \section{L'interfaccia Player}
-Questa interfaccia è usata per uniformare il giocatore robotico, il quale deve pensare ed effettuare la mossa, con il giocatore umano, di cui, invece, deve capirne la mossa effettuata. \\
-Il metodo che esegue tutto questo è:
+Questa interfaccia è usata per uniformare il giocatore robotico, il quale deve
+pensare ed effettuare la mossa, con il giocatore umano, di cui, invece, occorre
+determinare la mossa effettuata. \\ Il metodo che esegue tutto questo è:
 \begin{lstlisting}
 /** Ritorna la mossa effettuata dal giocatore */
 Move makeMove(final Board board) throws CantMoveException, IllegalMoveException, NotCalibratedException;
 \end{lstlisting}
-Come si può notare dalle eccezioni lanciabili, il metodo permette di riconoscere il caso in cui non ci siano più mosse disponibili sia da parte del robot che dell'umano e il caso in cui venga fatta una mossa non valida da parte dell'umano. Ovviamente tutto ciò non può funzionare se non è prima avvenuta la calibrazione (NotCalibratedException).
+Come si può notare dalle eccezioni lanciabili, il metodo permette di
+riconoscere il caso in cui non ci siano più mosse disponibili sia da parte del
+robot che dell'umano e il caso in cui venga fatta una mossa non valida da parte
+dell'umano. Ovviamente tutto ciò non può funzionare se non è prima avvenuta la
+calibrazione (\texttt{NotCalibratedException}).
 
 \subsection{ComputerPlayer}
-Il suo metodo principale (\texttt{makeMove()}) si può sostanzialmente suddividere in due parti. Inizialmente viene scelta tra le mosse disponibili quella che permetterà di ottenere il punteggio migliore, attraverso il metodo \texttt{MiniMax()} della classe \texttt{Engine}. Successivamente la mossa viene mostrata, indicando con il braccio mobile prima la pedina che si vuole spostare e poi la casella in cui è stato scelto di spostarla, questo utilizzando le classi \texttt{CheckersNavigator} e \texttt{ArmController}.\\
-Il livello di intelligenza della macchina è gestito mediante il livello di profondità massimo della ricorsione, eseguita in \texttt{MiniMax()}, e viene impostato attraverso l'attributo \texttt{depth}.
+Il suo metodo principale (\texttt{makeMove()}) si può sostanzialmente
+suddividere in due parti. Inizialmente viene scelta tra le mosse disponibili
+quella che permetterà di ottenere il punteggio migliore, attraverso il metodo
+\texttt{MiniMax()} della classe \texttt{Engine}. Successivamente la mossa viene
+mostrata, indicando con il braccio mobile prima la pedina che si vuole spostare
+e poi la casella in cui è stato scelto di spostarla, questo utilizzando le
+istanze \emph{singleTon} delle classi \texttt{CheckersNavigator} e
+\texttt{ArmController}.\\ Il livello di intelligenza della macchina è gestito mediante il livello di profondità massimo della ricorsione, eseguita in \texttt{MiniMax()}, e viene impostato attraverso l'attributo \texttt{depth}.
 
 \subsection{HumanPlayer}
 Questa classe si differenzia dalla precedente in quanto il suo compito è
@@ -43,7 +54,7 @@ dove è gestita l'intera partita: sia l'alternarsi dei turni tra i due giocatori,
 \'E strutturato in un ciclo do-while che continua fino alla vittoria di uno dei giocatori. Al suo interno si controlla se il giocatore ha ancora una mossa disponibile e se l'ha effettuata correttamente, attraverso il valore restituito da \texttt{makeMove()} della classe \texttt{Player}. In caso affermativo viene aggiornata la scacchiera e si passa al giocatore successivo. In caso di mossa errata si attende per una nuova mossa corretta, altrimenti, se non vi sono più mosse disponibili, si decreta vincitore il giocatore avversario.
 
 \section{Factory}
-La classe \texttt{Factory} è stata implementata per garantire una scelta
+La classe \texttt{Factory} è stata introdotta per garantire una scelta
 univoca a livello di progetto delle diverse implementazioni disponibili per le
 varie interfacce.
 \begin{lstlisting}
@@ -57,8 +68,8 @@ In questo modo, ad esempio, è possibile decidere di usare uno dei due\\
 Così anche per l'input da parte del giocatore umano che può essere, a seconda
 delle necessità, un pulsante sul brick NXT o un segnale inviato mediante
 Bluetooth.
-L'input è gestito da due classi, che implementano \texttt{HumanInput}:
-\texttt{ButtonInput} e \texttt{NXTCommHandle}.
+L'input può essere gestito da una qualsiasi delle classi che implementano
+\texttt{HumanInput}: \texttt{ButtonInput} e \texttt{NXTCommHandle}.
 L'interfaccia \texttt{HumanInput} prevede i seguenti metodi.
 \begin{lstlisting}
 public boolean waitForStart(boolean locking);
