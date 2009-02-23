@@ -1,13 +1,43 @@
 \chapter{RoboCheckers Statemachine}
 \section{Descrizione del progetto}
 
-Lo stato iniziale conduce forzatamente allo stato \emph{Calibration}.
-Una volta effettuata la calibrazione, il robot passa allo stato \emph{Home}.
-In questo stato il braccio viene portato fuori dalla scacchiera.
-All'evento \emph{Move}, si passa allo stato \emph{CalculateMoves}.
-Questa sezione del diagramma è differente dall'implementazione sequenziale: il
-tutto è gestito attraverso una serie di \emph{flag di stato}.
-
+Lo stato iniziale conduce forzatamente allo stato \texttt{Calibration}.
+Una volta effettuata la calibrazione, il robot passa allo stato \texttt{Home},
+in questo stato il braccio viene portato fuori dalla scacchiera e si entra in
+un loop infinito interrompibile dall'evento \texttt{HumanMoved}.\\
+Allo scattare dell'evento (ovvero quando il polling sullo \texttt{HumanInput}
+scelto restituisce esito positivo), si passa allo stato
+\texttt{CalculateMoves}. Questa sezione del diagramma è differente dall'implementazione
+sequenziale: il tutto è gestito attraverso una serie di \emph{flag di stato}.
+\paragraph{}
+Prima di tutto viene inizializzato il vettore delle mosse possibili;
+successivamente si entra in un ciclo che alterna la permanenza negli stati
+\texttt{GuessMoveFrom} e \texttt{SensorRead}: nel primo si preleva una
+possibile casella di partenza e si sposta il braccio su di essa, nel secondo
+viene campionata la lettura di colore e, in funzione di essa, si procede
+nuovamente in \texttt{GuessMoveFrom} (se la casella è occupata) o in
+\texttt{CalculateTo} (se la casella è libera).
+\paragraph{}
+\texttt{CalculateTo} serve essenzialmente a switchare i flag di stato in modo
+da cambiare la funzione del ciclo di ricerca, da questo momento in avanti si
+alterneranno gli stati \texttt{GuessMoveTo} e \texttt{SensorRead}.\\
+Nel caso in cui l'algoritmo di scansione della mossa fallisca, si passa nello
+stato di errore \texttt{IllegalMove}, dal quale si uscirà soltanto in seguito
+ad un nuovo segnale proveniente dall'istanza di \texttt{HumanInput}, che
+condurrà ad una nuova scansione.
+\paragraph{}
+Se la lettura ha successo, si transisce nello stato \texttt{UpdateBoard} che
+esegue l'aggiornamento della \texttt{Board} interna al Robot e,
+successivamente, nello stato \texttt{Think} che richiama direttamente
+l'algoritmo di \texttt{MiniMax} per decidere la prossima mossa. A questo punto
+il braccio viene azionato per indicare la mossa del Robot (\texttt{ShowFrom} e
+\texttt{ShowTo}) e si ritorna in \texttt{Home}.
+\paragraph{}
+La condizione di vittoria viene rilevata quando si verifica che uno dei due
+giovatori non ha più mosse possibili, gli stati \texttt{CalculateMoves} e
+\texttt{Think} possono pertanto condurre rispettivamente a \texttt{RobotWins} e
+\texttt{HumanWins}, per poi terminare nello stato finale.\\
+A pagina seguente si allega l'immagine della macchina a stati.
 
 \includepdfmerge{img/robocheckerssmd.pdf}
 
@@ -25,11 +55,11 @@ plugin.
 \item[Autocompletamento mancante] quando si modifica il codice all'interno
 degli stati o degli eventi, non funzionano nè l'autocompletamento nè il
 \emph{syntax checking} di \emph{Eclipse};
-\item[Difficoltà di editing degli stati] durante l'editing degli stati non è
-possibile andare a capo premendo invio (l'unico modo per forzare un \emph{line
-break} è inserire il carattere di carriage return, ad esempio tramite
-cut\&paste), questo riduce la leggibilità del programma e rende difficoltoso
-l'input del codice;
+\item[Difficoltà di editing degli stati] durante l'editing degli stati mediante
+la finestra \emph{Properties} non è possibile andare a capo premendo invio
+(l'unico modo per forzare un \emph{line break} è inserire il carattere di carriage return,
+ad esempio tramite cut\&paste), questo riduce la leggibilità del programma e
+rende difficoltoso l'input del codice;
 \item[Editing delle variabili a campi fissi] l'inserimento e la modifica di
 variabili è gestita a campi fissi (probabilmente per semplificare il parsing e
 la generazione del codice). Ogni variabile è definita da quattro campi
