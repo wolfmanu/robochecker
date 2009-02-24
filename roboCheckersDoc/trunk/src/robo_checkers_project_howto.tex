@@ -1,7 +1,7 @@
 \chapter{Configurazione dei progetti RoboCheckers in Eclipse}
 Questa appendice illustra brevemente come configurare correttamente
 Eclipse e scaricare i sorgenti dei due progetti sviluppati.
-Si dà come presupporto di avere già installato Eclipse con il
+Si dà come presupposto di avere già installato Eclipse con il
 plugin per la gestione dell'SVN\footnote{Nel caso in cui non fosse ancora
 stato installato il plugin per gestire l'SVN riferirsi al paragrafo
 \ref{sec:checkoutsvn}}.
@@ -10,7 +10,7 @@ Il primo passo per la configurazione dei progetti consiste nell'installazione
 di Lejos.
 L'installazione è molto semplice, una volta scaricato il setup dal sito
 ufficiale \url{http://lejos.sourceforge.net/} è sufficiente seguire il wizard
-fino alla fine, l'unica cosa importante da fare è ricordarsi la cartella in cui
+fino alla fine. L'unica cosa importante da fare è ricordarsi la cartella in cui
 lo si decide di installare in quanto sarà necessaria in seguito.
 \section{Installazione del Plugin di Lejos}
 Dopo aver installato Lejos è possibile installare il Plugin per Eclipse così da
@@ -54,7 +54,7 @@ si è reso necessario perchè \emph{Lejos} sui vari sistemi operativi è installato
 in posizioni diverse quindi al fine di rendere il progetto generico è necessario
 specificare alcune variabili per la configurazione corretta del Classpath di
 Java.\\
-Da \texttt{Window}$\to$\texttt{Preferences} selezionere la sezione
+Da \texttt{Window}$\to$\texttt{Preferences} selezionare la sezione
 \emph{Java}$\to$\emph{Build Path}$\to$\emph{Classpath Variable},
 selezionare quindi \texttt{New}. Nella finestra che appare completare il
 campo \texttt{Name} con \texttt{NXJ\_CLASSES} e quindi selezionare
@@ -66,7 +66,7 @@ all'interno della cartella lib dell'installazione di \emph{Lejos}.\\
 			\caption{Configurazione delle variabili d'ambiente \label{fig:classpath}}
 		\end{center}
 	\end{figure}
-Ripetere quindi le istruzioni al passo precedente ed aggiungete altre due
+Ripetere quindi le istruzioni al passo precedente ed aggiungere altre due
 variabili d'ambiente chiamate \texttt{PCCOMM\_CLASSES} e
 \texttt{PCTOOLS\_CLASSES} che fanno rispettivamente riferimento ai file
 \emph{pccomm.jar} e \emph{pctools.jar}.
@@ -74,7 +74,7 @@ Arrivati a questo punto la configurazione dell'ambiente Eclipse è finita ed è
 possibile scaricare i sorgenti del progetto.
 
 \section{Checkout dal repository SVN}
-Per fare il checkout dei sorgeti basta semplicemente seguire le istruzioni già
+Per fare il checkout dei sorgenti basta semplicemente seguire le istruzioni già
 utilizzate in precedenza\footnote{fare riferimento al paragrafo
 \ref{sec:checkoutsvn}} cambiando semplicemente l'indirizzo che risulta:
 \begin{itemize}
